@@ -11,15 +11,19 @@ contract HandleRegistry {
         address owner;
         string handle;
         string zId;
+        bool isVerified;
     }
 
     mapping (string => HandleRegistration) handleMap;
     HandleRegistration[] public handles;
+    
+    constructor() public payable { }
 
-    function registerHandle(address _owner, string memory _handle, string memory _zId) public {
+    function registerHandle(address payable _owner, string memory _handle, string memory _zId) public {
         require(zIdCheck(_zId));
         require(getHandleAvailability(_handle));
-        
+        stakeInfinity(_owner);
+
         HandleRegistration storage registration = handleMap[_handle];
         
         registration.owner = _owner;
@@ -45,9 +49,17 @@ contract HandleRegistry {
         }
     }
     
-    function getHandleAddress (string memory _handle) public view returns (address) {
+    function getHandleAddress(string memory _handle) public view returns (address) {
         HandleRegistration memory registration = handleMap[_handle];
         return registration.owner;
+    }
+    
+    function stakeInfinity(address payable _owner) payable public returns (bool) {
+        if(msg.sender == _owner) {
+            address payable owner = _owner;
+            owner.transfer(1);
+            return true;
+        }
     }
     
     function stringsEqual(string memory _a, string memory _b) internal pure returns (bool) {
@@ -59,12 +71,13 @@ contract HandleRegistry {
             return false;
         }
     }
-    
 }
 
 // >> to_do:
 
-// 0. check if entry already exists
-// 1. check if zId is valid
-// 2. ? 
+// 0. check if entry already exists [DONE]
+// 1. check if zId is valid [semi-DONE]
 // 3. charge xx Infinity in order to enter ... 
+// 4. verify from DAO 
+
+
