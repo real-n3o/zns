@@ -18,6 +18,7 @@ contract HandleRegistry {
 
     function registerHandle(address _owner, string memory _handle, string memory _zId) public {
         require(zIdCheck(_zId));
+        require(getHandleAvailability(_handle));
         
         HandleRegistration storage registration = handleMap[_handle];
         
@@ -28,11 +29,19 @@ contract HandleRegistry {
         handles.push(registration);
     }
  
-    function zIdCheck(string memory _zId) public pure returns (bool){
+    function zIdCheck(string memory _zId) public pure returns (bool) {
         if(stringsEqual(_zId, "0x36BA68c5B715405A373C5C7aBCda625E25F39175")) {
             return true;
         } else {
             return false;
+        }
+    }
+    
+    function getHandleAvailability(string memory _handle) public view returns (bool) {
+        HandleRegistration memory registration = handleMap[_handle];
+        address handleAddress = registration.owner;
+        if(handleAddress==address(0)) {
+            return true;
         }
     }
     
