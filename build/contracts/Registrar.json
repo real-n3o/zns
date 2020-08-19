@@ -1,0 +1,1415 @@
+{
+  "contractName": "Registrar",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "registrar",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "registryName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "registryType",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_registryName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_registryType",
+          "type": "string"
+        }
+      ],
+      "name": "createRegistry",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_registryName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_registryType\",\"type\":\"string\"}],\"name\":\"createRegistry\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"registrar\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"registryName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"registryType\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Create and interact with Registries\",\"methods\":{},\"title\":\"Registry\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/s9/code/ZNS/contracts/Registry.sol\":\"Registrar\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/s9/code/ZNS/contracts/Registry.sol\":{\"keccak256\":\"0xa09fea2697596b6454d117ecde36b1c4b04e61f6f6eae968aafd7e8c8a21aa8f\",\"urls\":[\"bzz-raw://59a6e8a7bfdca3a1607f0906c1718bb3402edd86d9c8eccc0981c6328db3ac46\",\"dweb:/ipfs/QmeiHLPq9PCptiXV6gXBVemnSgWY3aPmCkJkFevUi27gsy\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506107aa806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80639433fcbc1461003b578063f7aac95114610181575b600080fd5b6100676004803603602081101561005157600080fd5b81019080803590602001909291905050506102f3565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018060200180602001838103835285818151815260200191508051906020019080838360005b838110156100dd5780820151818401526020810190506100c2565b50505050905090810190601f16801561010a5780820380516001836020036101000a031916815260200191505b50838103825284818151815260200191508051906020019080838360005b83811015610143578082015181840152602081019050610128565b50505050905090810190601f1680156101705780820380516001836020036101000a031916815260200191505b509550505050505060405180910390f35b6102f16004803603606081101561019757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001906401000000008111156101d457600080fd5b8201836020820111156101e657600080fd5b8035906020019184600183028401116401000000008311171561020857600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561026b57600080fd5b82018360208201111561027d57600080fd5b8035906020019184600183028401116401000000008311171561029f57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061047a565b005b6001818154811061030057fe5b90600052602060002090600302016000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806001018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103d25780601f106103a7576101008083540402835291602001916103d2565b820191906000526020600020905b8154815290600101906020018083116103b557829003601f168201915b505050505090806002018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156104705780601f1061044557610100808354040283529160200191610470565b820191906000526020600020905b81548152906001019060200180831161045357829003601f168201915b5050505050905083565b600080836040518082805190602001908083835b602083106104b1578051825260208201915060208101905060208303925061048e565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390209050838160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555082816001019080519060200190610541929190610649565b508181600201908051906020019061055a929190610649565b50600181908060018154018082558091505090600182039060005260206000209060030201600090919290919091506000820160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600182018160010190805460018160011615610100020316600290046106179291906106c9565b506002820181600201908054600181600116156101000203166002900461063f9291906106c9565b5050505050505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061068a57805160ff19168380011785556106b8565b828001600101855582156106b8579182015b828111156106b757825182559160200191906001019061069c565b5b5090506106c59190610750565b5090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610702578054855561073f565b8280016001018555821561073f57600052602060002091601f016020900482015b8281111561073e578254825591600101919060010190610723565b5b50905061074c9190610750565b5090565b61077291905b8082111561076e576000816000905550600101610756565b5090565b9056fea265627a7a72315820ac7557990944e3a11f73371caf78a7f176aba3ae1583bcde9b20c63ef6ab22e464736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80639433fcbc1461003b578063f7aac95114610181575b600080fd5b6100676004803603602081101561005157600080fd5b81019080803590602001909291905050506102f3565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018060200180602001838103835285818151815260200191508051906020019080838360005b838110156100dd5780820151818401526020810190506100c2565b50505050905090810190601f16801561010a5780820380516001836020036101000a031916815260200191505b50838103825284818151815260200191508051906020019080838360005b83811015610143578082015181840152602081019050610128565b50505050905090810190601f1680156101705780820380516001836020036101000a031916815260200191505b509550505050505060405180910390f35b6102f16004803603606081101561019757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001906401000000008111156101d457600080fd5b8201836020820111156101e657600080fd5b8035906020019184600183028401116401000000008311171561020857600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561026b57600080fd5b82018360208201111561027d57600080fd5b8035906020019184600183028401116401000000008311171561029f57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061047a565b005b6001818154811061030057fe5b90600052602060002090600302016000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806001018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103d25780601f106103a7576101008083540402835291602001916103d2565b820191906000526020600020905b8154815290600101906020018083116103b557829003601f168201915b505050505090806002018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156104705780601f1061044557610100808354040283529160200191610470565b820191906000526020600020905b81548152906001019060200180831161045357829003601f168201915b5050505050905083565b600080836040518082805190602001908083835b602083106104b1578051825260208201915060208101905060208303925061048e565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390209050838160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555082816001019080519060200190610541929190610649565b508181600201908051906020019061055a929190610649565b50600181908060018154018082558091505090600182039060005260206000209060030201600090919290919091506000820160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600182018160010190805460018160011615610100020316600290046106179291906106c9565b506002820181600201908054600181600116156101000203166002900461063f9291906106c9565b5050505050505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061068a57805160ff19168380011785556106b8565b828001600101855582156106b8579182015b828111156106b757825182559160200191906001019061069c565b5b5090506106c59190610750565b5090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610702578054855561073f565b8280016001018555821561073f57600052602060002091601f016020900482015b8281111561073e578254825591600101919060010190610723565b5b50905061074c9190610750565b5090565b61077291905b8082111561076e576000816000905550600101610756565b5090565b9056fea265627a7a72315820ac7557990944e3a11f73371caf78a7f176aba3ae1583bcde9b20c63ef6ab22e464736f6c63430005100032",
+  "sourceMap": "105:590:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;105:590:2;;;;;;;",
+  "deployedSourceMap": "105:590:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;105:590:2;;;;;;;;;;;;;;;;;;;;;;;;287:27;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;287:27:2;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;287:27:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;287:27:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;321:371;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;321:371:2;;;;;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;321:371:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;321:371:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;321:371:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;321:371:2;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;321:371:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;321:371:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;321:371:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;321:371:2;;;;;;;;;;;;;;;:::i;:::-;;287:27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;321:371::-;468:25;496:11;508:13;496:26;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;36:153;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;496:26:2;;;;;;;;;;;;;;;;;;;;;468:54;;550:6;533:8;:14;;;:23;;;;;;;;;;;;;;;;;;590:13;566:8;:21;;:37;;;;;;;;;;;;:::i;:::-;;637:13;613:8;:21;;:37;;;;;;;;;;;;:::i;:::-;;661:9;676:8;661:24;;39:1:-1;33:3;27:10;23:18;57:10;52:3;45:23;79:10;72:17;;0:93;661:24:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;321:371;;;;:::o;105:590::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity >=0.4.22 <0.7.0;\n\n/**\n * @title Registry\n * @dev Create and interact with Registries\n*/\n\ncontract Registrar {\n\n    struct Registry {\n        address owner;\n        string registryName;\n        string registryType;\n    }\n\n    mapping (string => Registry) registryMap;\n    Registry[] public registrar;\n\n    function createRegistry (\n        address _owner, \n        string memory _registryName,\n        string memory _registryType\n    ) public {\n        Registry storage registry = registryMap[_registryName];\n\n        registry.owner = _owner;\n        registry.registryName = _registryName;\n        registry.registryType = _registryType;\n\n        registrar.push(registry);\n    }\n\n}\n",
+  "sourcePath": "/home/s9/code/ZNS/contracts/Registry.sol",
+  "ast": {
+    "absolutePath": "/home/s9/code/ZNS/contracts/Registry.sol",
+    "exportedSymbols": {
+      "Registrar": [
+        296
+      ]
+    },
+    "id": 297,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 241,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Registry\n@dev Create and interact with Registries",
+        "fullyImplemented": true,
+        "id": 296,
+        "linearizedBaseContracts": [
+          296
+        ],
+        "name": "Registrar",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Registrar.Registry",
+            "id": 248,
+            "members": [
+              {
+                "constant": false,
+                "id": 243,
+                "name": "owner",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "157:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 242,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "157:7:2",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 245,
+                "name": "registryName",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "180:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 244,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "180:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 247,
+                "name": "registryType",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "209:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 246,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "209:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Registry",
+            "nodeType": "StructDefinition",
+            "scope": 296,
+            "src": "131:104:2",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 252,
+            "name": "registryMap",
+            "nodeType": "VariableDeclaration",
+            "scope": 296,
+            "src": "241:40:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Registry_$248_storage_$",
+              "typeString": "mapping(string => struct Registrar.Registry)"
+            },
+            "typeName": {
+              "id": 251,
+              "keyType": {
+                "id": 249,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "250:6:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "241:28:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Registry_$248_storage_$",
+                "typeString": "mapping(string => struct Registrar.Registry)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 250,
+                "name": "Registry",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 248,
+                "src": "260:8:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                  "typeString": "struct Registrar.Registry"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 255,
+            "name": "registrar",
+            "nodeType": "VariableDeclaration",
+            "scope": 296,
+            "src": "287:27:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Registry_$248_storage_$dyn_storage",
+              "typeString": "struct Registrar.Registry[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 253,
+                "name": "Registry",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 248,
+                "src": "287:8:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                  "typeString": "struct Registrar.Registry"
+                }
+              },
+              "id": 254,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "287:10:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Registry_$248_storage_$dyn_storage_ptr",
+                "typeString": "struct Registrar.Registry[]"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 294,
+              "nodeType": "Block",
+              "src": "458:234:2",
+              "statements": [
+                {
+                  "assignments": [
+                    265
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 265,
+                      "name": "registry",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 294,
+                      "src": "468:25:2",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                        "typeString": "struct Registrar.Registry"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 264,
+                        "name": "Registry",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 248,
+                        "src": "468:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 269,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 266,
+                      "name": "registryMap",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 252,
+                      "src": "496:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Registry_$248_storage_$",
+                        "typeString": "mapping(string memory => struct Registrar.Registry storage ref)"
+                      }
+                    },
+                    "id": 268,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 267,
+                      "name": "_registryName",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 259,
+                      "src": "508:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "496:26:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Registry_$248_storage",
+                      "typeString": "struct Registrar.Registry storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "468:54:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 274,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 270,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "533:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      },
+                      "id": 272,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "owner",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 243,
+                      "src": "533:14:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 273,
+                      "name": "_owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 257,
+                      "src": "550:6:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "533:23:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 275,
+                  "nodeType": "ExpressionStatement",
+                  "src": "533:23:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 280,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 276,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "566:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      },
+                      "id": 278,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "registryName",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 245,
+                      "src": "566:21:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 279,
+                      "name": "_registryName",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 259,
+                      "src": "590:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "566:37:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 281,
+                  "nodeType": "ExpressionStatement",
+                  "src": "566:37:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 286,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 282,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "613:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      },
+                      "id": 284,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "registryType",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 247,
+                      "src": "613:21:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 285,
+                      "name": "_registryType",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 261,
+                      "src": "637:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "613:37:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 287,
+                  "nodeType": "ExpressionStatement",
+                  "src": "613:37:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 291,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "676:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 288,
+                        "name": "registrar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 255,
+                        "src": "661:9:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Registry_$248_storage_$dyn_storage",
+                          "typeString": "struct Registrar.Registry storage ref[] storage ref"
+                        }
+                      },
+                      "id": 290,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "661:14:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Registry_$248_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct Registrar.Registry storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 292,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "661:24:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 293,
+                  "nodeType": "ExpressionStatement",
+                  "src": "661:24:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 295,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createRegistry",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 262,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 257,
+                  "name": "_owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 295,
+                  "src": "355:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 256,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "355:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 259,
+                  "name": "_registryName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 295,
+                  "src": "380:27:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 258,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 261,
+                  "name": "_registryType",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 295,
+                  "src": "417:27:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 260,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "417:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "345:105:2"
+            },
+            "returnParameters": {
+              "id": 263,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "458:0:2"
+            },
+            "scope": 296,
+            "src": "321:371:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 297,
+        "src": "105:590:2"
+      }
+    ],
+    "src": "0:696:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/s9/code/ZNS/contracts/Registry.sol",
+    "exportedSymbols": {
+      "Registrar": [
+        296
+      ]
+    },
+    "id": 297,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 241,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Registry\n@dev Create and interact with Registries",
+        "fullyImplemented": true,
+        "id": 296,
+        "linearizedBaseContracts": [
+          296
+        ],
+        "name": "Registrar",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Registrar.Registry",
+            "id": 248,
+            "members": [
+              {
+                "constant": false,
+                "id": 243,
+                "name": "owner",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "157:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 242,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "157:7:2",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 245,
+                "name": "registryName",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "180:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 244,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "180:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 247,
+                "name": "registryType",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "209:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 246,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "209:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Registry",
+            "nodeType": "StructDefinition",
+            "scope": 296,
+            "src": "131:104:2",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 252,
+            "name": "registryMap",
+            "nodeType": "VariableDeclaration",
+            "scope": 296,
+            "src": "241:40:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Registry_$248_storage_$",
+              "typeString": "mapping(string => struct Registrar.Registry)"
+            },
+            "typeName": {
+              "id": 251,
+              "keyType": {
+                "id": 249,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "250:6:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "241:28:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Registry_$248_storage_$",
+                "typeString": "mapping(string => struct Registrar.Registry)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 250,
+                "name": "Registry",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 248,
+                "src": "260:8:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                  "typeString": "struct Registrar.Registry"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 255,
+            "name": "registrar",
+            "nodeType": "VariableDeclaration",
+            "scope": 296,
+            "src": "287:27:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Registry_$248_storage_$dyn_storage",
+              "typeString": "struct Registrar.Registry[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 253,
+                "name": "Registry",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 248,
+                "src": "287:8:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                  "typeString": "struct Registrar.Registry"
+                }
+              },
+              "id": 254,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "287:10:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Registry_$248_storage_$dyn_storage_ptr",
+                "typeString": "struct Registrar.Registry[]"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 294,
+              "nodeType": "Block",
+              "src": "458:234:2",
+              "statements": [
+                {
+                  "assignments": [
+                    265
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 265,
+                      "name": "registry",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 294,
+                      "src": "468:25:2",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                        "typeString": "struct Registrar.Registry"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 264,
+                        "name": "Registry",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 248,
+                        "src": "468:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 269,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 266,
+                      "name": "registryMap",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 252,
+                      "src": "496:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Registry_$248_storage_$",
+                        "typeString": "mapping(string memory => struct Registrar.Registry storage ref)"
+                      }
+                    },
+                    "id": 268,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 267,
+                      "name": "_registryName",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 259,
+                      "src": "508:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "496:26:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Registry_$248_storage",
+                      "typeString": "struct Registrar.Registry storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "468:54:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 274,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 270,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "533:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      },
+                      "id": 272,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "owner",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 243,
+                      "src": "533:14:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 273,
+                      "name": "_owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 257,
+                      "src": "550:6:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "533:23:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 275,
+                  "nodeType": "ExpressionStatement",
+                  "src": "533:23:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 280,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 276,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "566:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      },
+                      "id": 278,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "registryName",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 245,
+                      "src": "566:21:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 279,
+                      "name": "_registryName",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 259,
+                      "src": "590:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "566:37:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 281,
+                  "nodeType": "ExpressionStatement",
+                  "src": "566:37:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 286,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 282,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "613:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      },
+                      "id": 284,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "registryType",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 247,
+                      "src": "613:21:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 285,
+                      "name": "_registryType",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 261,
+                      "src": "637:13:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "613:37:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 287,
+                  "nodeType": "ExpressionStatement",
+                  "src": "613:37:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 291,
+                        "name": "registry",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 265,
+                        "src": "676:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Registry_$248_storage_ptr",
+                          "typeString": "struct Registrar.Registry storage pointer"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 288,
+                        "name": "registrar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 255,
+                        "src": "661:9:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Registry_$248_storage_$dyn_storage",
+                          "typeString": "struct Registrar.Registry storage ref[] storage ref"
+                        }
+                      },
+                      "id": 290,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "661:14:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Registry_$248_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct Registrar.Registry storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 292,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "661:24:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 293,
+                  "nodeType": "ExpressionStatement",
+                  "src": "661:24:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 295,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createRegistry",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 262,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 257,
+                  "name": "_owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 295,
+                  "src": "355:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 256,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "355:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 259,
+                  "name": "_registryName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 295,
+                  "src": "380:27:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 258,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 261,
+                  "name": "_registryType",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 295,
+                  "src": "417:27:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 260,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "417:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "345:105:2"
+            },
+            "returnParameters": {
+              "id": 263,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "458:0:2"
+            },
+            "scope": 296,
+            "src": "321:371:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 297,
+        "src": "105:590:2"
+      }
+    ],
+    "src": "0:696:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-08-19T04:47:13.334Z",
+  "devdoc": {
+    "details": "Create and interact with Registries",
+    "methods": {},
+    "title": "Registry"
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -501,10 +501,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        257,
-                        258
+                        267,
+                        268
                       ],
-                      "referencedDeclaration": 257,
+                      "referencedDeclaration": 267,
                       "src": "523:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -594,10 +594,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        257,
-                        258
+                        267,
+                        268
                       ],
-                      "referencedDeclaration": 257,
+                      "referencedDeclaration": 267,
                       "src": "556:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1925,7 +1925,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 254,
+                        "referencedDeclaration": 264,
                         "src": "1698:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -3065,10 +3065,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        257,
-                        258
+                        267,
+                        268
                       ],
-                      "referencedDeclaration": 257,
+                      "referencedDeclaration": 267,
                       "src": "523:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3158,10 +3158,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        257,
-                        258
+                        267,
+                        268
                       ],
-                      "referencedDeclaration": 257,
+                      "referencedDeclaration": 267,
                       "src": "556:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4489,7 +4489,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 254,
+                        "referencedDeclaration": 264,
                         "src": "1698:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -5294,7 +5294,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-08-18T21:45:32.358Z",
+  "updatedAt": "2020-08-19T04:28:57.204Z",
   "devdoc": {
     "details": "Store & retrieve registered ZNS Handle entries",
     "methods": {},

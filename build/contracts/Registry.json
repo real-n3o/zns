@@ -1,0 +1,294 @@
+{
+  "contractName": "Registry",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Create and interact with Registries\",\"methods\":{},\"title\":\"Registry\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/s9/code/ZNS/contracts/Registry.sol\":\"Registry\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/s9/code/ZNS/contracts/Registry.sol\":{\"keccak256\":\"0xf0474b9aa77fbf95f0f01d4c2dee6272bdb5eab614294233d43d04788a107b7d\",\"urls\":[\"bzz-raw://b67042f8b93253bc2e94510eab93a1912cd060a7be6fbd9fb31f29453b19b963\",\"dweb:/ipfs/QmR4SjtaZVKLpPajLgoYP6RsJ1yKLaoEi16ED4XvDvDsXT\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a7231582028b3e9c79cb1d77456b4d4260bf3ec6b310da69c4890245a2edd7125726d3a5f64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a7231582028b3e9c79cb1d77456b4d4260bf3ec6b310da69c4890245a2edd7125726d3a5f64736f6c63430005100032",
+  "sourceMap": "105:132:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;105:132:2;;;;;;;",
+  "deployedSourceMap": "105:132:2:-;;;;;",
+  "source": "pragma solidity >=0.4.22 <0.7.0;\n\n/**\n * @title Registry\n * @dev Create and interact with Registries\n*/\n\ncontract Registry {\n\n    struct registry {\n        address owner;\n        string registryName;\n        string registryType;\n    }\n\n}\n",
+  "sourcePath": "/home/s9/code/ZNS/contracts/Registry.sol",
+  "ast": {
+    "absolutePath": "/home/s9/code/ZNS/contracts/Registry.sol",
+    "exportedSymbols": {
+      "Registry": [
+        249
+      ]
+    },
+    "id": 250,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 241,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Registry\n@dev Create and interact with Registries",
+        "fullyImplemented": true,
+        "id": 249,
+        "linearizedBaseContracts": [
+          249
+        ],
+        "name": "Registry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Registry.registry",
+            "id": 248,
+            "members": [
+              {
+                "constant": false,
+                "id": 243,
+                "name": "owner",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "156:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 242,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "156:7:2",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 245,
+                "name": "registryName",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "179:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 244,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "179:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 247,
+                "name": "registryType",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "208:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 246,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "208:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "registry",
+            "nodeType": "StructDefinition",
+            "scope": 249,
+            "src": "130:104:2",
+            "visibility": "public"
+          }
+        ],
+        "scope": 250,
+        "src": "105:132:2"
+      }
+    ],
+    "src": "0:238:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/s9/code/ZNS/contracts/Registry.sol",
+    "exportedSymbols": {
+      "Registry": [
+        249
+      ]
+    },
+    "id": 250,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 241,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Registry\n@dev Create and interact with Registries",
+        "fullyImplemented": true,
+        "id": 249,
+        "linearizedBaseContracts": [
+          249
+        ],
+        "name": "Registry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Registry.registry",
+            "id": 248,
+            "members": [
+              {
+                "constant": false,
+                "id": 243,
+                "name": "owner",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "156:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 242,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "156:7:2",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 245,
+                "name": "registryName",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "179:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 244,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "179:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 247,
+                "name": "registryType",
+                "nodeType": "VariableDeclaration",
+                "scope": 248,
+                "src": "208:19:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 246,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "208:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "registry",
+            "nodeType": "StructDefinition",
+            "scope": 249,
+            "src": "130:104:2",
+            "visibility": "public"
+          }
+        ],
+        "scope": 250,
+        "src": "105:132:2"
+      }
+    ],
+    "src": "0:238:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-08-19T04:31:57.847Z",
+  "devdoc": {
+    "details": "Create and interact with Registries",
+    "methods": {},
+    "title": "Registry"
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
