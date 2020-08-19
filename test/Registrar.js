@@ -2,18 +2,24 @@ const Registrar = artifacts.require('Registrar');
 
 contract('Registrar', () => {
     before(async () => {
-        registrarDeployed = await Registrar.new();
+        deployedRegistrar = await Registrar.new();
     });
 
-    it('Create New Registrar', () => {
+    it('Create New Registry', () => {
         let address = '0x0';
         let registryName = 'TestRegistry';
         let registryType = 'RegistryType';
 
-        registrarDeployed.createRegistry.call(
+        deployedRegistrar.createRegistry.call(
             address,
             registryName,
             registryType
         );
     });
+
+
+    it('Get Registries from Registrar', () => {
+        deployedRegistrar.getRegistries.call();
+    });
 });
+

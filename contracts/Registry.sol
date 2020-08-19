@@ -30,4 +30,12 @@ contract Registrar {
         registrar.push(registry);
     }
 
+    function getRegistries() public view returns (string memory) {
+        string memory registries;
+        for(uint256 a=0; a<registrar.length; a++) {
+            registries = registrar[a].registryName;
+        }
+
+        return registries;
+    }
 }
