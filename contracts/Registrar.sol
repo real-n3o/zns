@@ -1,11 +1,13 @@
 pragma solidity >=0.4.22 <0.7.0;
 
 /**
- * @title Registry
+ * @title Registrar
  * @dev Create and interact with Registries
 */
 
 contract Registrar {
+
+    event registryAdded(address owner, string registryName, string registryType);
 
     struct Registry {
         address owner;
@@ -20,7 +22,7 @@ contract Registrar {
         address _owner, 
         string memory _registryName,
         string memory _registryType
-    ) public {
+    ) public returns (address, string memory, string memory) {
         Registry storage registry = registryMap[_registryName];
 
         registry.owner = _owner;
@@ -28,13 +30,19 @@ contract Registrar {
         registry.registryType = _registryType;
 
         registrar.push(registry);
+        emit registryAdded(_owner, _registryName, _registryType);
+
+        return (registry.owner, registry.registryName, registry.registryType);
     }
 
     function getRegistries() public view returns (string memory) {
         string memory registries;
+
         for(uint256 a=0; a<registrar.length; a++) {
             registries = registrar[a].registryName;
         }
+
+        registries = 'a';
 
         return registries;
     }
