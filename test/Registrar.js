@@ -7,7 +7,6 @@ let registryType = 'RegistryType';
 async function newRegistry() {
 
     const registry = await deployedRegistrar.createRegistry.call(
-        registryAddress,
         registryName,
         registryType
     );
@@ -22,9 +21,9 @@ contract('Registrar', () => {
 
     it('Create New Registry', async () => {
         registry = await newRegistry();
-        assert.equal(registry[0], registryAddress);
+        assert.isString(registry[0], registryAddress);
         assert.equal(registry[1], registryName);
-        assert.equal(registry[2], registryType);
+        assert.equal(registry[2], registryType);            
     });
 
     it('Get total number of Registries', async () => {
