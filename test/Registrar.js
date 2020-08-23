@@ -29,9 +29,7 @@ contract('Registrar', () => {
 
     it('Get total number of Registries', async () => {
         newRegistry();
-        
-        const result = await deployedRegistrar.getRegistries.call();
-        assert.isNumber(result);
-        console.log(result);
+        const registriesTotal = await deployedRegistrar.getRegistries.call();
+        assert.isNumber(registriesTotal.toNumber());
     });
 });

@@ -7,35 +7,54 @@ pragma solidity >=0.4.22 <0.7.0;
 
 contract Registrar {
 
-    event registryAdded(address owner, string registryName, string registryType);
+    event registryAdded(address registryContract, string registryName, string registryType);
 
-    struct Registry {
-        address owner;
+    struct RegistrarEntry {
+        address registryContract;
         string registryName;
         string registryType;
     }
 
-    mapping (string => Registry) registryMap;
-    Registry[] public registrar;
+    mapping (string => RegistrarEntry) registryMap;
+    RegistrarEntry[] public registrar;
 
     function createRegistry (
-        address _owner, 
         string memory _registryName,
         string memory _registryType
     ) public returns (address, string memory, string memory) {
-        Registry storage registry = registryMap[_registryName];
+        RegistrarEntry storage registry = registryMap[_registryName];
+        
+        Registry registryContract = new Registry();
+        registryContract.init(_registryName, _registryType);
 
-        registry.owner = _owner;
+        registry.registryContract = registryContract.getAddress();
         registry.registryName = _registryName;
         registry.registryType = _registryType;
 
         registrar.push(registry);
-        emit registryAdded(_owner, _registryName, _registryType);
+        emit registryAdded(registry.registryContract, _registryName, _registryType);
 
-        return (registry.owner, registry.registryName, registry.registryType);
+        return (registry.registryContract, registry.registryName, registry.registryType);
     }
 
     function getRegistries() public view returns (uint256) {
         return registrar.length;
     }
+}
+
+contract Registry {
+    string registryName;
+    string registryType;
+
+    constructor() public {}
+
+    function init(string memory _registryName, string memory _registryType) public {
+        registryName = _registryName;
+        registryType = _registryType;
+    }
+
+    function getAddress() public view returns (address) {  
+       address contractAddress = address(this);
+       return contractAddress;  
+    }  
 }
