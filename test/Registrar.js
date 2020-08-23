@@ -20,15 +20,20 @@ contract('Registrar', () => {
     });
 
     it('Create New Registry', async () => {
-        registry = await newRegistry();
+        registry = await newRegistry();     
         assert.isString(registry[0], registryAddress);
         assert.equal(registry[1], registryName);
-        assert.equal(registry[2], registryType);            
-    });
+        assert.equal(registry[2], registryType);  
+    }); 
 
     it('Get total number of Registries', async () => {
-        newRegistry();
-        const registriesTotal = await deployedRegistrar.getRegistries.call();
-        assert.isNumber(registriesTotal.toNumber());
+        const totalRegistries = await deployedRegistrar.getRegistrarLength.call();
+        assert.isNumber(totalRegistries.toNumber());
+    });
+
+    it('Get list of Registries', async () => {
+        const registrar = await deployedRegistrar.getRegistrarList.call();
+        console.log(registrar);
+        assert.isString(registrar);
     });
 });

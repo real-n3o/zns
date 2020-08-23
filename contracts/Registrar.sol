@@ -39,7 +39,16 @@ contract Registrar {
         return (registry.registryContract, registry.registryName, registry.registryType);
     }
 
-    function getRegistries() public view returns (uint256) {
+    function getRegistrarLength() public view returns (uint256) {
         return registrar.length;
+    }
+
+    function getRegistrarList() public view returns (string memory) {
+        string memory result;
+        for (uint256 i=0; i<registrar.length; i++) {
+            result = registrar[i].registryName;
+        }
+        
+        return result;
     }
 }
