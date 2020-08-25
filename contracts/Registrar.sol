@@ -1,4 +1,4 @@
-pragma solidity >=0.4.22 <0.7.0;
+pragma solidity ^0.6.0;
 
 /**
  * @title Registrar
@@ -27,12 +27,13 @@ contract Registrar {
                 
         Registry registryContract = new Registry();
         registryContract.init(_registryName, _registryType);
+        registryContract.setStakePrice(1);
 
         registryMap[_registryName].registryContract = registryContract.getAddress();
         registryMap[_registryName].registryName = _registryName;
         registryMap[_registryName].registryType = _registryType;
 
-        registrar.push(address(this));
+        registrar.push(registryMap[_registryName].registryContract);
         emit registryAdded(registryMap[_registryName].registryContract, _registryName, _registryType);
 
         return (registryMap[_registryName].registryContract, registryMap[_registryName].registryName, registryMap[_registryName].registryType);

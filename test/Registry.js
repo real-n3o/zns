@@ -9,10 +9,14 @@ contract('Registry', () => {
         return deployedRegistry = await Registry.new();
     });
 
-    it('create new registry', async () => {
+    it('Create Registry', async () => {
         const registry = await deployedRegistry.init(name, type);
-        assert.isString(name);
-        assert.isString(type);
+        assert.isString(registry.tx);
+    });
+
+    it('Set Registry stakePrice', async () => {
+        const registryStakePrice = await deployedRegistry.setStakePrice(250);
+        assert.isString(registryStakePrice.tx);
     });
 
     it('Get Registry Contract address', async () => {
