@@ -46,7 +46,7 @@ contract Registrar {
         return registryMap[_name].registryContract;
     }
 
-    function getRegistryType(string memory _name) public view returns (string memory) {
+    function getRegistryType(string memory _name) public view returns  (string memory) {
         return registryMap[_name].registryType;
     }
 }  
