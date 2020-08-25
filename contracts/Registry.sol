@@ -18,6 +18,6 @@ contract Registry {
 
     function getAddress() public view returns (address) {  
        address contractAddress = address(this);
-       return contractAddress;  
-    }  
+       return contractAddress;
+    }
 }

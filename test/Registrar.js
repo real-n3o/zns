@@ -1,29 +1,23 @@
 const Registrar = artifacts.require('Registrar');
 
-let registryAddress = '0x4316d047388e61EBC3Ed34DFf4cEE215840decDa';
 let registryName = 'TestRegistry';
 let registryType = 'RegistryType';
 
-async function newRegistry() {
-
-    const registry = await deployedRegistrar.createRegistry.call(
-        registryName,
-        registryType
-    );
-    return registry;
-}
-
 contract('Registrar', () => {
+    
+    let deployedRegistrar;
 
     before(async () => {
-        return deployedRegistrar = await Registrar.new();
+        deployedRegistrar = await Registrar.new();
+        return deployedRegistrar;
     });
 
-    it('Create New Registry', async () => {
-        registry = await newRegistry();     
-        assert.isString(registry[0], registryAddress);
-        assert.equal(registry[1], registryName);
-        assert.equal(registry[2], registryType);  
+    it('Create new Registry', async () => {
+        registry = await deployedRegistrar.createRegistry.sendTransaction(
+            registryName,
+            registryType
+        );
+        assert.isString(registry.tx);
     }); 
 
     it('Get total number of Registries', async () => {
@@ -31,9 +25,13 @@ contract('Registrar', () => {
         assert.isNumber(totalRegistries.toNumber());
     });
 
-    it('Get list of Registries', async () => {
-        const registrar = await deployedRegistrar.getRegistrarList.call();
-        console.log(registrar);
-        assert.isString(registrar);
+    it('Get Registry entry contract address', async () => {
+        const registryAddress = await deployedRegistrar.getRegistryAddress.call(registryName);
+        assert.isString(registryAddress);
+    });
+
+    it('Get Registry entry type', async () => {
+        const registryType = await deployedRegistrar.getRegistryType.call(registryName);
+        assert.isString(registryType);
     });
 });

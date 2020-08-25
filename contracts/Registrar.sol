@@ -18,37 +18,39 @@ contract Registrar {
     }
 
     mapping (string => RegistrarEntry) registryMap;
-    RegistrarEntry[] public registrar;
+    address[] public registrar;
 
     function createRegistry (
         string memory _registryName,
         string memory _registryType
-    ) public returns (address, string memory, string memory) {
-        RegistrarEntry storage registry = registryMap[_registryName];
-        
+    ) public returns (
+        address,    
+        string memory, 
+        string memory
+        ) {
+                
         Registry registryContract = new Registry();
         registryContract.init(_registryName, _registryType);
 
-        registry.registryContract = registryContract.getAddress();
-        registry.registryName = _registryName;
-        registry.registryType = _registryType;
+        registryMap[_registryName].registryContract = registryContract.getAddress();
+        registryMap[_registryName].registryName = _registryName;
+        registryMap[_registryName].registryType = _registryType;
 
-        registrar.push(registry);
-        emit registryAdded(registry.registryContract, _registryName, _registryType);
+        registrar.push(address(this));
+        emit registryAdded(registryMap[_registryName].registryContract, _registryName, _registryType);
 
-        return (registry.registryContract, registry.registryName, registry.registryType);
+        return (registryMap[_registryName].registryContract, registryMap[_registryName].registryName, registryMap[_registryName].registryType);
     }
 
     function getRegistrarLength() public view returns (uint256) {
         return registrar.length;
     }
 
-    function getRegistrarList() public view returns (string memory) {
-        string memory result;
-        for (uint256 i=0; i<registrar.length; i++) {
-            result = registrar[i].registryName;
-        }
-        
-        return result;
+    function getRegistryAddress(string memory _name) public view returns (address) {
+        return registryMap[_name].registryContract;
     }
-}
+
+    function getRegistryType(string memory _name) public view returns (string memory) {
+        return registryMap[_name].registryType;
+    }
+}   
