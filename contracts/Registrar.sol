@@ -23,11 +23,7 @@ contract Registrar {
     function createRegistry (
         string memory _registryName,
         string memory _registryType
-    ) public returns (
-        address,    
-        string memory, 
-        string memory
-        ) {
+    ) public returns (address, string memory, string memory) {
                 
         Registry registryContract = new Registry();
         registryContract.init(_registryName, _registryType);
