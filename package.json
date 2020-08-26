@@ -4,6 +4,7 @@
   "description": "Zer0 Name Service",
   "main": "index.js",
   "dependencies": {
+    "big-number": "^2.0.0",
     "ganache-cli": "^6.10.1",
     "node-gyp": "^7.1.0",
     "node-pre-gyp": "^0.15.0",

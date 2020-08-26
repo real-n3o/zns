@@ -4,7 +4,7 @@ let registryName = 'TestRegistry';
 let registryType = 'RegistryType';
 
 contract('Registrar', () => {
-    
+        
     let deployedRegistrar;
 
     before(async () => {

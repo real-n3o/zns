@@ -1,10 +1,38 @@
 const StakeToken = artifacts.require('StakeToken.sol');
+// const BigNumber = require('bignumber.js');
 
 let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
 
-contract('Registrar', () => { 
-    it('Mint token to address', async () => {
-        const deployedStakeToken = await StakeToken.new(testAddress);
-        // assert.isString(deployedStakeToken);
+contract('StakeToken', (accounts) => { 
+
+    let stakeToken;
+    const owner = accounts[0];
+
+    it('Deploy StakeToken and mint tokens to address', async () => {
+        stakeToken = await StakeToken.new(owner, 250);
+        assert.isString(stakeToken.address);
+    });
+
+    it('Add Staker', async () => {
+        const addStaker = await stakeToken.addStaker(testAddress);
+        assert.isString(addStaker.tx);
+    });
+
+    it('Remove Staker', async () => {
+        const removeStaker = await stakeToken.removeStaker(testAddress);
+        assert.isString(removeStaker.tx);
+    });
+
+    it('Address isStaker: false', async () => {
+        const isStaker = await stakeToken.isStaker(testAddress);
+        assert.isNotTrue(isStaker[0]);
+        assert.isNumber(isStaker[1].toNumber());
+    });
+
+    it('Address isStaker: true', async () => {
+        await stakeToken.addStaker(testAddress);
+        const isStaker = await stakeToken.isStaker(testAddress);
+        assert.isTrue(isStaker[0]);
+        assert.isNumber(isStaker[1].toNumber());
     });
 });
