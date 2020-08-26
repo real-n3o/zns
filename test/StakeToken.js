@@ -34,4 +34,14 @@ contract('StakeToken', (accounts) => {
         assert.isTrue(isStaker[0]);
         assert.isNumber(isStaker[1].toNumber());
     });
+
+    it('Send and Receive Stake to StakeToken contract', async () => {
+        const sendStake = await stakeToken.sendStake.sendTransaction({
+            from: accounts[0],
+            value: "1250"
+        });
+        assert.isString(sendStake.tx);
+        let newBalance = await stakeToken.balance.call();
+        console.log(newBalance.toNumber());
+    });
 });
