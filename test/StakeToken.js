@@ -1,6 +1,7 @@
 const StakeToken = artifacts.require('StakeToken.sol');
 
 let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
+let stakeValue = '1250';
 
 contract('StakeToken', (accounts) => { 
 
@@ -38,10 +39,10 @@ contract('StakeToken', (accounts) => {
     it('Send and Receive Stake to StakeToken contract', async () => {
         const sendStake = await stakeToken.sendStake.sendTransaction({
             from: accounts[0],
-            value: "1250"
+            value: stakeValue
         });
         assert.isString(sendStake.tx);
         let newBalance = await stakeToken.balance.call();
-        console.log(newBalance.toNumber());
+        assert.isNumber(newBalance.toNumber());
     });
 });
