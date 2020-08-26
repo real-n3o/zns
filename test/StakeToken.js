@@ -1,5 +1,4 @@
 const StakeToken = artifacts.require('StakeToken.sol');
-// const BigNumber = require('bignumber.js');
 
 let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
 

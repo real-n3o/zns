@@ -1,26 +1,33 @@
 const Registry = artifacts.require('Registry');
+const StakeToken = artifacts.require('StakeToken');
 
 let name = 'name';
 let type = 'type';
+let stakePrice = 250;
 
-contract('Registry', () => {
+contract('Registry', (accounts) => {
+
+    let stakeToken;
+    let registry;
+    const owner = accounts[0];
 
     before(async () => {
-        return deployedRegistry = await Registry.new();
+        stakeToken = await StakeToken.new(owner, 250);
+        registry = await Registry.new(); 
     });
 
     it('Create Registry', async () => {
-        const registry = await deployedRegistry.init(name, type);
-        assert.isString(registry.tx);
+        const newRegistry = await registry.init(name, type, stakeToken.address);
+        assert.isString(newRegistry.tx);
     });
 
     it('Set Registry stakePrice', async () => {
-        const registryStakePrice = await deployedRegistry.setStakePrice(250);
+        const registryStakePrice = await registry.setStakePrice(stakePrice);
         assert.isString(registryStakePrice.tx);
     });
 
     it('Get Registry Contract address', async () => {
-        const registry = await deployedRegistry.getAddress.call();
-        assert.isString(registry);
+        const registryAddress = await registry.getAddress.call();
+        assert.isString(registryAddress);
     });
 });

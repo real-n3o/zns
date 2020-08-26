@@ -6,6 +6,7 @@ pragma solidity ^0.6.0;
 */
 
 import './Registry.sol';
+import './StakeToken.sol';
 
 contract Registrar { 
 
@@ -22,12 +23,14 @@ contract Registrar {
 
     function createRegistry (
         string memory _registryName,
-        string memory _registryType
+        string memory _registryType,
+        uint256 _stakePrice
     ) public returns (address, string memory, string memory) {
                 
         Registry registryContract = new Registry();
-        registryContract.init(_registryName, _registryType);
-        registryContract.setStakePrice(1);
+        StakeToken stakeToken = new StakeToken(msg.sender, 250); // change static initial supply to var
+        registryContract.init(_registryName, _registryType, address(stakeToken));
+        registryContract.setStakePrice(_stakePrice);
 
         registryMap[_registryName].registryContract = registryContract.getAddress();
         registryMap[_registryName].registryName = _registryName;

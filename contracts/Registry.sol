@@ -8,20 +8,28 @@ pragma solidity ^0.6.0;
 contract Registry {
     string registryName;
     string registryType;
+    address stakeTokenAddress;
     uint256 stakePrice;
 
-    function init(string memory _registryName, string memory _registryType) public returns (string memory, string memory) {
+    function init(string memory _registryName, string memory _registryType, address _stakeTokenAddress) 
+    public returns (string memory, string memory) 
+    {
         registryName = _registryName;
         registryType = _registryType;
-        return (registryName, registryType);
+        stakeTokenAddress = _stakeTokenAddress;
+        return (registryName, registryType); // necessary?
     }
 
-    function setStakePrice(uint256 _stakePrice) public returns(uint256) {
+    function setStakePrice(uint256 _stakePrice) 
+    public returns(uint256) 
+    {
         stakePrice = _stakePrice;
         return stakePrice;
     } 
 
-    function getAddress() public view returns (address) {  
+    function getAddress() 
+    public view returns (address) 
+    {  
        address contractAddress = address(this);
        return contractAddress;
     }

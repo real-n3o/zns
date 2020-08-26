@@ -2,6 +2,7 @@ const Registrar = artifacts.require('Registrar');
 
 let registryName = 'TestRegistry';
 let registryType = 'RegistryType';
+let stakePrice = 250;
 
 contract('Registrar', () => {
         
@@ -12,10 +13,11 @@ contract('Registrar', () => {
         return deployedRegistrar;
     });
 
-    it('Create new Registry', async () => {
+    it('Create Registry', async () => {
         registry = await deployedRegistrar.createRegistry.sendTransaction(
             registryName,
-            registryType
+            registryType,
+            stakePrice
         );
         assert.isString(registry.tx);
     }); 
