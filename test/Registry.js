@@ -4,6 +4,7 @@ const StakeToken = artifacts.require('StakeToken');
 let name = 'name';
 let type = 'type';
 let stakePrice = 250;
+let stakeTokenInitialSupply = 100;
 
 contract('Registry', (accounts) => {
 
@@ -12,7 +13,7 @@ contract('Registry', (accounts) => {
     const owner = accounts[0];
 
     before(async () => {
-        stakeToken = await StakeToken.new(owner, 250);
+        stakeToken = await StakeToken.new(owner, stakeTokenInitialSupply);
         registry = await Registry.new(); 
     });
 
