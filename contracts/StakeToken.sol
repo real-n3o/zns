@@ -12,23 +12,26 @@ import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
 contract StakeToken is ERC20, Ownable {
     using SafeMath for uint256;
 
-    address payable self = payable(address(this));
-    uint256 public balance = self.balance;
     uint256 stakePrice = 1250;
-    
+    address payable wallet = payable(address(this));
+    uint256 public _balance = wallet.balance;
+    mapping (address => uint256) private _balances;
+    address[] internal stakers;    
+
     event Received(address, uint);
   
     constructor(address _owner, uint256 _supply) ERC20("Meow", "M2M") public payable { 
        _mint(_owner, _supply);
     }
 
-    address[] internal stakers;
-
     function addStaker(address _staker)
-        public returns(bool)
+        public 
+    returns(bool)
     {
         (bool _isStaker, ) = isStaker(_staker);
-        if(!_isStaker) stakers.push(_staker);
+        if((!_isStaker)) { // need to clean up
+            stakers.push(_staker);
+        }
         return(_isStaker);
     }
 
@@ -56,15 +59,32 @@ contract StakeToken is ERC20, Ownable {
     function sendStake()
         public
         payable
-    returns(bool) {
+    {
         require(msg.value == stakePrice);
-        self.send(msg.value);
-        balance += msg.value;
+        _mint(msg.sender, msg.value);
+        _balance += msg.value;
+        _balances[msg.sender] += msg.value;
+        wallet.transfer(msg.value);
+    }
+
+    function returnStake() 
+        public
+        payable
+    {
+        require(msg.value == stakePrice);
+        _burn(msg.sender, msg.value);
+        _balance -= msg.value;
+        // _balances[msg.sender] -= msg.value;
+        wallet.transfer(msg.value);
+    }
+
+    fallback() external payable {
+        sendStake();
     }
 
     receive() external payable {
+        // _balance += msg.value;
         emit Received(msg.sender, msg.value);
-        balance += msg.value;
     }
 
     function getBalance() 
@@ -72,6 +92,14 @@ contract StakeToken is ERC20, Ownable {
         view
     returns (uint256) 
     {
-        return balance;
+        return _balance;
+    }
+
+    function getBalanceAddress(address _address)
+        public
+        view
+    returns (uint256)
+    {
+        return _balances[_address];
     }
 }
