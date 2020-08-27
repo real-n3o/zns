@@ -14,7 +14,7 @@ contract Registrar {
 
     struct RegistrarEntry {
         address registryContract;
-        string _domain;
+        string domain;
         string registryType;
     }
 
@@ -23,23 +23,24 @@ contract Registrar {
 
     function createRegistry (
         string memory _domain,
+        string memory _reference,
         string memory _registryType,
         uint256 _stakePrice
     ) public returns (address, string memory, string memory) {
                 
         Registry registryContract = new Registry();
         StakeToken stakeToken = new StakeToken(msg.sender, 250); // change static initial supply to var
-        registryContract.init(_domain, _registryType, address(stakeToken));
+        registryContract.init(_domain, _reference, _registryType, address(stakeToken));
         registryContract.setStakePrice(_stakePrice);
 
         registryMap[_domain].registryContract = registryContract.getAddress();
-        registryMap[_domain]._domain = _domain;
+        registryMap[_domain].domain = _domain;
         registryMap[_domain].registryType = _registryType;
 
         registrar.push(registryMap[_domain].registryContract);
         emit registryAdded(registryMap[_domain].registryContract, _domain, _registryType);
 
-        return (registryMap[_domain].registryContract, registryMap[_domain]._domain, registryMap[_domain].registryType);
+        return (registryMap[_domain].registryContract, registryMap[_domain].domain, registryMap[_domain].registryType);
     }
 
     function getRegistrarLength() public view returns (uint256) {

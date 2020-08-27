@@ -1,6 +1,7 @@
 const Registrar = artifacts.require('Registrar');
 
 let domain = 'TestRegistry';
+let ref = 'ref';
 let registryType = 'RegistryType';
 let stakePrice = 250;
 
@@ -16,6 +17,7 @@ contract('Registrar', () => {
     it('Create Registry', async () => {
         registry = await deployedRegistrar.createRegistry.sendTransaction(
             domain,
+            ref,
             registryType,
             stakePrice
         );
