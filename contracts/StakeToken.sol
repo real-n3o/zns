@@ -12,7 +12,7 @@ import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
 contract StakeToken is ERC20, Ownable {
     using SafeMath for uint256;
 
-    uint256 stakePrice = 1250;
+    uint256 stakePrice = 1682160000000001;
     address payable wallet = payable(address(this));
     uint256 public _balance = wallet.balance;
     mapping (address => uint256) private _balances;
@@ -67,15 +67,16 @@ contract StakeToken is ERC20, Ownable {
         wallet.transfer(msg.value);
     }
 
-    function returnStake() 
+    function withdrawStake()
         public
         payable
     {
-        require(msg.value == stakePrice);
-        _burn(msg.sender, msg.value);
-        _balance -= msg.value;
-        // _balances[msg.sender] -= msg.value;
-        wallet.transfer(msg.value);
+        // require(msg.value == stakePrice);
+        address payable sender = msg.sender;
+        _burn(sender, stakePrice);
+        _balance -= stakePrice;
+        _balances[sender] -= stakePrice;
+        sender.transfer(stakePrice);
     }
 
     fallback() external payable {

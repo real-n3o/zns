@@ -1,8 +1,8 @@
 const StakeToken = artifacts.require('StakeToken.sol');
 
 let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
-let stakeTokenSupply = 250;
-let stakeValue = 1250;
+let stakeTokenSupply = 100000000000;
+let stakeValue = 1682160000000001;
 
 contract('StakeToken', (accounts) => { 
 
@@ -12,23 +12,20 @@ contract('StakeToken', (accounts) => {
     it('Deploy StakeToken and mint tokens to address', async () => {
         stakeToken = await StakeToken.new(owner, stakeTokenSupply);
         assert.isString(stakeToken.address);
-        // let newBalance = await stakeToken._balance.call();
-        // console.log(newBalance.toNumber());
-        // assert.isNumber(newBalance.toNumber());
     });
 
     it('Add Staker', async () => {
         const addStaker = await stakeToken.addStaker(testAddress);
         assert.isString(addStaker.tx);
         let stakerBalance = await stakeToken.getBalanceAddress.call(testAddress);
-        assert.isNumber(stakerBalance.toNumber());
+        assert.equal(stakerBalance.toNumber(), 0);
     });
 
     it('Address isStaker: true', async () => {
         await stakeToken.addStaker(accounts[0]);
         const isStaker = await stakeToken.isStaker(testAddress);
         assert.isTrue(isStaker[0]);
-        // assert.isNumber(isStaker[1].toNumber());
+        assert.equal(isStaker[1].toNumber(), 0);
     });
 
     it('Remove Staker', async () => {
@@ -50,6 +47,8 @@ contract('StakeToken', (accounts) => {
         assert.isString(sendStake.tx);
         let stakerBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
         assert.isAtLeast(stakerBalance.toNumber(), stakeValue);
+        console.log(stakerBalance.toNumber());
+        console.log(await web3.eth.getBalance(accounts[0]));
     });
 
     it('Add Staker after Stake has been sent', async () => {
@@ -69,12 +68,15 @@ contract('StakeToken', (accounts) => {
         assert.isNumber(addressBalance.toNumber());
     });
 
-    it('Return Stake', async() => {
-        let returnStake = await stakeToken.returnStake.sendTransaction({
-            from: accounts[0],
-            value: stakeValue
-        });
-        assert.isString(returnStake.tx);
+    it('Withdraw Stake from StakeToken Wallet', async() => {
+        let withdrawStake = await stakeToken.withdrawStake.sendTransaction({
+            from: accounts[0]
+        });        
+        assert.isString(withdrawStake.tx);
+        console.log(await web3.eth.getBalance(accounts[0]));
+        let stakerBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
+        console.log(stakerBalance.toNumber());
+        assert.isBelow(stakerBalance.toNumber(), stakeValue);
     });
 
 });
