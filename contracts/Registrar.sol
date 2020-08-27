@@ -10,11 +10,11 @@ import './StakeToken.sol';
 
 contract Registrar { 
 
-    event registryAdded(address registryContract, string registryName, string registryType);
+    event registryAdded(address registryContract, string _domain, string registryType);
 
     struct RegistrarEntry {
         address registryContract;
-        string registryName;
+        string _domain;
         string registryType;
     }
 
@@ -22,35 +22,35 @@ contract Registrar {
     address[] public registrar;
 
     function createRegistry (
-        string memory _registryName,
+        string memory _domain,
         string memory _registryType,
         uint256 _stakePrice
     ) public returns (address, string memory, string memory) {
                 
         Registry registryContract = new Registry();
         StakeToken stakeToken = new StakeToken(msg.sender, 250); // change static initial supply to var
-        registryContract.init(_registryName, _registryType, address(stakeToken));
+        registryContract.init(_domain, _registryType, address(stakeToken));
         registryContract.setStakePrice(_stakePrice);
 
-        registryMap[_registryName].registryContract = registryContract.getAddress();
-        registryMap[_registryName].registryName = _registryName;
-        registryMap[_registryName].registryType = _registryType;
+        registryMap[_domain].registryContract = registryContract.getAddress();
+        registryMap[_domain]._domain = _domain;
+        registryMap[_domain].registryType = _registryType;
 
-        registrar.push(registryMap[_registryName].registryContract);
-        emit registryAdded(registryMap[_registryName].registryContract, _registryName, _registryType);
+        registrar.push(registryMap[_domain].registryContract);
+        emit registryAdded(registryMap[_domain].registryContract, _domain, _registryType);
 
-        return (registryMap[_registryName].registryContract, registryMap[_registryName].registryName, registryMap[_registryName].registryType);
+        return (registryMap[_domain].registryContract, registryMap[_domain]._domain, registryMap[_domain].registryType);
     }
 
     function getRegistrarLength() public view returns (uint256) {
         return registrar.length;
     }
 
-    function getRegistryAddress(string memory _name) public view returns (address) {
-        return registryMap[_name].registryContract;
+    function getRegistryAddress(string memory _domain) public view returns (address) {
+        return registryMap[_domain].registryContract;
     }
 
-    function getRegistryType(string memory _name) public view returns (string memory) {
-        return registryMap[_name].registryType;
+    function getRegistryType(string memory _domain) public view returns (string memory) {
+        return registryMap[_domain].registryType;
     }
 }  

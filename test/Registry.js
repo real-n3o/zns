@@ -1,7 +1,7 @@
 const Registry = artifacts.require('Registry');
 const StakeToken = artifacts.require('StakeToken');
 
-let name = 'name';
+let domain = 'domain';
 let type = 'type';
 let stakePrice = 250;
 let stakeTokenInitialSupply = 100;
@@ -18,7 +18,7 @@ contract('Registry', (accounts) => {
     });
 
     it('Create Registry', async () => {
-        const newRegistry = await registry.init(name, type, stakeToken.address);
+        const newRegistry = await registry.init(domain, type, stakeToken.address);
         assert.isString(newRegistry.tx);
     });
 

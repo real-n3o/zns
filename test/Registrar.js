@@ -1,6 +1,6 @@
 const Registrar = artifacts.require('Registrar');
 
-let registryName = 'TestRegistry';
+let domain = 'TestRegistry';
 let registryType = 'RegistryType';
 let stakePrice = 250;
 
@@ -15,7 +15,7 @@ contract('Registrar', () => {
 
     it('Create Registry', async () => {
         registry = await deployedRegistrar.createRegistry.sendTransaction(
-            registryName,
+            domain,
             registryType,
             stakePrice
         );
@@ -28,12 +28,12 @@ contract('Registrar', () => {
     });
 
     it('Get Registry entry contract address', async () => {
-        const registryAddress = await deployedRegistrar.getRegistryAddress.call(registryName);
+        const registryAddress = await deployedRegistrar.getRegistryAddress.call(domain);
         assert.isString(registryAddress);
     });
 
     it('Get Registry entry type', async () => {
-        const registryType = await deployedRegistrar.getRegistryType.call(registryName);
+        const registryType = await deployedRegistrar.getRegistryType.call(domain);
         assert.isString(registryType);
     });
 });
