@@ -1,8 +1,9 @@
-const Migrations = artifacts.require("Migrations");
-const Registrar = artifacts.require("Registrar");
-const StakeToken = artifacts.require("StakeToken");
+const Migrations = artifacts.require('Migrations');
+const Registrar = artifacts.require('Registrar');
+const Controller = artifacts.require('Controller');
 
 module.exports = function (deployer) {
   deployer.deploy(Migrations);
   deployer.deploy(Registrar);
+  deployer.deploy(Controller);
 };

@@ -2,18 +2,26 @@ pragma solidity ^0.6.0;
 
 /**
  * @title Registry
- * @dev Manage individual Registry Entries
+ * @dev Manage Registry Entries
 */
+
+import './StakeToken.sol';
 
 contract Registry {
     string domain;
     string ref;
     string registryType;
     address stakeTokenAddress;
-    uint256 stakePrice;
+    uint256 public stakePrice;
 
-    function init(string memory _domain, string memory _ref, string memory _registryType, address _stakeTokenAddress) 
-        public 
+    address registryAddress = address(this);
+
+    function init(
+        string memory _domain,
+        string memory _ref, 
+        string memory _registryType, 
+        address _stakeTokenAddress) 
+    public 
     returns (string memory, string memory) 
     {
         domain = _domain;
@@ -26,8 +34,9 @@ contract Registry {
         public 
     returns(uint256) 
     {
+        // StakeToken stakeToken = StakeToken.at(stakeTokenAddress);
         stakePrice = _stakePrice;
-        return stakePrice;
+        return stakePrice;      
     } 
 
     function getAddress() 
@@ -35,8 +44,7 @@ contract Registry {
         view 
     returns (address) 
     {  
-       address contractAddress = address(this);
-       return contractAddress;
+       return registryAddress;
     }
 
     function getRef()

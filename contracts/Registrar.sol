@@ -23,7 +23,7 @@ contract Registrar {
 
     function createRegistry (
         string memory _domain,
-        string memory _reference,
+        string memory _ref,
         string memory _registryType,
         string memory _tokenName,
         string memory _tokenSymbol,
@@ -31,8 +31,8 @@ contract Registrar {
         uint256 _stakePrice
     ) public returns (address, string memory, string memory) {
         Registry registryContract = new Registry();
-        StakeToken stakeToken = new StakeToken(msg.sender, _tokenName, _tokenSymbol, _tokenSupply);
-        registryContract.init(_domain, _reference, _registryType, address(stakeToken));
+        StakeToken stakeToken = new StakeToken(msg.sender, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
+        registryContract.init(_domain, _ref, _registryType, address(stakeToken));
         registryContract.setStakePrice(_stakePrice);
 
         registryMap[_domain].registryContract = registryContract.getAddress();
