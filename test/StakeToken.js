@@ -1,8 +1,8 @@
 const StakeToken = artifacts.require('StakeToken.sol');
 
 let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
-let tokenName = "Meow";
-let tokenTicker = "stakeTokenTicker";
+let tokenName = "Meow Token";
+let tokenSymbol = "MEOW";
 let tokenSupply = 100;
 let stakeValue = 1682160000000001;
 
@@ -12,7 +12,7 @@ contract('StakeToken', (accounts) => {
     const owner = accounts[0];
 
     it('Deploy StakeToken and mint tokens to address', async () => {
-        stakeToken = await StakeToken.new(owner, tokenName, tokenTicker, tokenSupply);
+        stakeToken = await StakeToken.new(owner, tokenName, tokenSymbol, tokenSupply);
         assert.isString(stakeToken.address);
     });
 
@@ -43,8 +43,6 @@ contract('StakeToken', (accounts) => {
         assert.isString(sendStake.tx);
         let stakerBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
         assert.isAtLeast(stakerBalance.toNumber(), stakeValue);
-        console.log(stakerBalance.toNumber());
-        console.log(await web3.eth.getBalance(accounts[0]));
     });
 
     it('Add Staker after Stake has been sent', async () => {
@@ -75,10 +73,22 @@ contract('StakeToken', (accounts) => {
             from: accounts[0]
         });        
         assert.isString(withdrawStake.tx);
-        console.log(await web3.eth.getBalance(accounts[0]));
         let stakerBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
-        console.log(stakerBalance.toNumber());
         assert.isBelow(stakerBalance.toNumber(), stakeValue);
     });
 
+    it('Get token name', async() => {
+        let tokenName = await stakeToken.name.call();
+        assert.isString(tokenName);
+    });
+
+    it('Get token symbol', async() => {
+        let tokenSymbol = await stakeToken.symbol.call();
+        assert.isString(tokenSymbol);
+    });
+
+    it('Get token total supply', async() => {
+        let tokenSupply = await stakeToken.totalSupply.call();
+        assert.isNumber(tokenSupply.toNumber());
+    });
 });

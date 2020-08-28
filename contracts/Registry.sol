@@ -20,7 +20,6 @@ contract Registry {
         ref = _ref;
         registryType = _registryType;
         stakeTokenAddress = _stakeTokenAddress;
-        return (domain, registryType); // necessary?
     }
 
     function setStakePrice(uint256 _stakePrice) 

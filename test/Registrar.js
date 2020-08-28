@@ -4,7 +4,7 @@ let domain = 'TestRegistry';
 let ref = 'ref';
 let registryType = 'RegistryType';
 let tokenName = "Meow";
-let tokenTicker = "MWM";
+let tokenSymbol = "MWM";
 let tokenSupply = 500;
 let stakePrice = 250;
 
@@ -23,7 +23,7 @@ contract('Registrar', () => {
             ref,
             registryType,
             tokenName,
-            tokenTicker,
+            tokenSymbol,
             tokenSupply,
             stakePrice
         );

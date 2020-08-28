@@ -26,12 +26,12 @@ contract Registrar {
         string memory _reference,
         string memory _registryType,
         string memory _tokenName,
-        string memory _tokenTicker,
+        string memory _tokenSymbol,
         uint256 _tokenSupply,
         uint256 _stakePrice
     ) public returns (address, string memory, string memory) {
         Registry registryContract = new Registry();
-        StakeToken stakeToken = new StakeToken(msg.sender, _tokenName, _tokenTicker, _tokenSupply);
+        StakeToken stakeToken = new StakeToken(msg.sender, _tokenName, _tokenSymbol, _tokenSupply);
         registryContract.init(_domain, _reference, _registryType, address(stakeToken));
         registryContract.setStakePrice(_stakePrice);
 

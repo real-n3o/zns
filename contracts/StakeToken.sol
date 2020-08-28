@@ -14,7 +14,7 @@ contract StakeToken is ERC20, Ownable {
 
     uint256 stakePrice = 1682160000000001;
     address payable wallet = payable(address(this));
-    uint256 public _balance = wallet.balance;
+    uint256 public balance = wallet.balance;
     mapping (address => uint256) private _balances;
     address[] internal stakers;    
 
@@ -23,9 +23,9 @@ contract StakeToken is ERC20, Ownable {
     constructor(
         address _owner, 
         string memory _tokenName, 
-        string memory _tokenTicker, 
+        string memory _tokenSymbol, 
         uint256 _tokenSupply) 
-        ERC20(_tokenName, _tokenTicker) public payable 
+        ERC20(_tokenName, _tokenSymbol) public payable 
     { 
        _mint(_owner, _tokenSupply);
     }
@@ -69,7 +69,7 @@ contract StakeToken is ERC20, Ownable {
     {
         require(msg.value == stakePrice);
         _mint(msg.sender, msg.value);
-        _balance += msg.value;
+        balance += msg.value;
         _balances[msg.sender] += msg.value;
         wallet.transfer(msg.value);
     }
@@ -81,7 +81,7 @@ contract StakeToken is ERC20, Ownable {
         // require(msg.value == stakePrice);
         address payable sender = msg.sender;
         _burn(sender, stakePrice);
-        _balance -= stakePrice;
+        balance -= stakePrice;
         _balances[sender] -= stakePrice;
         sender.transfer(stakePrice);
     }
@@ -91,7 +91,7 @@ contract StakeToken is ERC20, Ownable {
     }
 
     receive() external payable {
-        // _balance += msg.value;
+        // balance += msg.value;
         emit Received(msg.sender, msg.value);
     }
 
@@ -100,7 +100,7 @@ contract StakeToken is ERC20, Ownable {
         view
     returns (uint256) 
     {
-        return _balance;
+        return balance;
     }
 
     function getBalanceAddress(address _address)
