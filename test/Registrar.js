@@ -3,6 +3,9 @@ const Registrar = artifacts.require('Registrar');
 let domain = 'TestRegistry';
 let ref = 'ref';
 let registryType = 'RegistryType';
+let tokenName = "Meow";
+let tokenTicker = "MWM";
+let tokenSupply = 500;
 let stakePrice = 250;
 
 contract('Registrar', () => {
@@ -19,6 +22,9 @@ contract('Registrar', () => {
             domain,
             ref,
             registryType,
+            tokenName,
+            tokenTicker,
+            tokenSupply,
             stakePrice
         );
         assert.isString(registry.tx);

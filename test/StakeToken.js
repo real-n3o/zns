@@ -1,7 +1,9 @@
 const StakeToken = artifacts.require('StakeToken.sol');
 
 let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
-let stakeTokenSupply = 100000000000;
+let tokenName = "Meow";
+let tokenTicker = "stakeTokenTicker";
+let tokenSupply = 100;
 let stakeValue = 1682160000000001;
 
 contract('StakeToken', (accounts) => { 
@@ -10,7 +12,7 @@ contract('StakeToken', (accounts) => {
     const owner = accounts[0];
 
     it('Deploy StakeToken and mint tokens to address', async () => {
-        stakeToken = await StakeToken.new(owner, stakeTokenSupply);
+        stakeToken = await StakeToken.new(owner, tokenName, tokenTicker, tokenSupply);
         assert.isString(stakeToken.address);
     });
 

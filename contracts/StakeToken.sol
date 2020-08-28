@@ -20,8 +20,14 @@ contract StakeToken is ERC20, Ownable {
 
     event Received(address, uint);
   
-    constructor(address _owner, uint256 _supply) ERC20("Meow", "M2M") public payable { 
-       _mint(_owner, _supply);
+    constructor(
+        address _owner, 
+        string memory _tokenName, 
+        string memory _tokenTicker, 
+        uint256 _tokenSupply) 
+        ERC20(_tokenName, _tokenTicker) public payable 
+    { 
+       _mint(_owner, _tokenSupply);
     }
 
     function addStaker(address _staker)
