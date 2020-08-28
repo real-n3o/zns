@@ -21,22 +21,16 @@ contract('StakeToken', (accounts) => {
         assert.equal(stakerBalance.toNumber(), 0);
     });
 
-    it('Address isStaker: true', async () => {
+    it('Address isStaker: false', async () => {
         await stakeToken.addStaker(accounts[0]);
         const isStaker = await stakeToken.isStaker(testAddress);
-        assert.isTrue(isStaker[0]);
+        assert.isNotTrue(isStaker[0]);
         assert.equal(isStaker[1].toNumber(), 0);
     });
 
     it('Remove Staker', async () => {
         const removeStaker = await stakeToken.removeStaker(accounts[0]);
         assert.isString(removeStaker.tx);
-    });
-
-    it('Address isStaker: false', async () => {
-        const isStaker = await stakeToken.isStaker(accounts[0]);
-        assert.isNotTrue(isStaker[0]);
-        assert.isNumber(isStaker[1].toNumber());
     });
 
     it('Send Stake to StakeToken Wallet', async () => {
@@ -56,6 +50,12 @@ contract('StakeToken', (accounts) => {
         assert.isString(sendStake.tx);
         let stakerBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
         assert.isNumber(stakerBalance.toNumber());
+    });
+
+    it('Address isStaker: true', async () => {
+        const isStaker = await stakeToken.isStaker(accounts[0]);
+        assert.isTrue(isStaker[0]);
+        assert.isNumber(isStaker[1].toNumber());
     });
 
     it('Get Total Balance', async () => {

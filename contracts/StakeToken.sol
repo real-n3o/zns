@@ -29,10 +29,11 @@ contract StakeToken is ERC20, Ownable {
     returns(bool)
     {
         (bool _isStaker, ) = isStaker(_staker);
-        if((!_isStaker)) { // need to clean up
+        uint256 stakerBalance = getBalanceAddress(_staker);
+        if((!_isStaker) && (stakerBalance==stakePrice)) {
             stakers.push(_staker);
+            return(_isStaker);
         }
-        return(_isStaker);
     }
 
     function removeStaker(address _staker)
