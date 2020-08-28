@@ -5,7 +5,7 @@ let domain = 'domain';
 let ref = 'ref';
 let type = 'type';
 let tokenName = 'Meow';
-let tokenTicker = "MWM";
+let tokenSymbol = "MWM";
 let tokenSupply = 100;
 let stakePrice = 250;
 
@@ -16,7 +16,7 @@ contract('Registry', (accounts) => {
     const owner = accounts[0];
 
     before(async () => {
-        stakeToken = await StakeToken.new(owner, tokenName, tokenTicker, tokenSupply);
+        stakeToken = await StakeToken.new(owner, tokenName, tokenSymbol, tokenSupply);
         registry = await Registry.new(); 
     });
 
