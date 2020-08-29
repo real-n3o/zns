@@ -17,7 +17,7 @@ contract('Registrar', () => {
         return deployedRegistrar;
     });
 
-    it('Create Registry', async () => {
+    it('create registry', async () => {
         registry = await deployedRegistrar.createRegistry.sendTransaction(
             domain,
             ref,
@@ -30,17 +30,19 @@ contract('Registrar', () => {
         assert.isString(registry.tx);
     }); 
 
-    it('Get total number of Registries', async () => {
+    // Getters
+
+    it('get total number of registries', async () => {
         const totalRegistries = await deployedRegistrar.getRegistrarLength.call();
         assert.isNumber(totalRegistries.toNumber());
     });
 
-    it('Get Registry entry contract address', async () => {
+    it('get registry entry contract address', async () => {
         const registryAddress = await deployedRegistrar.getRegistryAddress.call(domain);
         assert.isString(registryAddress);
     });
 
-    it('Get Registry entry type', async () => {
+    it('get registry entry type', async () => {
         const registryType = await deployedRegistrar.getRegistryType.call(domain);
         assert.isString(registryType);
     });

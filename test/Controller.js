@@ -46,5 +46,13 @@ contract('controller', (accounts) => {
         // let updatedStakePrice = await registry.stakePrice.call();
         // assert.equal(updatedStakePrice.toNumber(), newStakePrice);
     });
+
+    it('create registry entry', async () => {
+        // get registry address from registrar
+        // create new instance of registry contract
+        // take proper stake (where will this logic be?)
+        // create registry entry (need to determine fields)
+        // confirm registry entry has been added and fields have been updated
+    });
    
 });

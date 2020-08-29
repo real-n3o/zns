@@ -49,6 +49,9 @@ contract Controller {
         emit stakePriceSet(_registryAddress, _newStakePrice);
     }
 
+    // create RegistryEntry
+
+
     // make sure domain is unique
     // update ref
 
