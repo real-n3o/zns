@@ -33,7 +33,7 @@ contract Registrar {
         Registry registryContract = new Registry();
         StakeToken stakeToken = new StakeToken(msg.sender, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
         registryContract.init(_domain, _ref, _registryType, address(stakeToken));
-        registryContract.setStakePrice(_stakePrice);
+        stakeToken.setStakePrice(_stakePrice);
 
         registryMap[_domain].registryContract = registryContract.getAddress();
         registryMap[_domain].domain = _domain;
@@ -42,7 +42,7 @@ contract Registrar {
         registrar.push(registryMap[_domain].registryContract);
         emit registryAdded(registryMap[_domain].registryContract, _domain, _registryType);
 
-        return (registryMap[_domain].registryContract, registryMap[_domain].domain, registryMap[_domain].registryType);
+        return (registryMap[_domain].registryContract, registryMap[_domain].domain, registryMap[_domain].registryType); // remove
     }
 
     function getRegistrarLength() public view returns (uint256) {

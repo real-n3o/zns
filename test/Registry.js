@@ -25,13 +25,6 @@ contract('Registry', (accounts) => {
         assert.isString(newRegistry.tx);
     });
 
-    // Setters
-
-    it('set a registries stake price', async () => {
-        const registryStakePrice = await registry.setStakePrice(stakePrice);
-        assert.isString(registryStakePrice.tx);
-    });
-
     // Getters
 
     it('get a registries address', async () => {

@@ -26,7 +26,9 @@ contract StakeToken is ERC20, Ownable {
         string memory _tokenSymbol, 
         uint256 _tokenSupply,
         uint256 _stakePrice) 
-        ERC20(_tokenName, _tokenSymbol) public payable 
+    ERC20(_tokenName, _tokenSymbol) 
+        public
+        payable 
     { 
         stakePrice = _stakePrice;
        _mint(_owner, _tokenSupply);
@@ -121,8 +123,8 @@ contract StakeToken is ERC20, Ownable {
     function getAddress()
         public
         view
-    returns(address)
+    returns(address payable)
     {
-        return address(this);
+        return payable(address(this));
     }
 }

@@ -11,6 +11,11 @@ import './StakeToken.sol';
 contract Controller {
 
     address controller = address(this);
+    address public registryAddress;
+    address payable public stakeTokenAddress;
+    uint256 public stakePrice;
+
+    event stakePriceSet(address _registryAddress, uint256 _newStakePrice);
 
     function createRegistry(
         string memory _domain,
@@ -22,23 +27,29 @@ contract Controller {
         uint256 _stakePrice
     )
         public 
-    returns(Registry)
+    returns(address)
     {
         StakeToken stakeToken = new StakeToken(controller, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
         Registry registry = new Registry();
         registry.init(_domain, _ref, _registryType, stakeToken.getAddress());
-        return registry;
+        registryAddress = registry.getAddress();
+        stakeTokenAddress = registry.stakeTokenAddress();
     }
 
-    function setStakePrice(address _registry, uint256 _newStakePrice)
+    function setStakePrice(address _registryAddress, uint256 _newStakePrice)
         public
-    returns(uint256)
     {
-        // _registry.setStakePrice(_newStakePrice);
-        // return _registry.stakePrice;
+        Registry registry = Registry(_registryAddress);
+        registryAddress = registry.getAddress();
+        stakeTokenAddress = registry.stakeTokenAddress();
+        StakeToken stakeToken = StakeToken(stakeTokenAddress);
+        stakeToken.setStakePrice(_newStakePrice);
+        stakePrice = stakeToken.stakePrice();
+
+        emit stakePriceSet(_registryAddress, _newStakePrice);
     }
 
-    // make sure domain is unique   
+    // make sure domain is unique
     // update ref
 
     // get Registry

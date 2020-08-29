@@ -1,4 +1,6 @@
 const Controller = artifacts.require('Controller');
+const Registry = artifacts.require('Registry');
+const StakeToken = artifacts.require('StakeToken');
 
 let domain = 'TestRegistry';
 let ref = 'ref';
@@ -11,7 +13,8 @@ let newStakePrice = 333;
 
 contract('controller', (accounts) => {
     let controller;
-    let registry;
+    let registryAddress;
+    let stakeTokenAddress;
 
     before(async () => {
         controller = await Controller.new();
@@ -19,7 +22,7 @@ contract('controller', (accounts) => {
     });
 
     it('create registrar', async () => {
-        registry = await controller.createRegistry(
+        await controller.createRegistry(
             domain,
             ref,
             registryType,
@@ -27,12 +30,21 @@ contract('controller', (accounts) => {
             tokenSymbol,
             tokenSupply,
             stakePrice)
+        registryAddress = await controller.registryAddress.call();
+        console.log(registryAddress);
     });
 
-    it('set stake price', async () => {
-        setStakePrice = await controller.setStakePrice(registry.getAddress(), newStakePrice);
+    it('set stake price for registry', async () => {
+        stakeTokenAddress = await controller.stakeTokenAddress.call();
+        stakeToken = await StakeToken.at(stakeTokenAddress);
+        updatedStakePrice = await stakeToken.stakePrice.call();
 
-        assert.isNumber(setStakePrice.toNumber());
+        // await controller.setStakePrice(registryAddress, newStakePrice);
+        // registry = await Registry.at(registryAddress);
+
+
+        // let updatedStakePrice = await registry.stakePrice.call();
+        // assert.equal(updatedStakePrice.toNumber(), newStakePrice);
     });
    
 });
