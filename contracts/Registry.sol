@@ -12,7 +12,6 @@ contract Registry {
     string ref;
     string registryType;
     address payable public stakeTokenAddress;
-    // uint256 public stakePrice;
 
     address registryAddress = address(this);
 
@@ -21,7 +20,7 @@ contract Registry {
         string memory _ref, 
         string memory _registryType, 
         address payable _stakeTokenAddress) 
-    public 
+        public 
     returns (string memory, string memory) 
     {
         domain = _domain;
@@ -29,15 +28,6 @@ contract Registry {
         registryType = _registryType;
         stakeTokenAddress = _stakeTokenAddress;
     }
-
-    // function setStakePrice(uint256 _stakePrice) 
-    //     public 
-    // returns(uint256) 
-    // {
-    //     // StakeToken stakeToken = StakeToken.at(stakeTokenAddress);
-    //     stakePrice = _stakePrice;
-    //     return stakePrice;
-    // } 
 
     function getAddress() 
         public 
