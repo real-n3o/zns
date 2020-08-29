@@ -9,6 +9,9 @@ let tokenSymbol = "MWM";
 let tokenSupply = 100;
 let stakePrice = 250;
 
+let registryEntrySubdomain = "subdomain";
+let registryEntryRef = "subdomain_ref";
+
 contract('Registry', (accounts) => {
 
     let stakeToken;
@@ -25,6 +28,11 @@ contract('Registry', (accounts) => {
         assert.isString(newRegistry.tx);
     });
 
+    it('create a new registry entry', async () => {
+        registryEntry = await registry.createRegistryEntry(registryEntrySubdomain, registryEntryRef);
+        assert.isString(registryEntry.tx);
+    });
+
     // Getters
 
     it('get a registries address', async () => {
@@ -35,5 +43,10 @@ contract('Registry', (accounts) => {
     it('get a registries ref', async () => {
         const registryRef = await registry.getRef.call();
         assert.isString(registryRef);
+    });
+
+    it('get a registry entries ref', async () => {
+        const registryEntryRef = await registry.getRegistryEntryRef(registryEntrySubdomain);
+        assert.isString(registryEntryRef);
     });
 });

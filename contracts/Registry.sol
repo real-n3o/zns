@@ -18,7 +18,6 @@ contract Registry {
     event RegistryEntryAdded(string subdomain, string ref);
 
     struct RegistryEntry {
-        string subdomain;
         string ref;
         bool isHuman;
     }
@@ -63,9 +62,18 @@ contract Registry {
     {
         (bool _isRegistered, ) = isRegistered(_subdomain);
         if(!_isRegistered) {
+            registryEntryMap[_subdomain].ref = _ref;
+            registryEntryMap[_subdomain].isHuman = false;
             registryEntries.push(_subdomain);
             emit RegistryEntryAdded(_subdomain, _ref);
         }
+    }
+
+    function getRegistryEntryRef (string memory _subdomain) 
+        public 
+        view 
+    returns (string memory) {
+        return registryEntryMap[_subdomain].ref;
     }
 
     function isRegistered(string memory _subdomain)

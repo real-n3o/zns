@@ -42,7 +42,6 @@ contract('controller', (accounts) => {
         // await controller.setStakePrice(registryAddress, newStakePrice);
         // registry = await Registry.at(registryAddress);
 
-
         // let updatedStakePrice = await registry.stakePrice.call();
         // assert.equal(updatedStakePrice.toNumber(), newStakePrice);
     });
