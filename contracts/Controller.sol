@@ -103,11 +103,11 @@ contract Controller {
     // get Registry
     // get RegistryEntry
 
-    // remove RegistryEntry
+    // remove RegistryEntry and return Stake
 
-    // create registryType
-    // get registryType
-    // remove registryType (only if not in use)
-    
-    // set max number of registry entries
+    // Future:
+    // -- set max number of registry entries
+    // -- create registryType
+    // -- get registryType
+    // -- remove registryType (only if not in use)
 }

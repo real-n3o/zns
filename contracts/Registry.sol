@@ -88,4 +88,12 @@ contract Registry {
         }
         return (false, 0);
     }
+
+    function setRegistryRef (string memory _newRef) public {
+        ref = _newRef;
+    }
+
+    function setRegistryEntryRef (string memory _subdomain, string memory _newRef) public {
+        registryEntryMap[_subdomain].ref = _newRef;
+    }
 }

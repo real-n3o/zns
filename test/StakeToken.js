@@ -89,17 +89,17 @@ contract('StakeToken', (accounts) => {
 
     // Getters
 
-    it('Get token name', async() => {
+    it('get stake token name', async() => {
         let tokenName = await stakeToken.name.call();
         assert.isString(tokenName);
     });
 
-    it('Get token symbol', async() => {
+    it('get stake token symbol', async() => {
         let tokenSymbol = await stakeToken.symbol.call();
         assert.isString(tokenSymbol);
     });
 
-    it('Get token total supply', async() => {
+    it('get stake token total supply', async() => {
         let tokenSupply = await stakeToken.totalSupply.call();
         assert.isNumber(tokenSupply.toNumber());
     });
