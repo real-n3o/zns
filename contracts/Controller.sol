@@ -15,9 +15,25 @@ contract Controller {
     address payable public stakeTokenAddress;
     uint256 public stakePrice;
 
+    /// @notice Emitted when a new registry is created
     event createdRegistry(address _registrtyAddress, address stakeTokenAddress);
+
+    /// @notice Emitted when a registry's stake price is updated
     event stakePriceSet(address _registryAddress, uint256 _newStakePrice);
+
+    /// @notice Emitted when a new entry is created in a specific a registry
     event createdRegistryEntry(address _registryAddress, string subdomain, string ref);
+
+    /**
+     * @notice Creates a new Registry within the Registrar
+     * @param _domain The registry's unique name and root location in ZNS
+     * @param _ref The reference or pointer (such as a url) to a particular domain
+     * @param _registryType A valid type associated with the registry 
+     * @param _tokenName The token name associated with registry's staking token
+     * @param _tokenSymbol The stake token symbol (such as 'IOI')
+     * @param _tokenSupply The stake token's initial supply at creation
+     * @param _stakePrice The stake price required denominated in ETH to create a new entry in the registry
+     */
 
     function createRegistry(
         string memory _domain,
@@ -26,10 +42,8 @@ contract Controller {
         string memory _tokenName,
         string memory _tokenSymbol,
         uint256 _tokenSupply,
-        uint256 _stakePrice
-    )
+        uint256 _stakePrice)
         public 
-    returns(address)
     {
         StakeToken stakeToken = new StakeToken(controller, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
         Registry registry = new Registry();
@@ -39,6 +53,12 @@ contract Controller {
 
         emit createdRegistry(registryAddress, stakeTokenAddress);
     }
+
+    /**
+     * @notice Sets a new stake price for a registries stake token
+     * @param _registryAddress The registries address to update
+     * @param _newStakePrice The new stake price to be used by the registry
+     */
 
     function setStakePrice(address _registryAddress, uint256 _newStakePrice)
         public
@@ -53,6 +73,13 @@ contract Controller {
         emit stakePriceSet(_registryAddress, _newStakePrice);
     }
 
+    /**
+     * @notice Creates a new registry entry within a specific registry
+     * @param _registryAddress The registries address where the entry will be added
+     * @param _subdomain The subdomain that will be created within the registry entry
+     * @param _ref The user-defined reference (such as a domain) that the subdomain will point to
+     */
+
     function createRegistryEntry(
         address _registryAddress,
         string memory _subdomain,
@@ -62,29 +89,25 @@ contract Controller {
         Registry registry = Registry(_registryAddress);
         registry.createRegistryEntry(_subdomain, _ref);
         address currentRegistryAddress = registry.getAddress();
-        (bool isRegistered, uint256 stakeBalance) = registry.isRegistered(_subdomain);
+        (bool isRegistered, ) = registry.isRegistered(_subdomain);
         assert(isRegistered==true);
-        if(isRegistered==true) {
-            string memory currentRegistrySubdomain = _subdomain;
-            string memory currentRegistryRef = registry.getRegistryEntryRef(_subdomain);
-            emit createdRegistryEntry(currentRegistryAddress, currentRegistrySubdomain, currentRegistryRef);
-
-        }
+        string memory currentRegistrySubdomain = _subdomain;
+        string memory currentRegistryRef = registry.getRegistryEntryRef(_subdomain);
+        
+        emit createdRegistryEntry(currentRegistryAddress, currentRegistrySubdomain, currentRegistryRef);
     }
 
-    // create RegistryEntry
-
-
-    // make sure domain is unique
-    // update ref
+    // Update registry ref
+    // Update registry entry ref
 
     // get Registry
+    // get RegistryEntry
 
-    // list Registry
-    // create RegistryEntry
-    // list RegistryEntry
     // remove RegistryEntry
+
     // create registryType
-    // list RegistryTypes
-    // remove registryType
+    // get registryType
+    // remove registryType (only if not in use)
+    
+    // set max number of registry entries
 }
