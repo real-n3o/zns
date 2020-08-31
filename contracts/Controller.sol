@@ -15,7 +15,9 @@ contract Controller {
     address payable public stakeTokenAddress;
     uint256 public stakePrice;
 
+    event createdRegistry(address _registrtyAddress, address stakeTokenAddress);
     event stakePriceSet(address _registryAddress, uint256 _newStakePrice);
+    event createdRegistryEntry(address _registryAddress, string subdomain, string ref);
 
     function createRegistry(
         string memory _domain,
@@ -34,6 +36,8 @@ contract Controller {
         registry.init(_domain, _ref, _registryType, stakeToken.getAddress());
         registryAddress = registry.getAddress();
         stakeTokenAddress = registry.stakeTokenAddress();
+
+        emit createdRegistry(registryAddress, stakeTokenAddress);
     }
 
     function setStakePrice(address _registryAddress, uint256 _newStakePrice)
@@ -47,6 +51,25 @@ contract Controller {
         stakePrice = stakeToken.stakePrice();
 
         emit stakePriceSet(_registryAddress, _newStakePrice);
+    }
+
+    function createRegistryEntry(
+        address _registryAddress,
+        string memory _subdomain,
+        string memory _ref)
+        public
+    {
+        Registry registry = Registry(_registryAddress);
+        registry.createRegistryEntry(_subdomain, _ref);
+        address currentRegistryAddress = registry.getAddress();
+        (bool isRegistered, uint256 stakeBalance) = registry.isRegistered(_subdomain);
+        assert(isRegistered==true);
+        if(isRegistered==true) {
+            string memory currentRegistrySubdomain = _subdomain;
+            string memory currentRegistryRef = registry.getRegistryEntryRef(_subdomain);
+            emit createdRegistryEntry(currentRegistryAddress, currentRegistrySubdomain, currentRegistryRef);
+
+        }
     }
 
     // create RegistryEntry

@@ -55,6 +55,8 @@ contract Registry {
         return ref;
     }
 
+    // Add staking checks/logic here
+
     function createRegistryEntry (
         string memory _subdomain, 
         string memory _ref)

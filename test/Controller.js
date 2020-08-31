@@ -2,14 +2,16 @@ const Controller = artifacts.require('Controller');
 const Registry = artifacts.require('Registry');
 const StakeToken = artifacts.require('StakeToken');
 
-let domain = 'TestRegistry';
-let ref = 'ref';
-let registryType = 'RegistryType';
-let tokenName = "Meow";
-let tokenSymbol = "MWM";
-let tokenSupply = 500;
-let stakePrice = 250;
-let newStakePrice = 333;
+const domain = 'TestRegistry';
+const ref = 'ref';
+const registryType = 'RegistryType';
+const tokenName = "Meow";
+const tokenSymbol = "MWM";
+const tokenSupply = 500;
+const stakePrice = 250;
+const newStakePrice = 333;
+const subdomain = "meow_sub";
+const subdomainRef = "meow_ref";
 
 contract('controller', (accounts) => {
     let controller;
@@ -21,7 +23,7 @@ contract('controller', (accounts) => {
         return controller;
     });
 
-    it('create registrar', async () => {
+    it('create registry', async () => {
         await controller.createRegistry(
             domain,
             ref,
@@ -37,21 +39,21 @@ contract('controller', (accounts) => {
     it('set stake price for registry', async () => {
         stakeTokenAddress = await controller.stakeTokenAddress.call();
         stakeToken = await StakeToken.at(stakeTokenAddress);
-        updatedStakePrice = await stakeToken.stakePrice.call();
-
-        // await controller.setStakePrice(registryAddress, newStakePrice);
-        // registry = await Registry.at(registryAddress);
-
-        // let updatedStakePrice = await registry.stakePrice.call();
-        // assert.equal(updatedStakePrice.toNumber(), newStakePrice);
+        let currentStakePrice = await stakeToken.stakePrice.call();
+        assert.equal(currentStakePrice.toNumber(), stakePrice);
+        await controller.setStakePrice(registryAddress, newStakePrice);
+        let updatedStakePrice = await stakeToken.stakePrice.call();
+        assert.equal(updatedStakePrice.toNumber(), newStakePrice);
     });
 
     it('create registry entry', async () => {
-        // get registry address from registrar
-        // create new instance of registry contract
-        // take proper stake (where will this logic be?)
-        // create registry entry (need to determine fields)
-        // confirm registry entry has been added and fields have been updated
+        let registryAddress = await controller.registryAddress.call();
+        let registry = await Registry.at(registryAddress);
+        await registry.createRegistryEntry(subdomain, subdomainRef);
+        let returnedSubdomainRef = await registry.getRegistryEntryRef(subdomain);
+        assert.isString(returnedSubdomainRef, subdomainRef);
+
+        // take proper stake (where will this logic be?) ... should this be done as part of creation? Likely...
     });
    
 });
