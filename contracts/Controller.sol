@@ -2,7 +2,7 @@ pragma solidity >=0.4.22 <0.7.0;
 
 /**
  * @title Controller
- * @dev Create and interact with ZNS via the ZNS Controller
+ * @dev Create and interact with ZNS
 */
 
 import './Registry.sol';
@@ -54,6 +54,7 @@ contract Controller {
         StakeToken stakeToken = new StakeToken(controller, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
         Registry registry = new Registry();
         registry.init(_domain, _ref, _registryType, stakeToken.getAddress());
+
         registryAddress = registry.getAddress();
         stakeTokenAddress = registry.stakeTokenAddress();
 
@@ -72,6 +73,7 @@ contract Controller {
         Registry registry = Registry(_registryAddress);
         registryAddress = registry.getAddress();
         stakeTokenAddress = registry.stakeTokenAddress();
+
         StakeToken stakeToken = StakeToken(stakeTokenAddress);
         stakeToken.setStakePrice(_newStakePrice);
         stakePrice = stakeToken.stakePrice();
@@ -94,13 +96,15 @@ contract Controller {
     {
         Registry registry = Registry(_registryAddress);
         registry.createRegistryEntry(_subdomain, _ref);
-        address currentRegistryAddress = registry.getAddress();
+
+        registryAddress = registry.getAddress();
         (bool isRegistered, ) = registry.isRegistered(_subdomain);
         assert(isRegistered==true);
+
         string memory currentRegistrySubdomain = _subdomain;
         string memory currentRegistryRef = registry.getRegistryEntryRef(_subdomain);
         
-        emit createdRegistryEntry(currentRegistryAddress, currentRegistrySubdomain, currentRegistryRef);
+        emit createdRegistryEntry(registryAddress, currentRegistrySubdomain, currentRegistryRef);
     }
 
     /**
@@ -116,10 +120,11 @@ contract Controller {
     {
         Registry registry = Registry(_registryAddress);
         registry.setRegistryRef(_newRef);
-        address currentRegistryAddress = registry.getAddress();
+        
+        registryAddress = registry.getAddress();
         string memory currentRegistryRef = registry.getRef();
 
-        emit registryRefUpdated(currentRegistryAddress, currentRegistryRef);
+        emit registryRefUpdated(registryAddress, currentRegistryRef);
     }
 
     /**
@@ -138,10 +143,10 @@ contract Controller {
         Registry registry = Registry(_registryAddress);
         registry.setRegistryEntryRef(_subdomain, _newRef);
 
-        address currentRegistryAddress = registry.getAddress();
+        registryAddress = registry.getAddress();
         string memory currentRegistryEntryRef = registry.getRegistryEntryRef(_subdomain);
 
-        emit registryEntryRefUpdated(currentRegistryAddress, _subdomain, currentRegistryEntryRef);
+        emit registryEntryRefUpdated(registryAddress, _subdomain, currentRegistryEntryRef);
     }
 
     // get Registry
