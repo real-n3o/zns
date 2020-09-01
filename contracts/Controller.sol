@@ -16,13 +16,19 @@ contract Controller {
     uint256 public stakePrice;
 
     /// @notice Emitted when a new registry is created
-    event createdRegistry(address _registrtyAddress, address stakeTokenAddress);
+    event createdRegistry(address registrtyAddress, address stakeTokenAddress);
 
     /// @notice Emitted when a registry's stake price is updated
-    event stakePriceSet(address _registryAddress, uint256 _newStakePrice);
+    event stakePriceSet(address registryAddress, uint256 newStakePrice);
 
     /// @notice Emitted when a new entry is created in a specific a registry
-    event createdRegistryEntry(address _registryAddress, string subdomain, string ref);
+    event createdRegistryEntry(address registryAddress, string subdomain, string ref);
+
+    /// @notice Emitted when a new a registry ref is updated
+    event registryRefUpdated(address registryAddress, string newRef);
+
+    /// @notice Emitted when a new a registry entry ref is updated
+    event registryEntryRefUpdated(address registryAddress, string subdomain, string newRef);
 
     /**
      * @notice Creates a new Registry within the Registrar
@@ -97,8 +103,33 @@ contract Controller {
         emit createdRegistryEntry(currentRegistryAddress, currentRegistrySubdomain, currentRegistryRef);
     }
 
-    // Update registry ref
-    // Update registry entry ref
+    function setRegistryRef(
+        address _registryAddress,
+        string memory _newRef)
+        public
+    {
+        Registry registry = Registry(_registryAddress);
+        registry.setRegistryRef(_newRef);
+        address currentRegistryAddress = registry.getAddress();
+        string memory currentRegistryRef = registry.getRef();
+
+        emit registryRefUpdated(currentRegistryAddress, currentRegistryRef);
+    }
+
+    function setRegistryEntryRef(
+        address _registryAddress,
+        string memory _subdomain,
+        string memory _newRef)
+        public
+    {
+        Registry registry = Registry(_registryAddress);
+        registry.setRegistryEntryRef(_subdomain, _newRef);
+
+        address currentRegistryAddress = registry.getAddress();
+        string memory currentRegistryEntryRef = registry.getRegistryEntryRef(_subdomain);
+
+        emit registryEntryRefUpdated(currentRegistryAddress, _subdomain, currentRegistryEntryRef);
+    }
 
     // get Registry
     // get RegistryEntry

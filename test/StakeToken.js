@@ -12,6 +12,8 @@ contract('StakeToken', (accounts) => {
     let stakeToken;
     const owner = accounts[0];
 
+    // Creators
+
     it('deploy StakeToken and mint tokens to address', async () => {
         stakeToken = await StakeToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
         assert.isString(stakeToken.address);
@@ -53,22 +55,6 @@ contract('StakeToken', (accounts) => {
         assert.isNumber(stakerBalance.toNumber());
     });
 
-    it('address is a staker', async () => {
-        const isStaker = await stakeToken.isStaker(accounts[0]);
-        assert.isTrue(isStaker[0]);
-        assert.isNumber(isStaker[1].toNumber());
-    });
-
-    it('return the total balance of the stake token', async () => {
-        const totalBalance = await stakeToken.getBalance.call();
-        assert.isNumber(totalBalance.toNumber());
-    });
-
-    it('get an individual accounts stake token balance', async () => {
-        let addressBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
-        assert.isNumber(addressBalance.toNumber());
-    });
-
     it('withdraw a stake from a stake token wallet', async() => {
         let withdrawStake = await stakeToken.withdrawStake.sendTransaction({
             from: accounts[0]
@@ -88,6 +74,22 @@ contract('StakeToken', (accounts) => {
     });
 
     // Getters
+
+    it('check if address is a staker', async () => {
+        const isStaker = await stakeToken.isStaker(accounts[0]);
+        assert.isTrue(isStaker[0]);
+        assert.isNumber(isStaker[1].toNumber());
+    });
+
+    it('get the total balance of the stake token', async () => {
+        const totalBalance = await stakeToken.getBalance.call();
+        assert.isNumber(totalBalance.toNumber());
+    });
+
+    it('get an individual accounts stake token balance', async () => {
+        let addressBalance = await stakeToken.getBalanceAddress.call(accounts[0]);
+        assert.isNumber(addressBalance.toNumber());
+    });
 
     it('get stake token name', async() => {
         let tokenName = await stakeToken.name.call();

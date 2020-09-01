@@ -39,6 +39,20 @@ contract('Registry', (accounts) => {
         assert.isString(registryEntry.tx);
     });
 
+    // Setters
+
+    it('set registry ref', async () => {
+        assert.equal(ref, await registry.getRef());
+        await registry.setRegistryRef(newRef);
+        assert.equal(newRef, await registry.getRef());
+    });
+
+    it('set registry entry ref', async () => {
+        assert.equal(registryEntryRef, await registry.getRegistryEntryRef(registryEntrySubdomain));
+        await registry.setRegistryEntryRef(registryEntrySubdomain, newRegistryEntryRef);
+        assert.equal(newRegistryEntryRef, await registry.getRegistryEntryRef(registryEntrySubdomain));
+    });
+
     // Getters
 
     it('get a registries address', async () => {
@@ -54,19 +68,5 @@ contract('Registry', (accounts) => {
     it('get a registry entries ref', async () => {
         const registryEntryRef = await registry.getRegistryEntryRef(registryEntrySubdomain);
         assert.isString(registryEntryRef);
-    });
-
-    // Setters
-
-    it('set registry ref', async () => {
-        assert.equal(ref, await registry.getRef());
-        await registry.setRegistryRef(newRef);
-        assert.equal(newRef, await registry.getRef());
-    });
-
-    it('set registry entry ref', async () => {
-        assert.equal(registryEntryRef, await registry.getRegistryEntryRef(registryEntrySubdomain));
-        await registry.setRegistryEntryRef(registryEntrySubdomain, newRegistryEntryRef);
-        assert.equal(newRegistryEntryRef, await registry.getRegistryEntryRef(registryEntrySubdomain));
     });
 });

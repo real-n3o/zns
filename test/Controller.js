@@ -13,6 +13,8 @@ const newStakePrice = 333;
 const subdomain = "meow_sub";
 const subdomainRef = "meow_ref";
 
+const newRef = "newRef";
+
 contract('controller', (accounts) => {
     let controller;
     let registryAddress;
@@ -22,6 +24,8 @@ contract('controller', (accounts) => {
         controller = await Controller.new();
         return controller;
     });
+
+    // Creators
 
     it('create registry', async () => {
         await controller.createRegistry(
@@ -36,6 +40,17 @@ contract('controller', (accounts) => {
         console.log(registryAddress);
     });
 
+    it('create registry entry', async () => {
+        let registryAddress = await controller.registryAddress.call();
+        let registry = await Registry.at(registryAddress);
+        await registry.createRegistryEntry(subdomain, subdomainRef);
+        let returnedSubdomainRef = await registry.getRegistryEntryRef(subdomain);
+        assert.isString(returnedSubdomainRef, subdomainRef);
+        // take proper stake (where will this logic be?) ... should this be done as part of creation? Likely...
+    });
+
+    // Setters
+
     it('set stake price for registry', async () => {
         stakeTokenAddress = await controller.stakeTokenAddress.call();
         stakeToken = await StakeToken.at(stakeTokenAddress);
@@ -46,14 +61,16 @@ contract('controller', (accounts) => {
         assert.equal(updatedStakePrice.toNumber(), newStakePrice);
     });
 
-    it('create registry entry', async () => {
-        let registryAddress = await controller.registryAddress.call();
-        let registry = await Registry.at(registryAddress);
-        await registry.createRegistryEntry(subdomain, subdomainRef);
-        let returnedSubdomainRef = await registry.getRegistryEntryRef(subdomain);
-        assert.isString(returnedSubdomainRef, subdomainRef);
+    // needs equals tests
+    it('set registry ref', async () => {
+        const newRegRef = await controller.setRegistryRef(registryAddress, newRef);
+        assert.isString(newRegRef.tx);
+    });
 
-        // take proper stake (where will this logic be?) ... should this be done as part of creation? Likely...
+    // needs equals tests
+    it('set registry entry ref', async () => {
+        let newEntryRef = await controller.setRegistryEntryRef(registryAddress, subdomain, newRef);
+        assert.isString(newEntryRef.tx);
     });
    
 });

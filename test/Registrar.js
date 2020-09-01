@@ -17,6 +17,8 @@ contract('Registrar', () => {
         return deployedRegistrar;
     });
 
+    // Creators
+
     it('create registry', async () => {
         registry = await deployedRegistrar.createRegistry.sendTransaction(
             domain,
