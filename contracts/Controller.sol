@@ -103,6 +103,12 @@ contract Controller {
         emit createdRegistryEntry(currentRegistryAddress, currentRegistrySubdomain, currentRegistryRef);
     }
 
+    /**
+     * @notice Updates a registry's ref value
+     * @param _registryAddress The registries address where the ref will be updated
+     * @param _newRef The new ref value to be updated to
+     */
+
     function setRegistryRef(
         address _registryAddress,
         string memory _newRef)
@@ -115,6 +121,13 @@ contract Controller {
 
         emit registryRefUpdated(currentRegistryAddress, currentRegistryRef);
     }
+
+    /**
+     * @notice Updates a registry entries ref value
+     * @param _registryAddress The registries address where the registry entry ref will be updated
+     * @param _subdomain The subdomain of the registry entry to be updated
+     * @param _newRef The new ref value to be updated in the registry entry
+     */
 
     function setRegistryEntryRef(
         address _registryAddress,
