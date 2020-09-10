@@ -57,7 +57,7 @@ contract('Registry', (accounts) => {
     // Getters
 
     it('get a registries address', async () => {
-        const registryAddress = await registry.getAddress.call();
+        const registryAddress = await registry.address;
         assert.isString(registryAddress);
     });
 

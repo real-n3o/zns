@@ -42,7 +42,7 @@ contract Registrar {
         RegistryController controller = new RegistryController();
         controller.init(address(registry), payable(address(registryToken)));
 
-        registryMap[_domain].registry = registry.getAddress();
+        registryMap[_domain].registry = address(registry);
         registryMap[_domain].domain = _domain;
         registryMap[_domain].registryType = _registryType;
 

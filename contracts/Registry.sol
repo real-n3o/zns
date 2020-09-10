@@ -14,10 +14,6 @@ contract Registry {
     string registryType;
     address payable public registryTokenAddress;
 
-    RegistryToken registryToken;
-
-    address registryAddress = payable(address(this));
-
     event RegistryEntryAdded(string subdomain, string ref);
 
     struct RegistryEntry {
@@ -39,7 +35,7 @@ contract Registry {
         domain = _domain;
         ref = _ref;
         registryType = _registryType;
-        // registryToken = _registryToken;
+        registryTokenAddress = _registryToken;
     }
 
     function getRegistry() 
@@ -49,14 +45,6 @@ contract Registry {
     {
         // uint256 stakePrice = 10;
         return(domain, ref, registryType, registryTokenAddress);
-    }
-
-    function getAddress() 
-        public 
-        view 
-    returns (address) 
-    {  
-       return registryAddress;
     }
 
     function getRef()

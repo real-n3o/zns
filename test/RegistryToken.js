@@ -11,12 +11,10 @@ contract('RegistryToken', (accounts) => {
     let newStakePrice = 3313;
 
     let registryToken;
-    let registry;
     let owner = accounts[0];
 
     before(async () => {
         registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
-        registry = await Registry.new(); 
     });
 
     // Creators
