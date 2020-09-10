@@ -1,14 +1,14 @@
 pragma solidity >=0.4.22 <0.7.0;
 
 /**
- * @title Controller
+ * @title RegistryController
  * @dev Create and interact with ZNS
 */
 
 import './Registry.sol';
 import './RegistryToken.sol';
 
-contract Controller {
+contract RegistryController {
 
     Registry registry;
     address public registryAddress;

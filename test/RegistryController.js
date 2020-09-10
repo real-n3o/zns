@@ -1,8 +1,8 @@
-const Controller = artifacts.require('Controller');
+const RegistryController = artifacts.require('RegistryController');
 const Registry = artifacts.require('Registry');
 const RegistryToken = artifacts.require('RegistryToken');
 
-contract('Controller', (accounts) => {
+contract('RegistryController', (accounts) => {
     let controller;
     let registry;
     let registryToken;
@@ -25,7 +25,7 @@ contract('Controller', (accounts) => {
         registry = await Registry.new();
         registry.init(domain, ref, registryType, registryToken.address);
 
-        controller = await Controller.new();
+        controller = await RegistryController.new();
         controller.init(registry.address, registryToken.address);
         return controller;
     });

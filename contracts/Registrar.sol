@@ -7,7 +7,7 @@ pragma solidity ^0.6.0;
 
 import './Registry.sol';
 import './RegistryToken.sol';
-import './Controller.sol';
+import './RegistryController.sol';
 
 contract Registrar { 
 
@@ -39,7 +39,7 @@ contract Registrar {
         registryToken = RegistryToken(_registryToken);
         registryToken.setStakePrice(_stakePrice);
 
-        Controller controller = new Controller();
+        RegistryController controller = new RegistryController();
         controller.init(address(registry), payable(address(registryToken)));
 
         registryMap[_domain].registry = registry.getAddress();

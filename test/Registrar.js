@@ -17,7 +17,7 @@ contract('Registrar', (accounts) => {
 
     let owner = accounts[0];
 
-    it('create registrar', async () => {
+    it('create registrar', async () => {    
         deployedRegistrar = await Registrar.new();
         assert.isString(deployedRegistrar.address);
     });
