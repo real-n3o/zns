@@ -5,15 +5,18 @@ pragma solidity ^0.6.0;
  * @dev Manage Registry Entries
 */
 
-import './StakeToken.sol';
+import './RegistryToken.sol';
+import './Registry.sol';
 
 contract Registry {
     string domain;
     string ref;
     string registryType;
-    address payable public stakeTokenAddress;
+    address payable public registryTokenAddress;
 
-    address registryAddress = address(this);
+    RegistryToken registryToken;
+
+    address registryAddress = payable(address(this));
 
     event RegistryEntryAdded(string subdomain, string ref);
 
@@ -29,14 +32,23 @@ contract Registry {
         string memory _domain,
         string memory _ref, 
         string memory _registryType, 
-        address payable _stakeTokenAddress) 
+        address payable _registryToken)
         public 
     returns (string memory, string memory) 
     {
         domain = _domain;
         ref = _ref;
         registryType = _registryType;
-        stakeTokenAddress = _stakeTokenAddress;
+        // registryToken = _registryToken;
+    }
+
+    function getRegistry() 
+        public
+        view
+    returns(string memory, string memory, string memory, address)
+    {
+        // uint256 stakePrice = 10;
+        return(domain, ref, registryType, registryTokenAddress);
     }
 
     function getAddress() 

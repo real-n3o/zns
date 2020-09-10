@@ -1,34 +1,40 @@
 const Registrar = artifacts.require('Registrar');
+const Registry = artifacts.require('Registry');
+const RegistryToken = artifacts.require('RegistryToken');
 
-let domain = 'TestRegistry';
-let ref = 'ref';
-let registryType = 'RegistryType';
-let tokenName = "Meow";
-let tokenSymbol = "MWM";
-let tokenSupply = 500;
-let stakePrice = 250;
+contract('Registrar', (accounts) => {
 
-contract('Registrar', () => {
-        
+    let domain = 'TestRegistry';
+    let ref = 'ref';
+    let registryType = 'RegistryType';
+    let tokenName = "Meow";
+    let tokenSymbol = "MWM";
+    let tokenSupply = 500;
+    let stakePrice = 250;
+
     let deployedRegistrar;
+    let registryToken;
 
-    before(async () => {
+    let owner = accounts[0];
+
+    it('create registrar', async () => {
         deployedRegistrar = await Registrar.new();
-        return deployedRegistrar;
+        assert.isString(deployedRegistrar.address);
     });
 
     // Creators
 
     it('create registry', async () => {
+        registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
+
         registry = await deployedRegistrar.createRegistry.sendTransaction(
             domain,
             ref,
             registryType,
-            tokenName,
-            tokenSymbol,
-            tokenSupply,
-            stakePrice
+            stakePrice,
+            registryToken.address
         );
+
         assert.isString(registry.tx);
     }); 
 

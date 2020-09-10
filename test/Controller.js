@@ -1,76 +1,71 @@
 const Controller = artifacts.require('Controller');
 const Registry = artifacts.require('Registry');
-const StakeToken = artifacts.require('StakeToken');
+const RegistryToken = artifacts.require('RegistryToken');
 
-const domain = 'TestRegistry';
-const ref = 'ref';
-const registryType = 'RegistryType';
-const tokenName = "Meow";
-const tokenSymbol = "MWM";
-const tokenSupply = 500;
-const stakePrice = 250;
-const newStakePrice = 333;
-const subdomain = "meow_sub";
-const subdomainRef = "meow_ref";
-
-const newRef = "newRef";
-
-contract('controller', (accounts) => {
+contract('Controller', (accounts) => {
     let controller;
-    let registryAddress;
-    let stakeTokenAddress;
+    let registry;
+    let registryToken;
+
+    const domain = 'TestRegistry';
+    const ref = 'ref';
+    const registryType = 'RegistryType';
+    const tokenName = "Meow";
+    const tokenSymbol = "MWM";
+    const tokenSupply = 500;
+    const stakePrice = 250;
+    const newStakePrice = 333;
+    const subdomain = "meow_sub";
+    const subdomainRef = "meow_ref";
+    const newRef = "newRef";
 
     before(async () => {
+        registryToken = await RegistryToken.new(accounts[0], tokenName, tokenSymbol, tokenSupply, stakePrice);
+        
+        registry = await Registry.new();
+        registry.init(domain, ref, registryType, registryToken.address);
+
         controller = await Controller.new();
+        controller.init(registry.address, registryToken.address);
         return controller;
     });
 
     // Creators
 
-    it('create registry', async () => {
-        await controller.createRegistry(
-            domain,
-            ref,
-            registryType,
-            tokenName,
-            tokenSymbol,
-            tokenSupply,
-            stakePrice)
-        registryAddress = await controller.registryAddress.call();
-        console.log(registryAddress);
-    });
-
     it('create registry entry', async () => {
-        let registryAddress = await controller.registryAddress.call();
-        let registry = await Registry.at(registryAddress);
-        await registry.createRegistryEntry(subdomain, subdomainRef);
+        await controller.createRegistryEntry(subdomain, subdomainRef);
         let returnedSubdomainRef = await registry.getRegistryEntryRef(subdomain);
         assert.isString(returnedSubdomainRef, subdomainRef);
-        // take proper stake (where will this logic be?) ... should this be done as part of creation? Likely...
     });
 
     // Setters
 
     it('set stake price for registry', async () => {
-        stakeTokenAddress = await controller.stakeTokenAddress.call();
-        stakeToken = await StakeToken.at(stakeTokenAddress);
-        let currentStakePrice = await stakeToken.stakePrice.call();
-        assert.equal(currentStakePrice.toNumber(), stakePrice);
-        await controller.setStakePrice(registryAddress, newStakePrice);
-        let updatedStakePrice = await stakeToken.stakePrice.call();
+        await controller.setStakePrice(newStakePrice);
+        let updatedStakePrice = await controller.stakePrice.call();
         assert.equal(updatedStakePrice.toNumber(), newStakePrice);
     });
 
-    // needs equals tests
     it('set registry ref', async () => {
-        const newRegRef = await controller.setRegistryRef(registryAddress, newRef);
+        const newRegRef = await controller.setRegistryRef(newRef);
         assert.isString(newRegRef.tx);
     });
 
-    // needs equals tests
     it('set registry entry ref', async () => {
-        let newEntryRef = await controller.setRegistryEntryRef(registryAddress, subdomain, newRef);
+        let newEntryRef = await controller.setRegistryEntryRef(subdomain, newRef);
         assert.isString(newEntryRef.tx);
     });
    
 });
+
+    // get Registry
+    // get RegistryEntry
+
+    // remove RegistryEntry and return Stake
+    // put on market
+
+    // Future:
+    // -- set max number of registry entries
+    // -- create registryType
+    // -- get registryType
+    // -- remove registryType (only if not in use)

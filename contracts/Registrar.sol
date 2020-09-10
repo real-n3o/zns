@@ -6,17 +6,21 @@ pragma solidity ^0.6.0;
 */
 
 import './Registry.sol';
-import './StakeToken.sol';
+import './RegistryToken.sol';
+import './Controller.sol';
 
 contract Registrar { 
 
-    event registryAdded(address registryContract, string _domain, string registryType);
+    event registryAdded(address registry, string _domain, string registryType);
 
     struct RegistrarEntry {
-        address registryContract;
+        address registry;
         string domain;
         string registryType;
     }
+
+    RegistryToken registryToken;
+    Registry registry;
 
     mapping (string => RegistrarEntry) registryMap;
     address[] public registrar;
@@ -25,23 +29,26 @@ contract Registrar {
         string memory _domain,
         string memory _ref,
         string memory _registryType,
-        string memory _tokenName,
-        string memory _tokenSymbol,
-        uint256 _tokenSupply,
-        uint256 _stakePrice) 
+        uint256 _stakePrice,
+        address payable _registryToken)
         public
     {
-        Registry registryContract = new Registry();
-        StakeToken stakeToken = new StakeToken(msg.sender, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
-        registryContract.init(_domain, _ref, _registryType, address(stakeToken));
-        stakeToken.setStakePrice(_stakePrice);
+        registry = new Registry();
 
-        registryMap[_domain].registryContract = registryContract.getAddress();
+        registry.init(_domain, _ref, _registryType, _registryToken);
+        registryToken = RegistryToken(_registryToken);
+        registryToken.setStakePrice(_stakePrice);
+
+        Controller controller = new Controller();
+        controller.init(address(registry), payable(address(registryToken)));
+
+        registryMap[_domain].registry = registry.getAddress();
         registryMap[_domain].domain = _domain;
         registryMap[_domain].registryType = _registryType;
 
-        registrar.push(registryMap[_domain].registryContract);
-        emit registryAdded(registryMap[_domain].registryContract, _domain, _registryType);
+        registrar.push(registryMap[_domain].registry);
+
+        emit registryAdded(registryMap[_domain].registry, _domain, _registryType);
     }
 
     function getRegistrarLength() public view returns (uint256) {
@@ -49,7 +56,7 @@ contract Registrar {
     }
 
     function getRegistryAddress(string memory _domain) public view returns (address) {
-        return registryMap[_domain].registryContract;
+        return registryMap[_domain].registry;
     }
 
     function getRegistryType(string memory _domain) public view returns (string memory) {

@@ -6,10 +6,10 @@ import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
 
 /**
 * @title Staking Token
-* @notice Implements an ERC20 staking token.
+* @notice Implements an ERC20 staking token that is connected to a registry
 */
 
-contract StakeToken is ERC20, Ownable {
+contract RegistryToken is ERC20, Ownable {
     using SafeMath for uint256;
 
     uint256 public stakePrice = 1682160000000001;
@@ -28,10 +28,10 @@ contract StakeToken is ERC20, Ownable {
         uint256 _stakePrice) 
     ERC20(_tokenName, _tokenSymbol) 
         public
-        payable 
+        payable
     { 
         stakePrice = _stakePrice;
-       _mint(_owner, _tokenSupply);
+        _mint(_owner, _tokenSupply);
     }
 
     function addStaker(address _staker)

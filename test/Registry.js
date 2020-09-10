@@ -1,36 +1,37 @@
 const Registry = artifacts.require('Registry');
-const StakeToken = artifacts.require('StakeToken');
-
-let domain = 'domain';
-let ref = 'ref';
-let newRef = "newRef";
-let registryType = 'type';
-let tokenName = 'Meow';
-let tokenSymbol = "MWM";
-let tokenSupply = 100;
-let stakePrice = 250;
-
-let registryEntrySubdomain = "subdomain";
-let registryEntryRef = "subdomain_ref";
-
-let newRegistryEntrySubdomain = "new_subdomain";
-let newRegistryEntryRef = "new_subdomain_ref";
+const RegistryToken = artifacts.require('RegistryToken');
 
 contract('Registry', (accounts) => {
 
-    let stakeToken;
+    let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
+    let domain = 'domain';
+    let ref = 'ref';
+    let newRef = "newRef";
+    let registryType = 'type';
+    let tokenName = 'Meow';
+    let tokenSymbol = "MWM";
+    let tokenSupply = 100;
+    let stakePrice = 250;
+
+    let registryEntrySubdomain = "subdomain";
+    let registryEntryRef = "subdomain_ref";
+
+    let newRegistryEntrySubdomain = "new_subdomain";
+    let newRegistryEntryRef = "new_subdomain_ref";
+
+    let registryToken;
     let registry;
-    const owner = accounts[0];
+    let owner = accounts[0];
 
     before(async () => {
-        stakeToken = await StakeToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
+        registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
         registry = await Registry.new(); 
     });
 
-    // Creators
+//     // Creators
 
     it('create a new registry', async () => {
-        const newRegistry = await registry.init(domain, ref, registryType, stakeToken.address);
+        const newRegistry = await registry.init(domain, ref, registryType, registryToken.address);
         assert.isString(newRegistry.tx);
     });
 
@@ -69,4 +70,7 @@ contract('Registry', (accounts) => {
         const registryEntryRef = await registry.getRegistryEntryRef(registryEntrySubdomain);
         assert.isString(registryEntryRef);
     });
+    
+    // get Registry
+//     // get RegistryEntry
 });
