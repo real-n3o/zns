@@ -12,10 +12,10 @@ import './RegistryController.sol';
 contract Registrar { 
 
     /// @notice Emitted when a new Registry is added to the Registrar.
-    event registryAdded(address registry, string _domain, string registryType);
+    event registryAdded(address _controller, string _domain, string _registryType);
 
     struct RegistrarEntry {
-        address registry;
+        address controller;
         string domain;
         string registryType;
     }
@@ -51,14 +51,14 @@ contract Registrar {
 
         RegistryController controller = new RegistryController();
         controller.init(address(registry), payable(address(registryToken)));
-
-        registryMap[_domain].registry = address(registry);
+        
+        registryMap[_domain].controller = address(controller);
         registryMap[_domain].domain = _domain;
         registryMap[_domain].registryType = _registryType;
 
-        registrar.push(registryMap[_domain].registry);
+        registrar.push(registryMap[_domain].controller);
 
-        emit registryAdded(registryMap[_domain].registry, _domain, _registryType);
+        emit registryAdded(registryMap[_domain].controller, _domain, _registryType);
     }
 
     /**
@@ -70,12 +70,12 @@ contract Registrar {
     }
 
     /**
-     * @notice Returns the address of a Registry by providing its domain as a string.
+     * @notice Returns the address of a Registry Controller by providing its domain as a string.
      * @param _domain The primary name used to represent a particular Registry. 
      */
 
-    function getRegistryAddress(string memory _domain) public view returns (address) {
-        return registryMap[_domain].registry;
+    function getRegistryController(string memory _domain) public view returns (address) {
+        return registryMap[_domain].controller;
     }
 
     /**

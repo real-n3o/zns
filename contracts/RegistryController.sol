@@ -118,4 +118,16 @@ contract RegistryController {
 
         emit registryEntryRefUpdated(_subdomain, currentRegistryEntryRef);
     }
+    
+    function getRef() public view returns (string memory) {
+        return registry.getRef();
+    }
+
+    function getStakePrice() public view returns (uint256) {
+        return registryToken.stakePrice();
+    }
+
+    function getRegistryEntryRef(string memory _subdomain) public view returns (string memory) {
+        return registry.getRegistryEntryRef(_subdomain);
+    }
 }

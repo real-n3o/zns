@@ -55,11 +55,27 @@ contract('RegistryController', (accounts) => {
         let newEntryRef = await controller.setRegistryEntryRef(subdomain, newRef);
         assert.isString(newEntryRef.tx);
     });
+
+    // getters
+
+    it('get registry ref', async () => {
+        let registryRef = await controller.getRef.call();
+        assert.isString(registryRef);
+    });
+
+    it('get registry stake price', async () => {
+        let stakePrice = await controller.getStakePrice.call();
+        assert.isNumber(stakePrice.toNumber());
+    });
+
+    it('get registry entry ref', async () => {
+        let registryEntryRef = await controller.getRegistryEntryRef.call(subdomain);
+        assert.isString(registryEntryRef);
+    });
    
 });
 
     // get Registry
-    // get RegistryEntry
 
     // remove RegistryEntry and return Stake
     // put on market

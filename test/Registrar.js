@@ -45,9 +45,9 @@ contract('Registrar', (accounts) => {
         assert.isNumber(totalRegistries.toNumber());
     });
 
-    it('get registry entry contract address', async () => {
-        const registryAddress = await deployedRegistrar.getRegistryAddress.call(domain);
-        assert.isString(registryAddress);
+    it('get registry controller address', async () => {
+        const registryController = await deployedRegistrar.getRegistryController.call(domain);
+        assert.isString(registryController);
     });
 
     it('get registry entry type', async () => {
