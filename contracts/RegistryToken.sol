@@ -6,7 +6,7 @@ import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
 
 /**
 * @title Staking Token
-* @notice Implements an ERC20 staking token that is connected to a registry
+* @notice Implements an ERC20 staking token that is connected to a registry.
 */
 
 contract RegistryToken is ERC20, Ownable {
@@ -18,9 +18,27 @@ contract RegistryToken is ERC20, Ownable {
     mapping (address => uint256) private _balances;
     address[] internal stakers;    
 
+    /// @notice Emitted when a new RegistryToken is created.
+    event RegistryTokenCreated(address _owner, string _tokenName, string tokenSymbol, uint256 tokenSupply, uint256 stakePrice);
+
     /// @notice Emitted when tokens are received by RegistryToken.
-    event Received(address, uint);
-  
+    event Received(address _stake, uint256 _amount);
+
+    /// @notice Emitted when a new staker is added to RegistryToken.
+    event StakerAdded(address _staker);
+
+    /// @notice Emitted when a new staker is removed to RegistryToken.
+    event StakerRemoved(address _staker);
+
+    /// @notice Emitted when a new stake price is set.
+    event StakePriceSet(uint256 _newStakePrice);
+
+    /// @notice Emitted when new tokens are staked and minted to `msg.sender`.
+    event StakeSent(address _sender, uint256 _amount, uint256 _senderBalance);
+
+    /// @notice Emitted when new tokens are returned and burned to `msg.sender`.
+    event StakeReturned(address _sender, uint256 _amount, uint256 _senderBalance);
+
     /**
      * @notice Constructs a new RegistryToken.
      * @param _owner The address that will own and control the RegistryToken contract.
@@ -40,8 +58,9 @@ contract RegistryToken is ERC20, Ownable {
         public
         payable
     { 
-        stakePrice = _stakePrice;
         _mint(_owner, _tokenSupply);
+        stakePrice = _stakePrice;
+        emit RegistryTokenCreated(_owner, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
     }
 
     /**
@@ -58,6 +77,7 @@ contract RegistryToken is ERC20, Ownable {
         uint256 stakerBalance = getBalanceAddress(_staker);
         if((!_isStaker) && (stakerBalance==stakePrice)) {
             stakers.push(_staker);
+            emit StakerAdded(_staker);
             return(_isStaker);
         }
     }
@@ -74,6 +94,7 @@ contract RegistryToken is ERC20, Ownable {
         if(_isStaker){
             stakers[s] = stakers[stakers.length - 1];
             stakers.pop();
+            emit StakerRemoved(_staker);
         }
     }
 
@@ -102,6 +123,7 @@ contract RegistryToken is ERC20, Ownable {
 
     function setStakePrice(uint256 _newStakePrice) public returns (uint256) {
         stakePrice = _newStakePrice;
+        emit StakePriceSet(stakePrice);
         return stakePrice;
     }
 
@@ -119,6 +141,8 @@ contract RegistryToken is ERC20, Ownable {
         balance += msg.value;
         _balances[msg.sender] += msg.value;
         wallet.transfer(msg.value);
+        
+        emit StakeSent(msg.sender, msg.value, _balances[msg.sender]);
     }
 
     /**
@@ -130,12 +154,14 @@ contract RegistryToken is ERC20, Ownable {
         public
         payable
     {
-        // require(msg.value == stakePrice);
+        require(msg.value == stakePrice);
         address payable sender = msg.sender;
         _burn(sender, stakePrice);
         balance -= stakePrice;
         _balances[sender] -= stakePrice;
         sender.transfer(stakePrice);
+
+        emit StakeReturned(msg.sender, msg.value, _balances[msg.sender]);
     }
 
     /**

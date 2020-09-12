@@ -17,6 +17,9 @@ contract RegistryController {
     address payable public registryTokenAddress;
     uint256 public stakePrice;
 
+    /// @notice Emitted when the RegistryController is initialized.
+    event registryControllerInitialized(address _registry, address payable _registryToken);
+
     /// @notice Emitted when a new Registry is created.
     event createdRegistry(address registrtyAddress, address registryTokenAddress);
 
@@ -45,6 +48,8 @@ contract RegistryController {
         registry = Registry(registryAddress);
         registryTokenAddress = _registryToken;
         registryToken = RegistryToken(registryTokenAddress);
+
+        emit registryControllerInitialized(_registry, _registryToken);
     }
 
     /**

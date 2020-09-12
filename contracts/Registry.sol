@@ -17,6 +17,12 @@ contract Registry {
     /// @notice Emitted when a new Registry is created.
     event RegistryEntryCreated(string subdomain, string ref);
 
+    /// @notice Emitted when the Registry ref is set.
+    event RegistryRefSet(string ref);
+
+    /// @notice Emitted when the Registry entry ref is set.
+    event RegistryEntryRefSet(string ref);
+
     struct RegistryEntry {
         string ref;
         bool isHuman;
@@ -77,6 +83,7 @@ contract Registry {
 
     function setRegistryRef (string memory _newRef) public {
         ref = _newRef;
+        emit RegistryRefSet(ref);
     }
 
     /**
@@ -87,6 +94,7 @@ contract Registry {
 
     function setRegistryEntryRef (string memory _subdomain, string memory _newRef) public {
         registryEntryMap[_subdomain].ref = _newRef;
+        emit RegistryEntryRefSet(registryEntryMap[_subdomain].ref);
     }
 
     /**

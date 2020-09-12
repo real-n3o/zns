@@ -19,7 +19,7 @@ contract('RegistryToken', (accounts) => {
 
     // Creators
 
-    it('deploy RegistryToken', async () => {
+    it('deploy a new registry token', async () => {
         registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
         assert.isString(registryToken.address);
     });
@@ -43,7 +43,7 @@ contract('RegistryToken', (accounts) => {
         assert.isString(removeStaker.tx);
     });
 
-    it('send stake to a stake tokens wallet', async () => {
+    it('send stake to a registry tokens wallet', async () => {
         let sendStake = await registryToken.sendStake.sendTransaction({
             from: accounts[0],
             value: stakePrice,
@@ -60,9 +60,10 @@ contract('RegistryToken', (accounts) => {
         assert.isNumber(stakerBalance.toNumber());
     });
 
-    it('withdraw a stake from a stake token wallet', async() => {
+    it('withdraw a stake from a registry token wallet', async() => {
         let withdrawStake = await registryToken.withdrawStake.sendTransaction({
-            from: accounts[0]
+            from: accounts[0],
+            value: stakePrice
         });        
         assert.isString(withdrawStake.tx);
         let stakerBalance = await registryToken.getBalanceAddress.call(accounts[0]);
@@ -86,27 +87,27 @@ contract('RegistryToken', (accounts) => {
         assert.isNumber(isStaker[1].toNumber());
     });
 
-    it('get the total balance of the stake token', async () => {
+    it('get the total balance of the registry token', async () => {
         const totalBalance = await registryToken.getBalance.call();
         assert.isNumber(totalBalance.toNumber());
     });
 
-    it('get an individual accounts stake token balance', async () => {
+    it('get an individual accounts registry token balance', async () => {
         let addressBalance = await registryToken.getBalanceAddress.call(accounts[0]);
         assert.isNumber(addressBalance.toNumber());
     });
 
-    it('get stake token name', async() => {
+    it('get registry token name', async() => {
         let tokenName = await registryToken.name.call();
         assert.isString(tokenName);
     });
 
-    it('get stake token symbol', async() => {
+    it('get registry token symbol', async() => {
         let tokenSymbol = await registryToken.symbol.call();
         assert.isString(tokenSymbol);
     });
 
-    it('get stake token total supply', async() => {
+    it('get registry token total supply', async() => {
         let tokenSupply = await registryToken.totalSupply.call();
         assert.isNumber(tokenSupply.toNumber());
     });
