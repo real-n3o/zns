@@ -32,6 +32,12 @@ contract RegistryController {
     /// @notice Emitted when a new a Registry Entry 'ref' is updated.
     event registryEntryRefUpdated(string subdomain, string newRef);
 
+    /**
+     * @notice Initializes a new RegistryController after construction.
+     * @param _registry The Registry address that the RegistryConroller will manage.
+     * @param _registryToken The RegistryToken address that the RegistryController will manage.
+     */
+
     function init(address _registry, address payable _registryToken) 
         public 
     {
