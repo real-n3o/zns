@@ -2,7 +2,7 @@ pragma solidity >=0.4.22 <0.7.0;
 
 /**
  * @title RegistryController
- * @dev Create and interact with ZNS
+ * @dev Create and interact with ZNS.
 */
 
 import './Registry.sol';
@@ -17,19 +17,19 @@ contract RegistryController {
     address payable public registryTokenAddress;
     uint256 public stakePrice;
 
-    /// @notice Emitted when a new registry is created
+    /// @notice Emitted when a new Registry is created.
     event createdRegistry(address registrtyAddress, address registryTokenAddress);
 
-    /// @notice Emitted when a registry's stake price is updated
+    /// @notice Emitted when a Registry's stake price is updated.
     event stakePriceSet(uint256 newStakePrice);
 
-    /// @notice Emitted when a new entry is created in a specific a registry
+    /// @notice Emitted when a new entry is created in a Registry.
     event createdRegistryEntry(string subdomain, string ref);
 
-    /// @notice Emitted when a new a registry ref is updated
+    /// @notice Emitted when a new a Registry 'ref' is updated.
     event registryRefUpdated(string newRef);
 
-    /// @notice Emitted when a new a registry entry ref is updated
+    /// @notice Emitted when a new a Registry Entry 'ref' is updated.
     event registryEntryRefUpdated(string subdomain, string newRef);
 
     function init(address _registry, address payable _registryToken) 
@@ -42,8 +42,8 @@ contract RegistryController {
     }
 
     /**
-     * @notice Sets a new stake price for a registries stake token
-     * @param _newStakePrice The new stake price to be used by the registry
+     * @notice Sets a new stake price for a Registry's RegistryToken.
+     * @param _newStakePrice The new stake price to be used by the registry.
      */
 
     function setStakePrice(uint256 _newStakePrice)
@@ -56,9 +56,9 @@ contract RegistryController {
     }
 
     /**
-     * @notice Creates a new registry entry within a specific registry
-     * @param _subdomain The subdomain that will be created within the registry entry
-     * @param _ref The user-defined reference (such as a domain) that the subdomain will point to
+     * @notice Creates a new entry within a Registry.
+     * @param _subdomain The subdomain that will be utilized to reference the current Registry entry.
+     * @param _ref The user-defined reference (such as an index or url) that the Registry entry will point to.
      */
 
     function createRegistryEntry(
@@ -77,8 +77,8 @@ contract RegistryController {
     }
 
     /**
-     * @notice Updates a registry's ref value
-     * @param _newRef The new ref value to be updated to
+     * @notice Updates a Registry's referece value.
+     * @param _newRef The new reference value to be updated to.
      */
 
     function setRegistryRef(
@@ -92,9 +92,9 @@ contract RegistryController {
     }
 
     /**
-     * @notice Updates a registry entries ref value
-     * @param _subdomain The subdomain of the registry entry to be updated
-     * @param _newRef The new ref value to be updated in the registry entry
+     * @notice Updates a Registry entries reference value.
+     * @param _subdomain The subdomain of the Registry entry to be updated.
+     * @param _newRef The new reference value to be updated in the Registry entry.
      */
 
     function setRegistryEntryRef(
