@@ -16,10 +16,10 @@ Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts 
 Addresses can be set to map to any type of arbitrary content source, such as:
 
 - **Networks** that map to shared namespaces, such as a community, organization or DAO. 
-- **Handles** that map to individual user accounts, such as humans or bots.
+- **Handles** that map to individual user accounts, such as a human or bot.
 - **Resources** that map to any type of computational resource, such as a binary file, url, hash, or text blob. 
 
-Content sources can be represented as a unique human identity through a decentralized verification process (see the Human Verification section).
+Content sources can be represented as a unique human identity through a decentralized verification process (see [Human Verification](https://github.com/real-n3o/ZNS#human-verification)).
 
 ## Why ZNS?
 
