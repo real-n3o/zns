@@ -19,13 +19,13 @@ Addresses can be set to map to any type of arbitrary content source, such as:
 - **Handles** that map to individual user accounts, which can represent either humans or bots.
 - **Resources** that map to any type of computational resource, such as a binary file, url, hash, or text blob. 
 
-# Why ZNS?
+## Why ZNS?
 
 A global naming system is a necessary component for distributed systems like Zero, where system state resides across multiple parallel systems and is not stored in a single central server or decentralized blockchain. Our goal is that modern browsers and projects across the web3 ecosystem will adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS.
  
 ## Addressing
 
-Zero Addresses are made up of a hierarchical set of registries and registry entries on the Ethereum blockchain. Let's review an addresses constituent parts by evaluating the following address: ```0://rootaddr:subdomain:content```:
+Zero Addresses are made up of a hierarchical set of registries and registry entries on the Ethereum blockchain. Let's review an addresses constituent parts by evaluating the following address: ```0:rootaddr:subdomain:content```:
 
 - ```0:``` -> is used to signify the beginning of a Zero Address path.
 - ```0:rootaddr``` -> The first value in the address is a ***domain*** that references a unique Registry Contract and user-defined reference value.
@@ -36,14 +36,25 @@ In relation to traditional DNS addressing, the ```0:``` is comparable to ```http
 
 ## Contracts
 
+Contracts should be deployed to the blockchain in the following order:
+
 ***Registrar***
 
-  ```Registrar.sol``` is the root Contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method by providing a valid:
-   - ***domain***: a globally unique and user-defined identity such as ```0:zero```
-   - ***reference***: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero``
-   - ***registry type***: a valid registry type to aid with indexing registries. Valid registry types are defined by the ZNS DAO.
-   - ***stake price***: the price of registering an entry (a subdomain) with the Registry such as ```0:zero:guild```
-   - ***registry token address***: the address of the registry's RegistryToken ERC20 token.
+  ```Registrar.sol``` is the root contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method by providing a:
+   - ```domain```: a globally unique and user-defined identity such as ```0:zero```
+   - ```ref```: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero```
+   - ```registryType```: a valid registry type to aid with indexing registries. Valid registry types are defined by the ZNS DAO.
+   - ```stakePrice```: the price of registering an entry (a subdomain) with the Registry such as ```0:zero:guild```
+   - ```registryTokenAddress```: the address of the registry's RegistryToken ERC20 token.
+
+***RegistryToken***
+
+  ```RegistryToken.sol``` is the token contract for a specific ```Registry``` based on the OpenZepplin [ERC20 standard] (https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). ```RegistryToken``` is responsible for facilitating the process of registering new entries (called 'subdomains') within the Registry, including adding and removing valid stakers, minting and burning registry tokens, and depositing and withdrawing tokens into the contract. A new ```RegistryToken``` is added on construction by providing a:
+   - ```owner```: the owner's Ethereum address
+   - ```tokenName```: the token's name such as ```Infinity```
+   - ```tokenSymbol```: the token's ticker such as ```INI```
+   - ```tokenSupply```: the token's total initial supply
+   - ```stakePrice```: the price of registering a RegistryToken
 
 ## Security
 
@@ -55,7 +66,7 @@ ZNS is still in alpha phase. We have done the best to create secure and tested c
 
 - Node.js is required
 - [Truffle](https://github.com/ConsenSys/truffle) is required
-- A blockchain explorer is required ([Ganache](https://www.trufflesuite.com/ganache) is recommended)
+- A blockchain explorer such as ([Ganache](https://www.trufflesuite.com/ganache)
 
 ### Installing 
 
@@ -65,20 +76,16 @@ From the ZNS directory:
 2. Install and initialize truffle
    ```sh
    npm install -g truffle
-   mkdir ZNS && cd ZNs
+   mkdir ZNS && cd ZNS
    truffle
    ```
 3. Install the ZNS contracts package with: ```npm install zns```
-4. Download, install and start Ganache with ```ganache-client```
-5. Deploy the ZNS contracts with ```truffle deploy```
+4. Download, install and start Ganache with: ```ganache-client```
+5. Deploy the ZNS contracts with: ```truffle deploy```
 
 ### Testing
 
 ```truffle test```
-
-### deployment
-
-
 
 ## License
 
