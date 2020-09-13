@@ -8,8 +8,10 @@ pragma solidity ^0.6.0;
 import './Registry.sol';
 import './RegistryToken.sol';
 import './RegistryController.sol';
+import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Registrar { 
+    using SafeMath for uint256;
 
     /// @notice Emitted when a new Registry is added to the Registrar.
     event registryAdded(address _controller, string _domain, string _registryType);
