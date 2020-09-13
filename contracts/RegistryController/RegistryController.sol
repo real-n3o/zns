@@ -5,9 +5,9 @@ pragma solidity ^0.6.0;
  * @dev Create and interact with ZNS.
 */
 
-import './Registry.sol';
-import './RegistryToken.sol';
-import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import '../Registry/Registry.sol';
+import '../RegistryToken/RegistryToken.sol';
+import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract RegistryController {
     using SafeMath for uint256;

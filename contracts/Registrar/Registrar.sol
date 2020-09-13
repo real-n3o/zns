@@ -5,10 +5,10 @@ pragma solidity ^0.6.0;
  * @dev Create and interact with Registries.
 */
 
-import './Registry.sol';
-import './RegistryToken.sol';
-import './RegistryController.sol';
-import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import '../Registry/Registry.sol';
+import '../RegistryToken/RegistryToken.sol';
+import '../RegistryController/RegistryController.sol';
+import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Registrar { 
     using SafeMath for uint256;
