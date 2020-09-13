@@ -38,14 +38,14 @@ In relation to traditional DNS addressing, the ```0:``` is comparable to ```http
 
 ZNS is made up of four primary contracts that should be deployed in the following order:
 
-***Registrar***
+  * ***Registrar***
 
-  ```Registrar.sol``` is the root contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method by providing a valid:
-   - ```domain```: a globally unique and user-defined identity such as ```zero```
-   - ```ref```: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero```
-   - ```registryType```: a valid registry type to aid with indexing registries. Valid registry types are defined by the ZNS DAO (See Governance & Staking section below).
-   - ```stakePrice```: the price of registering an entry (a subdomain) with the Registry such as ```zero:guild```
-   - ```registryTokenAddress```: the address of the registry's ```RegistryToken```.
+    + ```Registrar.sol``` is the root contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method by providing a valid:
+      - ```domain```: a globally unique and user-defined identity such as ```zero```
+      - ```ref```: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero```
+      - ```registryType```: a valid registry type to aid with indexing registries. Valid registry types are defined by the ZNS DAO (See Governance & Staking section below).
+      - ```stakePrice```: the price of registering an entry (a subdomain) with the Registry such as ```zero:guild```
+      - ```registryTokenAddress```: the address of the registry's ```RegistryToken```.
 
 ***RegistryToken***
 
