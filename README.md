@@ -11,13 +11,13 @@
 
 # ZNS
 
-Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsbile for 'Global Addressing' within Zero. A global naming system is a necessary component for distributed distributed systems like Zero, where system state lives within multiple parallel systems, and does not reside in a single centralized server (cloud) or decentralized ledger (blockchain). Similar to DNS, Global Addressing enables users and communities to establish global identities and namespaces in Zero and across any part of the Internet. 
+Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsbile for 'Global Addressing' within Zero. A global naming system is a necessary component for distributed distributed systems like Zero, where system state lives across multiple parallel systems, and is not represented within a single centralized server or decentralized blockchain. Similar to DNS, Global Addressing enables users and communities to establish global identities and namespaces in Zero and map to any part of the Internet.
 
 Addresses can be set to map to any type of arbitary content source. Zero loosly buckets addresses in three categories:
 
-- **Networks** in Zero map to shared namespaces, such as a community, organization or DAO. 
-- **Handles** in Zero map to individal user accounts, which can represent either humans or bots.
-- **Resources** in Zero map to any type of resource, such as a binary file, url, or text blob. 
+- **Networks** map to shared namespaces, such as a community, organization or DAO. 
+- **Handles** map to individal user accounts, which can represent either humans or bots.
+- **Resources** map to any type of resource, such as a binary file, url, or text blob. 
 
 ## Addressing
 
@@ -34,6 +34,26 @@ The following is a simple overview of how the ZNS protocol works:
 
 - Root domains in ZNS are defined by creating Registries. 
 
+## Security
+
+ZNS is still in alpha phase. We have done the best to create secure and tested code, however have no yet performed any external security audits. Please understand that we are not responsbile for domain purchases or any implementations of the protocol. Please use common sense and proceed with caution. 
+
 ## Getting Started
 
 ### Requirements 
+
+- Node.js is required
+- Truffle is required
+
+### Installing 
+
+```npm install```
+
+### Testing
+
+```truffle test```
+
+## License
+
+Governed by the InnerSource License.
+
