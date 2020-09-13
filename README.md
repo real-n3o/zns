@@ -47,28 +47,28 @@ ZNS is made up of four primary contracts that should be deployed in the followin
       - ```stakePrice```: the price of registering an entry (a subdomain) with the Registry such as ```zero:guild```
       - ```registryTokenAddress```: the address of the registry's ```RegistryToken```.
 
-***RegistryToken***
+  * ***RegistryToken***
 
-  ```RegistryToken.sol``` is the associated token contract for a specific ```Registry``` that is based on the OpenZepplin [ERC20 standard](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). The ```RegistryToken``` is responsible for the financial related activity of a ```Registry``` including adding and removing stakers, minting and burning a registry's tokens, and depositing and withdrawing (via staking) funds into the ```RegistryToken``` contract itself. 
+  + ```RegistryToken.sol``` is the associated token contract for a specific ```Registry``` that is based on the OpenZepplin [ERC20 standard](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). The ```RegistryToken``` is responsible for the financial related activity of a ```Registry``` including adding and removing stakers, minting and burning a registry's tokens, and depositing and withdrawing (via staking) funds into the ```RegistryToken``` contract itself. 
   
-  A new ```RegistryToken``` is created on construction by providing a valid:
-   - ```owner```: the owner's Ethereum address
-   - ```tokenName```: the token's name such as 'Infinity'
-   - ```tokenSymbol```: the token's ticker such as 'INI'
-   - ```tokenSupply```: the token's initial total number of tokens in circulation
-   - ```stakePrice```: the price for registering a new registry entry (a subdomain)
+  + A new ```RegistryToken``` is created on construction by providing a valid:
+      - ```owner```: the owner's Ethereum address
+      - ```tokenName```: the token's name such as 'Infinity'
+      - ```tokenSymbol```: the token's ticker such as 'INI'
+      - ```tokenSupply```: the token's initial total number of tokens in circulation
+      - ```stakePrice```: the price for registering a new registry entry (a subdomain)
 
-***Registry***
+* ***Registry***
 
-  ```Registry.sol``` is the contract is responsible for managing and updating registry entries (called 'subdomains') within an individual ```Registry```. A ```Registry``` must be initialized by calling the ```init()``` function after creation by providing a valid ```domain```, ```ref```, ```registryType``` and ```registryToken``` address. 
+  + ```Registry.sol``` is the contract is responsible for managing and updating registry entries (called 'subdomains') within an individual ```Registry```. A ```Registry``` must be initialized by calling the ```init()``` function after creation by providing a valid ```domain```, ```ref```, ```registryType``` and ```registryToken``` address. 
   
-  A new ```RegistryEntry``` can be added by calling the ```CreateRegistryEntry()``` method and providing a valid ```domain``` and ```ref```.
+  + A new ```RegistryEntry``` can be added by calling the ```CreateRegistryEntry()``` method and providing a valid ```domain``` and ```ref```.
 
-***RegistryController***
+* ***RegistryController***
 
-```RegistryController.sol``` is the main contract that validates permissible user actions on a particular ```Registry```, ```RegistryEntry```, and ```RegistryToken```. After creation and initialization, all interactions with the contract-set for a particular Registry must happen via ```RegistryController``` for security purposes.
+  + ```RegistryController.sol``` is the main contract that validates permissible user actions on a particular ```Registry```, ```RegistryEntry```, and ```RegistryToken```. After creation and initialization, all interactions with the contract-set for a particular Registry must happen via ```RegistryController``` for security purposes.
 
-After a new ```RegistryController``` is created it must be initialized by calling the ```init()``` method and providing a valid ```registry``` address and ```registryToken``` address.
+  + After a new ```RegistryController``` is created it must be initialized by calling the ```init()``` method and providing a valid ```registry``` address and ```registryToken``` address.
 
 ## Staking & Governance
 
