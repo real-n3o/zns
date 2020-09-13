@@ -78,7 +78,7 @@ Registry Entries operate similarly, although have the latitude to establish thei
 
 Given that each ```Registry``` has its own ```RegistryToken```, Registry operators can create staking based incentives via the issuance of governance tokens, similar to many DeFi lending protocols. This creates a 'market of markets' for different namespaces across the web at large, creating the incentives to manage useful curated lists and pathways to content.  
 
-# Human Verification
+## Human Verification
 
 ...
 
