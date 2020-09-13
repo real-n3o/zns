@@ -11,22 +11,26 @@
 
 # ZNS
 
-Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsible for 'Global Addressing' within Zero. Similar to DNS, Global Addressing enables users and communities to establish global identities and namespaces that map to addresses in peer-to-peer systems like Zero, or any part of the Internet. A global naming system is a necessary component for distributed systems, where system state resides across multiple parallel systems, and is not represented within a single centralized server or decentralized blockchain. Our goal is that modern browsers and projects across the web3 ecosystem adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS.
+Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsible for 'Global Addressing' within Zero. Similar to DNS, Global Addressing enables users and communities to establish and own global identities and namespaces within Zero. 
 
-Addresses can be set to map to any type of arbitrary content source. Primary examples of Addresses include:
+Addresses can be set to map to any type of arbitrary content source, such as:
 
-- **Networks** map to shared namespaces, such as a community, organization or DAO. 
-- **Handles** map to individal user accounts, which can represent either humans or bots.
-- **Resources** map to any type of resource, such as a binary file, url, or text blob. 
+- **Networks** that map to shared namespaces, such as a community, organization or DAO. 
+- **Handles** that map to individual user accounts, which can represent either humans or bots.
+- **Resources** that map to any type of computational resource, such as a binary file, url, hash, or text blob. 
+
+# Why ZNS?
+
+A global naming system is a necessary component for distributed systems like Zero, where system state resides across multiple parallel systems and is not stored in a single central server or decentralized blockchain. Our goal is that modern browsers and projects across the web3 ecosystem will adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS.
  
 ## Addressing
 
-There are multiple namespaces in a typical address path:
+There are multiple namespaces in a typical Zero Address path:
 
-- ```0://``` -> is used to signify a Zero Address
-- ```0://rootaddr``` -> The first value in the address path is a pointer to the ref of the domain set by the domain's Registry Contract.
-- ```0://rootaddr:subdomain``` -> The second value is a pointer to the sub-domain set by the Registries corresponding Registry entry. 
-- ```0://rootaddr:subdomain:content``` -> The third value is a pointer to content within the Registry entry at that location. 
+- ```0://``` -> is used to signify a Zero Address path.
+- ```0://rootaddr``` -> The first value in the address is a ***domain*** that references a unique Registry.
+- ```0://rootaddr:subdomain``` -> The second value in the address is a **subdomain** that references an Entry within the Registry (a Registry Entry).
+- ```0://rootaddr:subdomain:content``` -> The third value in the address represents a ***path*** defined by the Registry Entry.
 
 ## How It Works
 
@@ -36,7 +40,7 @@ The following is a simple overview of how the ZNS protocol works:
 
 ## Security
 
-ZNS is still in alpha phase. We have done the best to create secure and tested code, however have no yet performed any external security audits. Please understand that we are not responsible for domain purchases or any implementations of the protocol. Please use common sense and proceed with caution. 
+ZNS is still in alpha phase. We have done the best to create secure and tested code, however have not yet performed any external security audits. Please understand that we are not responsible for domain purchases or the result for any implementations of this protocol. Please use common sense and proceed with caution. 
 
 ## Getting Started
 
@@ -52,14 +56,14 @@ From the ZNS directory:
 
 1. ```npm install```
 2. Install and initialize truffle
-   <code>
+   ```sh
    npm install -g truffle
    mkdir ZNS && cd ZNs
    truffle
-   </code>
+   ```
 3. Install the ZNS contracts package with: ```npm install zns```
 4. Download, install and start Ganache with ```ganache-client```
-5. Deploy the ZNS contracts with ```truffle deploy```
+5. Deploy the ZNS contracts with ```truffle deploy
 
 ### Testing
 
