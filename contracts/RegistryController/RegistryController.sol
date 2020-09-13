@@ -5,6 +5,7 @@ pragma solidity ^0.6.0;
  * @dev Create and interact with ZNS.
 */
 
+import './RegistryControllerI.sol';
 import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
 import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
