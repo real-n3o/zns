@@ -1,0 +1,4 @@
+// .gitignore
+# OpenZeppelin
+.openzeppelin/dev-*.json
+.openzeppelin/.session

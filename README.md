@@ -25,7 +25,7 @@ Content sources can be represented as a unique human identity through a decentra
 
 A global naming and human verification system is a necessary component for distributed systems like Zero, where system state resides within multiple parallel systems and is not stored in a single central server or decentralized blockchain. 
 
-The goal is that modern browsers and projects across the web3 ecosystem adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS (along with human verification and vastly improved financial incentives!).
+The goal is that modern browsers and projects across the web3 ecosystem adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS (along with the introduction of human verification and vastly improved financial incentives!).
  
 ## Addressing
 
@@ -36,7 +36,7 @@ Zero Addresses are made up of a hierarchical set of registries and registry entr
 - ```0:rootaddr:subdomain``` -> The second value in the address is a **subdomain** that references an Entry within the Registry, along with a user-defined reference value.
 - ```0:rootaddr:subdomain:content``` -> The third value in the address represents a ***path*** defined within the Registry Entry.
 
-In relation to traditional DNS addressing, the ```0:``` is comparable to ```http://```, the  ```rootaddr``` is comparable to a TLD like ```.com``` or ```.io```, the ```subdomain``` is comparable to a domain, and the ```content``` is comparable to a relative path on a webserver. 
+In relation to traditional DNS addressing, the ```0:``` is comparable to ```http://```, the  ```rootaddr``` is comparable to a TLD like ```.com``` or ```.io```, the ```subdomain``` is comparable to a domain, and ```content``` is comparable to a relative path on a webserver. 
 
 ## Contracts
 
