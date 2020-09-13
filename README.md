@@ -40,21 +40,25 @@ Contracts should be deployed to the blockchain in the following order:
 
 ***Registrar***
 
-  ```Registrar.sol``` is the root contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method by providing a:
+  ```Registrar.sol``` is the root contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method by providing a valid:
    - ```domain```: a globally unique and user-defined identity such as ```0:zero```
    - ```ref```: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero```
    - ```registryType```: a valid registry type to aid with indexing registries. Valid registry types are defined by the ZNS DAO.
    - ```stakePrice```: the price of registering an entry (a subdomain) with the Registry such as ```0:zero:guild```
-   - ```registryTokenAddress```: the address of the registry's RegistryToken ERC20 token.
+   - ```registryTokenAddress```: the address of the registry's ```RegistryToken```.
 
 ***RegistryToken***
 
-  ```RegistryToken.sol``` is the token contract for a specific ```Registry``` based on the OpenZepplin [ERC20 standard] (https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). ```RegistryToken``` is responsible for facilitating the process of registering new entries (called 'subdomains') within the Registry, including adding and removing valid stakers, minting and burning registry tokens, and depositing and withdrawing tokens into the contract. A new ```RegistryToken``` is added on construction by providing a:
+  ```RegistryToken.sol``` is the associated token contract for a specific ```Registry``` that is based on the OpenZepplin [ERC20 standard] (https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). The ```RegistryToken``` is responsible for the finanical related activity of a ```Registry``` including adding and removing stakers, minting and burning registry tokens, and depositing and withdrawing (via staking) funds into the ```RegistryToken``` contract. A new ```RegistryToken``` is created on construction by providing a valid:
    - ```owner```: the owner's Ethereum address
    - ```tokenName```: the token's name such as ```Infinity```
    - ```tokenSymbol```: the token's ticker such as ```INI```
    - ```tokenSupply```: the token's total initial supply
-   - ```stakePrice```: the price of registering a RegistryToken
+   - ```stakePrice```: the price of registering a ```RegistryToken```
+
+***Registry***
+
+  ```Registry.sol``` is the contract is responsible for managing and updating entries (called 'subdomains') within an individual ```Registry```. A ```Registry``` initialized by calling the ```init()``` function on the newly created ```Registry``` by providing a valid ```domain```, ```ref```, ```registryType``` and ```registryToken``` address. A new ```RegistryEntry``` can be added by calling the ```CreateRegistryEntry()``` method and providng a valid ```domain``` and ```ref```.
 
 ## Security
 
