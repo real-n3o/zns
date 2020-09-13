@@ -131,4 +131,4 @@ From the ZNS directory, run: ```truffle test```
 
 ZNS is governed and made publicly accessible under the terms and conditions of the InnerSource License. 
 
-ZNS is proudly brought to you by n3o in collaboration with The One Foundation, The Zero Guild, zDAO, and Wilder Studios.
+ZNS is proudly brought to you by n3o in collaboration with The One Foundation, The Zero Guild, zDAO, Wilder Studios and The Last Entity.
