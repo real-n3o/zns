@@ -57,12 +57,12 @@ ZNS is made up of four primary contracts that should be deployed in the followin
     - ```tokenSupply```: the token's initial total number of tokens in circulation
     - ```stakePrice```: the price for registering a new registry entry (a subdomain)
 
-* ***Registry***
+***Registry***
 
   + ```Registry.sol``` is the contract is responsible for managing and updating registry entries (called 'subdomains') within an individual ```Registry```. A ```Registry``` must be initialized by calling the ```init()``` function after creation by providing a valid ```domain```, ```ref```, ```registryType``` and ```registryToken``` address. 
   + A new ```RegistryEntry``` can be added by calling the ```CreateRegistryEntry()``` method and providing a valid ```domain``` and ```ref```.
 
-* ***RegistryController***
+***RegistryController***
 
   + ```RegistryController.sol``` is the main contract that validates permissible user actions on a particular ```Registry```, ```RegistryEntry```, and ```RegistryToken```. After creation and initialization, all interactions with the contract-set for a particular Registry must happen via ```RegistryController``` for security purposes.
   + After a new ```RegistryController``` is created it must be initialized by calling the ```init()``` method and providing a valid ```registry``` address and ```registryToken``` address.
