@@ -10,7 +10,7 @@ import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
 import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract RegistryController {
+contract RegistryController is RegistryControllerI {
     using SafeMath for uint256;
 
     Registry registry;
@@ -45,7 +45,8 @@ contract RegistryController {
      */
 
     function init(address _registry, address payable _registryToken) 
-        public 
+        external 
+        override
     {
         registryAddress = _registry;
         registry = Registry(registryAddress);
@@ -61,7 +62,8 @@ contract RegistryController {
      */
 
     function setStakePrice(uint256 _newStakePrice)
-        public
+        external
+        override
     {
         registryToken.setStakePrice(_newStakePrice);
         stakePrice = registryToken.stakePrice();
@@ -76,9 +78,10 @@ contract RegistryController {
      */
 
     function createRegistryEntry(
-        string memory _subdomain,
-        string memory _ref)
-        public
+        string calldata _subdomain,
+        string calldata _ref)
+        external
+        override
     {
         registry.createRegistryEntry(_subdomain, _ref);
         (bool isRegistered, ) = registry.isRegistered(_subdomain);
@@ -96,8 +99,9 @@ contract RegistryController {
      */
 
     function setRegistryRef(
-        string memory _newRef)
-        public
+        string calldata _newRef)
+        external
+        override
     {
         registry.setRegistryRef(_newRef);        
         string memory currentRegistryRef = registry.getRef();
@@ -112,9 +116,10 @@ contract RegistryController {
      */
 
     function setRegistryEntryRef(
-        string memory _subdomain,
-        string memory _newRef)
-        public
+        string calldata _subdomain,
+        string calldata _newRef)
+        external
+        override
     {
         registry.setRegistryEntryRef(_subdomain, _newRef);
         string memory currentRegistryEntryRef = registry.getRegistryEntryRef(_subdomain);
@@ -122,15 +127,15 @@ contract RegistryController {
         emit registryEntryRefUpdated(_subdomain, currentRegistryEntryRef);
     }
     
-    function getRef() public view returns (string memory) {
+    function getRef() override external returns (string memory) {
         return registry.getRef();
     }
 
-    function getStakePrice() public view returns (uint256) {
+    function getStakePrice() override external returns (uint256) {
         return registryToken.stakePrice();
     }
 
-    function getRegistryEntryRef(string memory _subdomain) public view returns (string memory) {
+    function getRegistryEntryRef(string calldata _subdomain) override external returns (string memory) {
         return registry.getRegistryEntryRef(_subdomain);
     }
 }

@@ -13,5 +13,5 @@ interface RegistryControllerI {
     function setRegistryEntryRef(string calldata _subdomain, string calldata _newRef) external;
     function getRef() external returns (string memory);
     function getStakePrice() external returns (uint256);
-    function getRegistryEntryRef() external returns (string memory);
+    function getRegistryEntryRef(string calldata _subdomain) external returns (string memory);
 }
