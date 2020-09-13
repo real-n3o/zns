@@ -11,7 +11,7 @@
 
 # ZNS
 
-Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsible for 'Global Addressing' within Zero. Similar to DNS, Global Addressing enables users and communities to establish and own global identities and namespaces within Zero. 
+Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsible for 'Global Addressing' within Zero. Similar to DNS, Global Addressing enables users and communities to establish and own global identities and namespaces within Zero and any peer-to-peer system. 
 
 Addresses can be set to map to any type of arbitrary content source, such as:
 
@@ -21,7 +21,7 @@ Addresses can be set to map to any type of arbitrary content source, such as:
 
 ## Why ZNS?
 
-A global naming system is a necessary component for distributed systems like Zero, where system state resides across multiple parallel systems and is not stored in a single central server or decentralized blockchain. Our goal is that modern browsers and projects across the web3 ecosystem will adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS.
+A global naming system is a necessary component for distributed systems like Zero, where system state resides across multiple parallel systems and is not stored in a single central server or decentralized blockchain. The goal is that modern browsers and projects across the web3 ecosystem adopt the ZNS protocol to create a more customizable, flexible, and decentralized alternative to modern DNS (with fantastic financial incentives).
  
 ## Addressing
 
@@ -70,6 +70,18 @@ ZNS is made up of four primary contracts that should be deployed in the followin
 
 After a new ```RegistryController``` is created it must be initialized by calling the ```init()``` method and providing a valid ```registry``` address and ```registryToken``` address.
 
+## Staking & Governance
+
+One of the unique properties of ZNS is the introduction of blockchain-based staking and (optional) DAO-based governance for Registries and Registry Entries. At Network launch anyone is free to purchase root Registries by staking the ```stakePrice``` set within within the ZNS Global Registrar. The ```stakePrice``` can be increased or decreased overtime with the submission and acceptance of a proposal from the ZNS DAO. Purchasers of new Registries (domains) and Registry Entries (subdomains) are automatically added as Members to the DAO responsible for the Global Registrar, thereby ensuring all participants within the Network have rights to govern the pricing for the issuance of new Registries. 
+
+Registry Entries operate similarly, although have the latitude to establish their own pricing mechanisms and DAO-based governance structure. For instance, a user could purchase the Registry at ```0:ninja```, declare themselves dictator with sole authority over the domain, and create a prohibitively high price for creating new Registry Entires (subdomains). Alternatively, a do-gooder could purchase ```0:everyone``` and make choices via a DAO which set affordable prices for new subdomains.
+
+Given that each ```Registry``` has its own ```RegistryToken```, Registry operators can create staking based incentives via the issuance of governance tokens, similar to many DeFi lending protocols. This creates a 'market of markets' for different namespaces across the web at large, creating the incentives to manage useful curated lists and pathways to content.  
+
+# Human Verification
+
+...
+
 ## Security
 
 ZNS is still in alpha phase. We have done the best to create secure and tested code, however have not yet performed any external security audits. Please understand that we are not responsible for domain purchases or the result for any implementations of this protocol. Please use common sense and proceed with caution. 
@@ -80,7 +92,7 @@ ZNS is still in alpha phase. We have done the best to create secure and tested c
 
 - Node.js is required
 - [Truffle](https://github.com/ConsenSys/truffle) is required
-- A blockchain explorer such as ([Ganache](https://www.trufflesuite.com/ganache)
+- A blockchain explorer such as [Ganache](https://www.trufflesuite.com/ganache)
 
 ### Installing 
 
@@ -99,7 +111,7 @@ From the ZNS directory:
 
 ### Testing
 
-```truffle test```
+From the ZNS directory, run: ```truffle test```
 
 ## License
 
