@@ -36,7 +36,7 @@ In relation to traditional DNS addressing, the ```0:``` is comparable to ```http
 
 ## Contracts
 
-Contracts should be deployed to the blockchain in the following order:
+ZNS is made up of four primary contracts that should be deployed in the following order:
 
 ***Registrar***
 
@@ -49,7 +49,7 @@ Contracts should be deployed to the blockchain in the following order:
 
 ***RegistryToken***
 
-  ```RegistryToken.sol``` is the associated token contract for a specific ```Registry``` that is based on the OpenZepplin [ERC20 standard] (https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). The ```RegistryToken``` is responsible for the finanical related activity of a ```Registry``` including adding and removing stakers, minting and burning registry tokens, and depositing and withdrawing (via staking) funds into the ```RegistryToken``` contract. A new ```RegistryToken``` is created on construction by providing a valid:
+  ```RegistryToken.sol``` is the associated token contract for a specific ```Registry``` that is based on the OpenZepplin [ERC20 standard](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol). The ```RegistryToken``` is responsible for the financial related activity of a ```Registry``` including adding and removing stakers, minting and burning registry tokens, and depositing and withdrawing (via staking) funds into the ```RegistryToken``` contract. A new ```RegistryToken``` is created on construction by providing a valid:
    - ```owner```: the owner's Ethereum address
    - ```tokenName```: the token's name such as ```Infinity```
    - ```tokenSymbol```: the token's ticker such as ```INI```
@@ -58,7 +58,11 @@ Contracts should be deployed to the blockchain in the following order:
 
 ***Registry***
 
-  ```Registry.sol``` is the contract is responsible for managing and updating entries (called 'subdomains') within an individual ```Registry```. A ```Registry``` initialized by calling the ```init()``` function on the newly created ```Registry``` by providing a valid ```domain```, ```ref```, ```registryType``` and ```registryToken``` address. A new ```RegistryEntry``` can be added by calling the ```CreateRegistryEntry()``` method and providng a valid ```domain``` and ```ref```.
+  ```Registry.sol``` is the contract is responsible for managing and updating entries (called 'subdomains') within an individual ```Registry```. A ```Registry``` must be initialized by calling the ```init()``` function after creation by providing a valid ```domain```, ```ref```, ```registryType``` and ```registryToken``` address. A new ```RegistryEntry``` can be added by calling the ```CreateRegistryEntry()``` method and providing a valid ```domain``` and ```ref```.
+
+***RegistryController***
+
+```RegistryController.sol``` is the main contract that validates permissible user actions on a particular ```Registry```, ```RegistryEntry```, and ```RegistryToken```. After a new ```RegistryController``` is created it must be initialized by calling the ```init()``` method and providing a valid ```registry``` address and ```registryToken``` address.
 
 ## Security
 
