@@ -36,7 +36,8 @@ In relation to traditional DNS addressing, the ```0:``` is comparable to ```http
 
 ## Contracts
 
-*** Registrar ***
+***Registrar***
+
   ```Registrar.sol``` is the root Contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method within the by providing a valid:
    - domain: a globally unique and user-defined identity such as ```0:zero```
    - reference: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero``
