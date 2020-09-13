@@ -11,7 +11,7 @@
 
 # ZNS
 
-Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsible for 'Global Addressing' within Zero. Similar to DNS, Global Addressing enables users and communities to establish and own global identities and namespaces within Zero and any peer-to-peer system. 
+Zer0 Name Service (ZNS) is the underlying set of Ethereum-based smart contracts responsible for 'Global Addressing' within Zero. Similar to DNS, Global Addressing enables users and communities to establish and own global identities and namespaces within Zero and any peer-to-peer system (including the Internet). 
 
 Addresses can be set to map to any type of arbitrary content source, such as:
 
