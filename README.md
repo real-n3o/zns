@@ -122,4 +122,6 @@ From the ZNS directory, run: ```truffle test```
 
 ## License
 
-Governed by the InnerSource License.
+ZNS is proudly brought to you in collaboration with The One Foundation, The Zero Guild, and Wilder Studios.
+
+ZNS is governed and made publicly accessible under the terms and conditions of the InnerSource License.
