@@ -106,7 +106,6 @@ contract Registry {
         view
     returns(string memory, string memory, string memory, address)
     {
-        // uint256 stakePrice = 10;
         return(domain, ref, registryType, registryTokenAddress);
     }
 

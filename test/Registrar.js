@@ -14,7 +14,6 @@ contract('Registrar', (accounts) => {
 
     let deployedRegistrar;
     let registryToken;
-
     let owner = accounts[0];
 
     it('create registrar', async () => {    

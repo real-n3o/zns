@@ -16,7 +16,6 @@ contract('Registry', (accounts) => {
     let registryEntrySubdomain = "subdomain";
     let registryEntryRef = "subdomain_ref";
 
-    let newRegistryEntrySubdomain = "new_subdomain";
     let newRegistryEntryRef = "new_subdomain_ref";
 
     let registryToken;
