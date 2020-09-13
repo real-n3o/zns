@@ -25,18 +25,24 @@ A global naming system is a necessary component for distributed systems like Zer
  
 ## Addressing
 
-There are multiple namespaces in a typical Zero Address path:
+Zero Addresses are made up of a hierarchical set of registries and registry entries on the Ethereum blockchain. Let's review an addresses constituent parts by evaluating the following address: ```0://rootaddr:subdomain:content```:
 
-- ```0://``` -> is used to signify a Zero Address path.
-- ```0://rootaddr``` -> The first value in the address is a ***domain*** that references a unique Registry.
-- ```0://rootaddr:subdomain``` -> The second value in the address is a **subdomain** that references an Entry within the Registry (a Registry Entry).
-- ```0://rootaddr:subdomain:content``` -> The third value in the address represents a ***path*** defined by the Registry Entry.
+- ```0:``` -> is used to signify the beginning of a Zero Address path.
+- ```0:rootaddr``` -> The first value in the address is a ***domain*** that references a unique Registry Contract and user-defined reference value.
+- ```0:rootaddr:subdomain``` -> The second value in the address is a **subdomain** that references an Entry within the Registry, along with a user-defined reference value.
+- ```0:rootaddr:subdomain:content``` -> The third value in the address represents a ***path*** defined within the Registry Entry.
 
-## How It Works
+In relation to traditional DNS addressing, the ```0:``` is comparable to ```http://``, the  ```rootaddr``` referenced above can be compared to a TLD, a domain can be compared the ```subdomain```, and the ```content``` represents the local path on an individual webserver. 
 
-The following is a simple overview of how the ZNS protocol works: 
+## Contracts
 
-- Root domains in ZNS are defined by creating Registries. 
+*** Registrar ***
+  ```Registrar.sol``` is the root Contract for creating and storing Registries. New Registries are created by calling the ```createRegistry()``` method within the by providing a valid:
+   - domain: a globally unique and user-defined identity such as ```0:zero```
+   - reference: a reference to an arbitrary content source such as a url like ```https://zer0.io/network/zero``
+   - registry type: a valid registry type to aid with indexing registries. Valid registry types are defined by the ZNS DAO.
+   - stake price: the price of registering an entry (a subdomain) with the Registry such as ```0:zero:guild```
+   - registry token address: the address of the registry's RegistryToken ERC20 token.
 
 ## Security
 
@@ -63,11 +69,15 @@ From the ZNS directory:
    ```
 3. Install the ZNS contracts package with: ```npm install zns```
 4. Download, install and start Ganache with ```ganache-client```
-5. Deploy the ZNS contracts with ```truffle deploy
+5. Deploy the ZNS contracts with ```truffle deploy```
 
 ### Testing
 
 ```truffle test```
+
+### deployment
+
+
 
 ## License
 
