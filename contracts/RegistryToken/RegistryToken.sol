@@ -1,15 +1,15 @@
 pragma solidity 0.6.2;
 
-import "../../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "../../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
 
 /**
 * @title Staking Token
 * @notice Implements an ERC20 staking token that is connected to a registry.
 */
 
-contract RegistryToken is ERC20, Ownable {
+contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
     using SafeMath for uint256;
 
     uint256 public stakePrice;
@@ -48,24 +48,20 @@ contract RegistryToken is ERC20, Ownable {
      * @param _stakePrice The initial amount/price to add an Entry to the Registry, denominated in Infinity Token.
      */
 
-    constructor(
+    function initialize(
         address _owner, 
         string memory _tokenName, 
         string memory _tokenSymbol, 
         uint256 _tokenSupply,
-        uint256 _stakePrice) 
-    ERC20(_tokenName, _tokenSymbol) 
-        public
-        payable
-    { 
-        _mint(_owner, _tokenSupply);
+        uint256 _stakePrice
+    ) 
+        public 
+        initializer 
+    {
+        ERC20UpgradeSafe.__ERC20_init(_tokenName, _tokenSymbol);
         stakePrice = _stakePrice;
         emit RegistryTokenCreated(_owner, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
     }
-
-    // function initialize() public {
-
-    // }
 
     /**
      * @notice Adds a new staker to the RegistryToken.

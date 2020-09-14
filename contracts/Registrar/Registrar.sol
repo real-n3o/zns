@@ -8,7 +8,7 @@ pragma solidity 0.6.2;
 import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
 import '../RegistryController/RegistryController.sol';
-import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
 contract Registrar { 
     using SafeMath for uint256;

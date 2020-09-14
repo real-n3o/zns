@@ -8,9 +8,9 @@ pragma solidity 0.6.2;
 import './RegistryControllerI.sol';
 import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
-import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
-contract RegistryController is RegistryControllerI {
+contract RegistryController is RegistryControllerI, Initializable {
     using SafeMath for uint256;
 
     Registry registry;
@@ -48,6 +48,7 @@ contract RegistryController is RegistryControllerI {
     function initialize(Registry _registry, RegistryToken _registryToken)
         external
         override
+        initializer
     {
         registryAddress = payable(address(_registry));
         registry = _registry;

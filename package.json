@@ -4,16 +4,17 @@
   "description": "Zer0 Name Service",
   "main": "index.js",
   "dependencies": {
+    "@openzeppelin/contracts-ethereum-package": "^3.0.0",
     "big-number": "^2.0.0",
     "ganache-cli": "^6.10.1",
     "node-gyp": "^7.1.0",
     "node-pre-gyp": "^0.15.0",
-    "openzeppelin-solidity": "^3.1.0",
     "scrypt-js": "^3.0.1",
     "truffle": "^5.1.41"
   },
   "devDependencies": {
-    "@openzeppelin/cli": "^2.8.2"
+    "@openzeppelin/cli": "^2.8.2",
+    "@openzeppelin/truffle-upgrades": "^1.0.2"
   },
   "scripts": {
     "test": "mocha"

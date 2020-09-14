@@ -20,7 +20,8 @@ contract('RegistryToken', (accounts) => {
     // Creators
 
     it('deploy a new registry token', async () => {
-        registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
+        registryToken = await RegistryToken.new();
+        registryToken.initialize(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
         assert.isString(registryToken.address);
     });
 

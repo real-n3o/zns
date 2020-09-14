@@ -7,9 +7,9 @@ pragma solidity 0.6.2;
 
 import '../RegistryToken/RegistryToken.sol';
 import '../Registry/Registry.sol';
-import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
-contract Registry {
+contract Registry is Initializable {
     using SafeMath for uint256;
 
     string domain;
@@ -49,12 +49,13 @@ contract Registry {
         string memory _registryType, 
         RegistryToken _registryToken)
         public 
+        initializer
     returns (string memory, string memory) 
     {
         domain = _domain;
         ref = _ref;
         registryType = _registryType;
-        registryToken = registryToken;
+        registryToken = _registryToken;
     }
 
     // Add staking checks/logic here
@@ -151,17 +152,5 @@ contract Registry {
             if (keccak256(bytes(_subdomain)) == keccak256(bytes(registryEntries[i]))) return (true, i);
         }
         return (false, 0);
-    }
-
-    function testFunction1() public view returns (string memory) {
-        return ref;
-    }
-
-    function testFunction2() public view returns (string memory) {
-        return domain;
-    }
-
-    function testFunction4() public view returns (string memory) {
-        return 'meow';
     }
 }
