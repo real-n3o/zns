@@ -44,18 +44,18 @@ contract('RegistryToken', (accounts) => {
     });
 
     it('send stake to a registry tokens wallet', async () => {
-        let sendStake = await registryToken.sendStake.sendTransaction({
+        let depositStake = await registryToken.depositStake.sendTransaction({
             from: accounts[0],
             value: stakePrice,
         });
-        assert.isString(sendStake.tx);
+        assert.isString(depositStake.tx);
         let stakerBalance = await registryToken.getBalanceAddress.call(accounts[0]);
         assert.isAtLeast(stakerBalance.toNumber(), stakePrice);
     });
 
     it('add staker after stake has been sent', async () => {
-        const sendStake = await registryToken.addStaker(accounts[0]);
-        assert.isString(sendStake.tx);
+        const depositStake = await registryToken.addStaker(accounts[0]);
+        assert.isString(depositStake.tx);
         let stakerBalance = await registryToken.getBalanceAddress.call(accounts[0]);
         assert.isNumber(stakerBalance.toNumber());
     });

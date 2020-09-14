@@ -136,7 +136,7 @@ contract Registry {
         return registryEntryMap[_subdomain].ref;
     }
 
-    /**
+    /**s
      * @notice Returns a boolean representing whether a subdomain is registered within the Registry.
      * @param _subdomain The subdomain to index the Registry entry.
      */
@@ -150,5 +150,17 @@ contract Registry {
             if (keccak256(bytes(_subdomain)) == keccak256(bytes(registryEntries[i]))) return (true, i);
         }
         return (false, 0);
+    }
+
+    function testFunction1() public view returns (string memory) {
+        return ref;
+    }
+
+    function testFunction2() public view returns (string memory) {
+        return domain;
+    }
+
+    function testFunction4() public view returns (string memory) {
+        return 'meow';
     }
 }

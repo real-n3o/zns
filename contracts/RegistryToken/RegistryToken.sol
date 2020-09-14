@@ -34,7 +34,7 @@ contract RegistryToken is ERC20, Ownable {
     event StakePriceSet(uint256 _newStakePrice);
 
     /// @notice Emitted when new tokens are staked and minted to `msg.sender`.
-    event StakeSent(address _sender, uint256 _amount, uint256 _senderBalance);
+    event StakeDeposited(address _sender, uint256 _amount, uint256 _senderBalance);
 
     /// @notice Emitted when new tokens are returned and burned to `msg.sender`.
     event StakeReturned(address _sender, uint256 _amount, uint256 _senderBalance);
@@ -132,7 +132,7 @@ contract RegistryToken is ERC20, Ownable {
      * Requires `msg.sender` sends a valid `msg.value` in the transaction.
      */
 
-    function sendStake()
+    function depositStake()
         public
         payable
     {
@@ -140,9 +140,11 @@ contract RegistryToken is ERC20, Ownable {
         _mint(msg.sender, msg.value);
         balance += msg.value;
         _balances[msg.sender] += msg.value;
-        wallet.transfer(msg.value);
+
+        (bool success, ) = msg.sender.call.value(msg.value)("");
+        require(success, "Transfer failed.");
         
-        emit StakeSent(msg.sender, msg.value, _balances[msg.sender]);
+        emit StakeDeposited(msg.sender, msg.value, _balances[msg.sender]);
     }
 
     /**
@@ -159,7 +161,9 @@ contract RegistryToken is ERC20, Ownable {
         _burn(sender, stakePrice);
         balance -= stakePrice;
         _balances[sender] -= stakePrice;
-        sender.transfer(stakePrice);
+
+        (bool success, ) = msg.sender.call.value(msg.value)("");
+        require(success, "Transfer failed.");
 
         emit StakeReturned(msg.sender, msg.value, _balances[msg.sender]);
     }
@@ -208,7 +212,7 @@ contract RegistryToken is ERC20, Ownable {
      */
 
     fallback() external payable {
-        sendStake();
+        depositStake();
     }
 
     /**

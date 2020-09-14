@@ -1,0 +1,250 @@
+{
+  "contracts": {
+    "Registrar": {
+      "address": "0x2DfE11700744B2D454CD834F7BFd24d7BFa8f711",
+      "constructorCode": "608060405234801561001057600080fd5b50614173806100206000396000f3fe",
+      "bodyBytecodeHash": "c223037af6759403d205f7edb0c64458a6dcf0d8441ee420e77e594a044ab94e",
+      "localBytecodeHash": "cbd87a5b750d8218d5d3442f8624cf8e7e9110f2e87f407e529c6f17d2cab242",
+      "deployedBytecodeHash": "cbd87a5b750d8218d5d3442f8624cf8e7e9110f2e87f407e529c6f17d2cab242",
+      "types": {
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_struct<Registrar.RegistrarEntry>": {
+          "id": "t_struct<Registrar.RegistrarEntry>",
+          "kind": "struct",
+          "label": "Registrar.RegistrarEntry",
+          "members": [
+            {
+              "label": "controller",
+              "astId": 51,
+              "type": "t_address",
+              "src": "560:18:1"
+            },
+            {
+              "label": "domain",
+              "astId": 53,
+              "type": "t_string",
+              "src": "588:13:1"
+            },
+            {
+              "label": "registryType",
+              "astId": 55,
+              "type": "t_string",
+              "src": "611:19:1"
+            }
+          ]
+        },
+        "t_string": {
+          "id": "t_string",
+          "kind": "elementary",
+          "label": "string"
+        },
+        "t_mapping<t_struct<Registrar.RegistrarEntry>>": {
+          "id": "t_mapping<t_struct<Registrar.RegistrarEntry>>",
+          "valueType": "t_struct<Registrar.RegistrarEntry>",
+          "label": "mapping(key => Registrar.RegistrarEntry)",
+          "kind": "mapping"
+        },
+        "t_array:dyn<t_address>": {
+          "id": "t_array:dyn<t_address>",
+          "valueType": "t_address",
+          "length": "dyn",
+          "kind": "array",
+          "label": "address[]"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Registrar",
+          "path": "contracts/Registrar/Registrar.sol",
+          "label": "registryToken",
+          "astId": 58,
+          "type": "t_address",
+          "src": "643:27:1"
+        },
+        {
+          "contract": "Registrar",
+          "path": "contracts/Registrar/Registrar.sol",
+          "label": "registry",
+          "astId": 60,
+          "type": "t_address",
+          "src": "676:17:1"
+        },
+        {
+          "contract": "Registrar",
+          "path": "contracts/Registrar/Registrar.sol",
+          "label": "registryMap",
+          "astId": 64,
+          "type": "t_mapping<t_struct<Registrar.RegistrarEntry>>",
+          "src": "700:46:1"
+        },
+        {
+          "contract": "Registrar",
+          "path": "contracts/Registrar/Registrar.sol",
+          "label": "registrar",
+          "astId": 67,
+          "type": "t_array:dyn<t_address>",
+          "src": "752:26:1"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    },
+    "Registry": {
+      "address": "0xC62f8Fc5a475D29029bB8c3dF9cA008e84f2aDFa",
+      "constructorCode": "608060405234801561001057600080fd5b506118b1806100206000396000f3fe",
+      "bodyBytecodeHash": "f61911721e69d5a8d7086a0d5ea1a8e08bedbe9403eb258178bec66584146f22",
+      "localBytecodeHash": "2ef27197d78226945bd87eff42ea67996940c3091bc405fe9c8b63e8b0612ccc",
+      "deployedBytecodeHash": "2ef27197d78226945bd87eff42ea67996940c3091bc405fe9c8b63e8b0612ccc",
+      "types": {
+        "t_string": {
+          "id": "t_string",
+          "kind": "elementary",
+          "label": "string"
+        },
+        "t_address_payable": {
+          "id": "t_address_payable",
+          "kind": "elementary",
+          "label": "address payable"
+        },
+        "t_struct<Registry.RegistryEntry>": {
+          "id": "t_struct<Registry.RegistryEntry>",
+          "kind": "struct",
+          "label": "Registry.RegistryEntry",
+          "members": [
+            {
+              "label": "ref",
+              "astId": 240,
+              "type": "t_string",
+              "src": "771:10:2"
+            },
+            {
+              "label": "isHuman",
+              "astId": 242,
+              "type": "t_bool",
+              "src": "791:12:2"
+            }
+          ]
+        },
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_mapping<t_struct<Registry.RegistryEntry>>": {
+          "id": "t_mapping<t_struct<Registry.RegistryEntry>>",
+          "valueType": "t_struct<Registry.RegistryEntry>",
+          "label": "mapping(key => Registry.RegistryEntry)",
+          "kind": "mapping"
+        },
+        "t_array:dyn<t_string>": {
+          "id": "t_array:dyn<t_string>",
+          "valueType": "t_string",
+          "length": "dyn",
+          "kind": "array",
+          "label": "string[]"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Registry",
+          "path": "contracts/Registry/Registry.sol",
+          "label": "domain",
+          "astId": 218,
+          "type": "t_string",
+          "src": "314:13:2"
+        },
+        {
+          "contract": "Registry",
+          "path": "contracts/Registry/Registry.sol",
+          "label": "ref",
+          "astId": 220,
+          "type": "t_string",
+          "src": "333:10:2"
+        },
+        {
+          "contract": "Registry",
+          "path": "contracts/Registry/Registry.sol",
+          "label": "registryType",
+          "astId": 222,
+          "type": "t_string",
+          "src": "349:19:2"
+        },
+        {
+          "contract": "Registry",
+          "path": "contracts/Registry/Registry.sol",
+          "label": "registryTokenAddress",
+          "astId": 224,
+          "type": "t_address_payable",
+          "src": "374:43:2"
+        },
+        {
+          "contract": "Registry",
+          "path": "contracts/Registry/Registry.sol",
+          "label": "registryEntryMap",
+          "astId": 247,
+          "type": "t_mapping<t_struct<Registry.RegistryEntry>>",
+          "src": "816:49:2"
+        },
+        {
+          "contract": "Registry",
+          "path": "contracts/Registry/Registry.sol",
+          "label": "registryEntries",
+          "astId": 250,
+          "type": "t_array:dyn<t_string>",
+          "src": "871:24:2"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [
+          {
+            "contract": "Registry",
+            "path": "contracts/Registry/Registry.sol",
+            "label": "registryEntryMap",
+            "astId": 247,
+            "type": "t_mapping<t_struct<Registry.RegistryEntry>>",
+            "src": "816:49:2"
+          }
+        ],
+        "storageDiff": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "ZNS/RegistryToken": [
+      {
+        "address": "0x9064c20A3c86308fBE1062B142C310bD03Bf20c8",
+        "kind": "NonProxy",
+        "bytecodeHash": "669482e9230f2ce36f19ab93e907bf825b721dd6a6551be98858a435e45a77c5"
+      }
+    ],
+    "ZNS/Registry": [
+      {
+        "address": "0x255a0d1Ec2C1A92aEa2ae4b9e1D0fA064E65f6A3",
+        "version": "0.0.1",
+        "implementation": "0xc7f5D61797aC9DB0697564CAFA264B4995DB4801",
+        "admin": "0x8283e47B9D8D7Df9b9F520931a6a42266E1B5FDf",
+        "kind": "Upgradeable"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "0.0.1",
+  "proxyAdmin": {
+    "address": "0x8283e47B9D8D7Df9b9F520931a6a42266E1B5FDf"
+  }
+}
