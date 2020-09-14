@@ -2,4 +2,4 @@
 # OpenZeppelin
 .openzeppelin/dev-*.json
 .openzeppelin/.session
-/node_modules/
+node_modules/
