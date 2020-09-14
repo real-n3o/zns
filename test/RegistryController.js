@@ -23,10 +23,10 @@ contract('RegistryController', (accounts) => {
         registryToken = await RegistryToken.new(accounts[0], tokenName, tokenSymbol, tokenSupply, stakePrice);
         
         registry = await Registry.new();
-        registry.init(domain, ref, registryType, registryToken.address);
+        registry.initialize(domain, ref, registryType, registryToken.address);
 
         controller = await RegistryController.new();
-        controller.init(registry.address, registryToken.address);
+        controller.initialize(registry.address, registryToken.address);
         return controller;
     });
 

@@ -1,12 +1,15 @@
-pragma solidity ^0.6.0;
+pragma solidity 0.6.2;
 
 /**
  * @title RegistryControllerInterface
  * @dev An Interface for RegistryController.
 */
 
+import '../Registry/Registry.sol';
+import '../RegistryToken/RegistryToken.sol';
+
 interface RegistryControllerI {
-    function init(address _registry, address payable _registryToken) external;
+    function initialize(Registry _registry, RegistryToken _registryToken) external;
     function setStakePrice(uint256 _newStakePrice) external;
     function createRegistryEntry(string calldata _subdomain, string calldata _ref) external;
     function setRegistryRef(string calldata _newRef) external;   

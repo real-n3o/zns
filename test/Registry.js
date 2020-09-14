@@ -30,7 +30,7 @@ contract('Registry', (accounts) => {
     // Creators
 
     it('create a new registry', async () => {
-        const newRegistry = await registry.init(domain, ref, registryType, registryToken.address);
+        const newRegistry = await registry.initialize(domain, ref, registryType, registryToken.address);
         assert.isString(newRegistry.tx);
     });
 

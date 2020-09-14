@@ -1,4 +1,4 @@
-pragma solidity ^0.6.0;
+pragma solidity 0.6.2;
 
 /**
  * @title RegistryController
@@ -18,13 +18,14 @@ contract RegistryController is RegistryControllerI {
 
     RegistryToken registryToken;
     address payable public registryTokenAddress;
+
     uint256 public stakePrice;
 
     /// @notice Emitted when the RegistryController is initialized.
-    event registryControllerInitialized(address _registry, address payable _registryToken);
+    event registryControllerInitialized(Registry registry, RegistryToken registryToken);
 
     /// @notice Emitted when a new Registry is created.
-    event createdRegistry(address registrtyAddress, address registryTokenAddress);
+    event createdRegistry(address registrtyAddress, Registry registryToken);
 
     /// @notice Emitted when a Registry's stake price is updated.
     event stakePriceSet(uint256 newStakePrice);
@@ -44,14 +45,14 @@ contract RegistryController is RegistryControllerI {
      * @param _registryToken The RegistryToken address that the RegistryController will manage.
      */
 
-    function init(address _registry, address payable _registryToken) 
-        external 
+    function initialize(Registry _registry, RegistryToken _registryToken)
+        external
         override
     {
-        registryAddress = _registry;
-        registry = Registry(registryAddress);
-        registryTokenAddress = _registryToken;
-        registryToken = RegistryToken(registryTokenAddress);
+        registryAddress = payable(address(_registry));
+        registry = _registry;
+        registryTokenAddress = payable(address(_registryToken));
+        registryToken = _registryToken;
 
         emit registryControllerInitialized(_registry, _registryToken);
     }

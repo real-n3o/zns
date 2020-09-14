@@ -1,4 +1,4 @@
-pragma solidity ^0.6.0;
+pragma solidity 0.6.2;
 
 /**
  * @title Registrar
@@ -13,9 +13,6 @@ import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 contract Registrar { 
     using SafeMath for uint256;
 
-    /// @notice Emitted when a new Registry is added to the Registrar.
-    event registryAdded(address _controller, string _domain, string _registryType);
-
     struct RegistrarEntry {
         address controller;
         string domain;
@@ -27,6 +24,9 @@ contract Registrar {
 
     mapping (string => RegistrarEntry) registryMap;
     address[] public registrar;
+
+    /// @notice Emitted when a new Registry is added to the Registrar.
+    event registryAdded(address _controller, string _domain, string _registryType);
 
     /**
      * @notice Creates a new Registry and associated Entry in the Registrar.
@@ -42,17 +42,17 @@ contract Registrar {
         string memory _ref,
         string memory _registryType,
         uint256 _stakePrice,
-        address payable _registryToken)
+        RegistryToken _registryToken)
         public
     {
         registry = new Registry();
 
-        registry.init(_domain, _ref, _registryType, _registryToken);
+        registry.initialize(_domain, _ref, _registryType, _registryToken);
         registryToken = RegistryToken(_registryToken);
         registryToken.setStakePrice(_stakePrice);
 
         RegistryController controller = new RegistryController();
-        controller.init(address(registry), payable(address(registryToken)));
+        controller.initialize(registry, _registryToken);
         
         registryMap[_domain].controller = address(controller);
         registryMap[_domain].domain = _domain;

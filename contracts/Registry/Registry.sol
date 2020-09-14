@@ -1,4 +1,4 @@
-pragma solidity ^0.6.0;
+pragma solidity 0.6.2;
 
 /**
  * @title Registry
@@ -15,7 +15,16 @@ contract Registry {
     string domain;
     string ref;
     string registryType;
+    RegistryToken registryToken;
     address payable public registryTokenAddress;
+
+    struct RegistryEntry {
+        string ref;
+        bool isHuman;
+    }
+
+    mapping(string => RegistryEntry) registryEntryMap;
+    string[] registryEntries;
 
     /// @notice Emitted when a new Registry is created.
     event RegistryEntryCreated(string subdomain, string ref);
@@ -26,14 +35,6 @@ contract Registry {
     /// @notice Emitted when the Registry entry ref is set.
     event RegistryEntryRefSet(string ref);
 
-    struct RegistryEntry {
-        string ref;
-        bool isHuman;
-    }
-
-    mapping(string => RegistryEntry) registryEntryMap;
-    string[] registryEntries;
-
     /**
      * @notice Initializes a new Registry after construction.
      * @param _domain The primary name used to represent the Registry. 
@@ -42,18 +43,18 @@ contract Registry {
      * @param _registryToken The address of the Registry's Token. Registry Tokens are issued upon staking Infinity Token to transfer the ownership of a Registry Entry.
      */
 
-    function init(
+    function initialize(
         string memory _domain,
         string memory _ref, 
         string memory _registryType, 
-        address payable _registryToken)
+        RegistryToken _registryToken)
         public 
     returns (string memory, string memory) 
     {
         domain = _domain;
         ref = _ref;
         registryType = _registryType;
-        registryTokenAddress = _registryToken;
+        registryToken = registryToken;
     }
 
     // Add staking checks/logic here

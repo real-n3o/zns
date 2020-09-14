@@ -1,4 +1,4 @@
-pragma solidity ^0.6.0;
+pragma solidity 0.6.2;
 
 import "../../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
@@ -62,6 +62,10 @@ contract RegistryToken is ERC20, Ownable {
         stakePrice = _stakePrice;
         emit RegistryTokenCreated(_owner, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
     }
+
+    // function initialize() public {
+
+    // }
 
     /**
      * @notice Adds a new staker to the RegistryToken.
