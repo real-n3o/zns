@@ -137,13 +137,14 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
         payable
     {
         require(msg.value == stakePrice);
+
+        (bool success, ) = msg.sender.call.value(msg.value)("");
+        require(success, "Deposit transfer failed.");
+
         _mint(msg.sender, msg.value);
         balance += msg.value;
         _balances[msg.sender] += msg.value;
 
-        (bool success, ) = msg.sender.call.value(msg.value)("");
-        require(success, "Transfer failed.");
-        
         emit StakeDeposited(msg.sender, msg.value, _balances[msg.sender]);
     }
 
@@ -157,13 +158,14 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
         payable
     {
         require(msg.value == stakePrice);
+
         address payable sender = msg.sender;
-        _burn(sender, stakePrice);
         balance -= stakePrice;
         _balances[sender] -= stakePrice;
+        _burn(sender, stakePrice);
 
         (bool success, ) = msg.sender.call.value(msg.value)("");
-        require(success, "Transfer failed.");
+        require(success, "Withdraw transfer failed.");
 
         emit StakeReturned(msg.sender, msg.value, _balances[msg.sender]);
     }

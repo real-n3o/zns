@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for Registrar/Registrar.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">Registrar/</a> Registrar.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/14</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">pragma solidity 0.6.2;
+&nbsp;
+/**
+ * @title Registrar
+ * @dev Create and interact with Registries.
+*/
+&nbsp;
+import '../Registry/Registry.sol';
+import '../RegistryToken/RegistryToken.sol';
+import '../RegistryController/RegistryController.sol';
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+&nbsp;
+contract Registrar { 
+    using SafeMath for uint256;
+&nbsp;
+    struct RegistrarEntry {
+        address controller;
+        string domain;
+        string registryType;
+    }
+&nbsp;
+    RegistryToken registryToken;
+    Registry registry;
+&nbsp;
+    mapping (string =&gt; RegistrarEntry) registryMap;
+    address[] public registrar;
+&nbsp;
+    /// @notice Emitted when a new Registry is added to the Registrar.
+    event registryAdded(address _controller, string _domain, string _registryType);
+&nbsp;
+    /**
+     * @notice Creates a new Registry and associated Entry in the Registrar.
+     * @param _domain The primary name used to represent a particular Registry. 
+     * @param _ref The primary reference that a Registry links to. This can be any type of content and is typically used to reference an index or url.
+     * @param _registryType The Registry's Type. Registry Types are defined globally at the Registrar and used to categorize Registries.
+     * @param _stakePrice The amount of Infinity Token required to register a new Entry in the Registry. 
+     * @param _registryToken The address of the Registry's Token. Registry Tokens are issued upon staking Infinity Token to transfer the ownership of a Registry Entry.
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function createRegistry (</span>
+        string memory _domain,
+        string memory _ref,
+        string memory _registryType,
+        uint256 _stakePrice,
+        RegistryToken _registryToken)
+        public
+    {
+<span class="cstat-no" title="statement not covered" >        registry = new Registry()</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        registry.initialize(_domain, _ref, _registryType, _registryToken)</span>;
+<span class="cstat-no" title="statement not covered" >        registryToken = RegistryToken(_registryToken)</span>;
+<span class="cstat-no" title="statement not covered" >        registryToken.setStakePrice(_stakePrice)</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        RegistryController controller = new RegistryController();</span>
+<span class="cstat-no" title="statement not covered" >        controller.initialize(registry, _registryToken)</span>;
+        
+<span class="cstat-no" title="statement not covered" >        registryMap[_domain].controller = address(controller)</span>;
+<span class="cstat-no" title="statement not covered" >        registryMap[_domain].domain = _domain</span>;
+<span class="cstat-no" title="statement not covered" >        registryMap[_domain].registryType = _registryType</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        registrar.push(registryMap[_domain].controller)</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit registryAdded(registryMap[_domain].controller, _domain, _registryType);</span>
+    }
+&nbsp;
+    /**
+     * @notice Returns the the number of Registries in the Registrar as an interger. 
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getRegistrarLength() public view returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        return registrar.length;</span>
+    }
+&nbsp;
+    /**
+     * @notice Returns the address of a Registry Controller by providing its domain as a string.
+     * @param _domain The primary name used to represent a particular Registry. 
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getRegistryController(string memory _domain) public view returns (address) {</span>
+<span class="cstat-no" title="statement not covered" >        return registryMap[_domain].controller;</span>
+    }
+&nbsp;
+    /**
+     * @notice Returns the Type of a Registry by providing its domain as a string.
+     * @param _domain The primary name used to represent a particular Registry. 
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getRegistryType(string memory _domain) public view returns (string memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return registryMap[_domain].registryType;</span>
+    }
+}  </pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 14 2020 00:44:42 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for RegistryController/RegistryController.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">RegistryController/</a> RegistryController.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/23</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">pragma solidity 0.6.2;
+&nbsp;
+/**
+ * @title RegistryController
+ * @dev Create and interact with ZNS.
+*/
+&nbsp;
+import './RegistryControllerI.sol';
+import '../Registry/Registry.sol';
+import '../RegistryToken/RegistryToken.sol';
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+&nbsp;
+contract RegistryController is RegistryControllerI, Initializable {
+    using SafeMath for uint256;
+&nbsp;
+    Registry registry;
+    address public registryAddress;
+&nbsp;
+    RegistryToken registryToken;
+    address payable public registryTokenAddress;
+&nbsp;
+    uint256 public stakePrice;
+&nbsp;
+    /// @notice Emitted when the RegistryController is initialized.
+    event registryControllerInitialized(Registry registry, RegistryToken registryToken);
+&nbsp;
+    /// @notice Emitted when a new Registry is created.
+    event createdRegistry(address registrtyAddress, Registry registryToken);
+&nbsp;
+    /// @notice Emitted when a Registry's stake price is updated.
+    event stakePriceSet(uint256 newStakePrice);
+&nbsp;
+    /// @notice Emitted when a new entry is created in a Registry.
+    event createdRegistryEntry(string subdomain, string ref);
+&nbsp;
+    /// @notice Emitted when a new a Registry 'ref' is updated.
+    event registryRefUpdated(string newRef);
+&nbsp;
+    /// @notice Emitted when a new a Registry Entry 'ref' is updated.
+    event registryEntryRefUpdated(string subdomain, string newRef);
+&nbsp;
+    /**
+     * @notice Initializes a new RegistryController after construction.
+     * @param _registry The Registry address that the RegistryConroller will manage.
+     * @param _registryToken The RegistryToken address that the RegistryController will manage.
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function initialize(Registry _registry, RegistryToken _registryToken)</span>
+        external
+        override
+        initializer
+    {
+<span class="cstat-no" title="statement not covered" >        registryAddress = payable(address(_registry))</span>;
+<span class="cstat-no" title="statement not covered" >        registry = _registry</span>;
+<span class="cstat-no" title="statement not covered" >        registryTokenAddress = payable(address(_registryToken))</span>;
+<span class="cstat-no" title="statement not covered" >        registryToken = _registryToken</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit registryControllerInitialized(_registry, _registryToken);</span>
+    }
+&nbsp;
+    /**
+     * @notice Sets a new stake price for a Registry's RegistryToken.
+     * @param _newStakePrice The new stake price to be used by the registry.
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function setStakePrice(uint256 _newStakePrice)</span>
+        external
+        override
+    {
+<span class="cstat-no" title="statement not covered" >        registryToken.setStakePrice(_newStakePrice)</span>;
+<span class="cstat-no" title="statement not covered" >        stakePrice = registryToken.stakePrice()</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit stakePriceSet(_newStakePrice);</span>
+    }
+&nbsp;
+    /**
+     * @notice Creates a new entry within a Registry.
+     * @param _subdomain The subdomain that will be utilized to reference the current Registry entry.
+     * @param _ref The user-defined reference (such as an index or url) that the Registry entry will point to.
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function createRegistryEntry(</span>
+        string calldata _subdomain,
+        string calldata _ref)
+        external
+        override
+    {
+<span class="cstat-no" title="statement not covered" >        registry.createRegistryEntry(_subdomain, _ref)</span>;
+<span class="cstat-no" title="statement not covered" >        (bool isRegistered, ) = registry.isRegistered(_subdomain);</span>
+<span class="cstat-no" title="statement not covered" >        assert(isRegistered==true)</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        string memory currentRegistrySubdomain = _subdomain;</span>
+<span class="cstat-no" title="statement not covered" >        string memory currentRegistryRef = registry.getRegistryEntryRef(_subdomain);</span>
+        
+<span class="cstat-no" title="statement not covered" >        emit createdRegistryEntry(currentRegistrySubdomain, currentRegistryRef);</span>
+    }
+&nbsp;
+    /**
+     * @notice Updates a Registry's referece value.
+     * @param _newRef The new reference value to be updated to.
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function setRegistryRef(</span>
+        string calldata _newRef)
+        external
+        override
+    {
+<span class="cstat-no" title="statement not covered" >        registry.setRegistryRef(_newRef)</span>;        
+<span class="cstat-no" title="statement not covered" >        string memory currentRegistryRef = registry.getRef();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit registryRefUpdated(currentRegistryRef);</span>
+    }
+&nbsp;
+    /**
+     * @notice Updates a Registry entries reference value.
+     * @param _subdomain The subdomain of the Registry entry to be updated.
+     * @param _newRef The new reference value to be updated in the Registry entry.
+     */
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function setRegistryEntryRef(</span>
+        string calldata _subdomain,
+        string calldata _newRef)
+        external
+        override
+    {
+<span class="cstat-no" title="statement not covered" >        registry.setRegistryEntryRef(_subdomain, _newRef)</span>;
+<span class="cstat-no" title="statement not covered" >        string memory currentRegistryEntryRef = registry.getRegistryEntryRef(_subdomain);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        emit registryEntryRefUpdated(_subdomain, currentRegistryEntryRef);</span>
+    }
+    
+<span class="fstat-no" title="function not covered" >    function getRef() override external returns (string memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return registry.getRef();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getStakePrice() override external returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        return registryToken.stakePrice();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getRegistryEntryRef(string calldata _subdomain) override external returns (string memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return registry.getRegistryEntryRef(_subdomain);</span>
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 14 2020 00:44:42 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

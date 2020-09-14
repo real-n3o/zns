@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "@openzeppelin/cli": "^2.8.2",
-    "@openzeppelin/truffle-upgrades": "^1.0.2"
+    "@openzeppelin/truffle-upgrades": "^1.0.2",
+    "solidity-coverage": "^0.7.10"
   },
   "scripts": {
     "test": "mocha"
