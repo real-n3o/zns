@@ -34,10 +34,10 @@ contract RegistryController is RegistryControllerI, Initializable {
     event createdRegistryEntry(string subdomain, string ref);
 
     /// @notice Emitted when a new a Registry 'ref' is updated.
-    event registryRefUpdated(string newRef);
+    event registryRefSet(string newRef);
 
     /// @notice Emitted when a new a Registry Entry 'ref' is updated.
-    event registryEntryRefUpdated(string subdomain, string newRef);
+    event registryEntryRefSet(string subdomain, string newRef);
 
     /**
      * @notice Initializes a new RegistryController after construction.
@@ -108,7 +108,7 @@ contract RegistryController is RegistryControllerI, Initializable {
         registry.setRegistryRef(_newRef);        
         string memory currentRegistryRef = registry.getRef();
 
-        emit registryRefUpdated(currentRegistryRef);
+        emit registryRefSet(currentRegistryRef);
     }
 
     /**
@@ -126,7 +126,7 @@ contract RegistryController is RegistryControllerI, Initializable {
         registry.setRegistryEntryRef(_subdomain, _newRef);
         string memory currentRegistryEntryRef = registry.getRegistryEntryRef(_subdomain);
 
-        emit registryEntryRefUpdated(_subdomain, currentRegistryEntryRef);
+        emit registryEntryRefSet(_subdomain, currentRegistryEntryRef);
     }
     
     function getRef() override external returns (string memory) {

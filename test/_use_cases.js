@@ -163,12 +163,18 @@ contract('Core Use Cases', (accounts) => {
         assert.isString(txCreateRegistryEntry.logs[0].args[1]);
         assert.equal(txCreateRegistryEntry.logs[0].args[1], subdomainRef);
     });
-    
 
     // Use-case 3: Update the Ref for a domain.
 
     it('Update the ref for a domain (Registry)', async () => {
-        await registryController.setRef(updatedRef);
+        let txSetRef = await registryController.setRef(updatedRef);
+
+        assert.equal(txSetRef.logs.length, 1);
+        assert.equal(txSetRef.logs[0].event, 'registryRefSet');
+
+        assert.isString(txSetRef.logs[0].args[0]);
+        assert.equal(txSetRef.logs[0].args[0], updatedRef);
+
         let getRef = await registryController.getRef.call();
 
         assert.equal(getRef, updatedRef);
@@ -177,7 +183,14 @@ contract('Core Use Cases', (accounts) => {
     // Use-case 4: Update the stake price for registering a new sub-domain within the Registry.
 
     it('Update the stake Price for registering a new sub-domain (Registry Entry)', async () => {
-        await registryController.setStakePrice(updatedStakePrice);
+        let txSetStakePrice = await registryController.setStakePrice(updatedStakePrice);
+
+        assert.equal(txSetStakePrice.logs.length, 1);
+        assert.equal(txSetStakePrice.logs[0].event, 'stakePriceSet');
+
+        assert.isNumber(txSetStakePrice.logs[0].args[0].toNumber());
+        assert.equal(txSetStakePrice.logs[0].args[0], updatedStakePrice);
+
         let getStakePrice = await registryController.getStakePrice.call();
 
         assert.equal(getStakePrice, updatedStakePrice);
@@ -186,7 +199,17 @@ contract('Core Use Cases', (accounts) => {
     // Use-case 5: Update the ref of a sub-domain within the Registry.
 
     it('Update the ref of a sub-domain (Registry Entry)', async () => {
-        await registryController.setRegistryEntryRef(subdomain, updatedRegistryEntryRef);
+        let txSetRegistryEntryRef = await registryController.setRegistryEntryRef(subdomain, updatedRegistryEntryRef);
+
+        assert.equal(txSetRegistryEntryRef.logs.length, 1);
+        assert.equal(txSetRegistryEntryRef.logs[0].event, 'registryEntryRefSet');
+
+        assert.isString(txSetRegistryEntryRef.logs[0].args[0]);
+        assert.equal(txSetRegistryEntryRef.logs[0].args[0], subdomain);
+
+        assert.isString(txSetRegistryEntryRef.logs[0].args[1]);
+        assert.equal(txSetRegistryEntryRef.logs[0].args[1], updatedRegistryEntryRef);
+
         let getRegistryEntryRef = await registryController.getRegistryEntryRef.call(subdomain);
 
         assert.equal(getRegistryEntryRef, updatedRegistryEntryRef);
