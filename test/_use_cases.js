@@ -19,9 +19,7 @@ contract('Core Use Cases', (accounts) => {
 
     let updatedRef = 'updatedRef';
     let updatedStakePrice = 1337;
-
     let updatedRegistryEntryRef = 'updatedRegistryEntryRef';
-    let updatedRegistryEntryStakePrice = 1337
 
     let registrar;
     let registryToken;
@@ -136,7 +134,6 @@ contract('Core Use Cases', (accounts) => {
         assert.isString(txRegistryControllerInit.logs[0].args[1]);
         assert.lengthOf(txRegistryControllerInit.logs[0].args[1], 42);
         assert.equal(txRegistryControllerInit.logs[0].args[1], registryTokenAddress);
-
     });
 
     // Use-case 2: Register a new ZNS sub-domain.
