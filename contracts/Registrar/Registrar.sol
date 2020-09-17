@@ -19,14 +19,14 @@ contract Registrar {
         string registryType;
     }
 
-    RegistryToken registryToken;
     Registry registry;
+    RegistryToken registryToken;
 
     mapping (string => RegistrarEntry) registryMap;
     address[] public registrar;
 
     /// @notice Emitted when a new Registry is added to the Registrar.
-    event registryAdded(address _controller, string _domain, string _registryType);
+    event RegistryCreated(string domain, string ref, string registryType, uint256 stakePrice, address registryToken, address registry, address registryController);
 
     /**
      * @notice Creates a new Registry and associated Entry in the Registrar.
@@ -60,7 +60,7 @@ contract Registrar {
 
         registrar.push(registryMap[_domain].controller);
 
-        emit registryAdded(registryMap[_domain].controller, _domain, _registryType);
+        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, address(registryToken), address(registry), registryMap[_domain].controller);
     }
 
     /**
@@ -88,4 +88,4 @@ contract Registrar {
     function getRegistryType(string memory _domain) public view returns (string memory) {
         return registryMap[_domain].registryType;
     }
-}  
+}

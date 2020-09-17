@@ -47,7 +47,7 @@ contract('RegistryController', (accounts) => {
     });
 
     it('set registry ref', async () => {
-        const newRegRef = await controller.setRegistryRef(newRef);
+        const newRegRef = await controller.setRef(newRef);
         assert.isString(newRegRef.tx);
     });
 

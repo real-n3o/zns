@@ -12,7 +12,7 @@ interface RegistryControllerI {
     function initialize(Registry _registry, RegistryToken _registryToken) external;
     function setStakePrice(uint256 _newStakePrice) external;
     function createRegistryEntry(string calldata _subdomain, string calldata _ref) external;
-    function setRegistryRef(string calldata _newRef) external;   
+    function setRef(string calldata _newRef) external;   
     function setRegistryEntryRef(string calldata _subdomain, string calldata _newRef) external;
     function getRef() external returns (string memory);
     function getStakePrice() external returns (uint256);

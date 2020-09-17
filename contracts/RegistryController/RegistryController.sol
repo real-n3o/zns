@@ -100,7 +100,7 @@ contract RegistryController is RegistryControllerI, Initializable {
      * @param _newRef The new reference value to be updated to.
      */
 
-    function setRegistryRef(
+    function setRef(
         string calldata _newRef)
         external
         override
