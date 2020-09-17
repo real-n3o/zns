@@ -163,22 +163,29 @@ contract('Core Use Cases', (accounts) => {
         assert.isString(txCreateRegistryEntry.logs[0].args[1]);
         assert.equal(txCreateRegistryEntry.logs[0].args[1], subdomainRef);
     });
+    
 
-    // Use-case 3: Update the Ref and stake Price for purchasing a new domain.
+    // Use-case 3: Update the Ref for a domain.
 
-    it('Update the ref and price of a domain (Registry)', async () => {
+    it('Update the ref for a domain (Registry)', async () => {
         await registryController.setRef(updatedRef);
         let getRef = await registryController.getRef.call();
 
         assert.equal(getRef, updatedRef);
+    });
 
+    // Use-case 4: Update the stake price for registering a new sub-domain within the Registry.
+
+    it('Update the stake Price for registering a new sub-domain (Registry Entry)', async () => {
         await registryController.setStakePrice(updatedStakePrice);
         let getStakePrice = await registryController.getStakePrice.call();
 
         assert.equal(getStakePrice, updatedStakePrice);
     });
 
-    it('Update the ref of a subdomain (Registry Entry)', async () => {
+    // Use-case 5: Update the ref of a sub-domain within the Registry.
+
+    it('Update the ref of a sub-domain (Registry Entry)', async () => {
         await registryController.setRegistryEntryRef(subdomain, updatedRegistryEntryRef);
         let getRegistryEntryRef = await registryController.getRegistryEntryRef.call(subdomain);
 
