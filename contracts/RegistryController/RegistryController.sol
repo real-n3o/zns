@@ -9,12 +9,15 @@ import './RegistryControllerI.sol';
 import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
 
 contract RegistryController is RegistryControllerI, Initializable {
     using SafeMath for uint256;
 
-    Registry registry;
-    address public registryAddress;
+    Registry registryFactory;
+
+    Registry registryProxy;
+    address public registryProxyAddress;
 
     RegistryToken registryToken;
     address payable public registryTokenAddress;
@@ -22,10 +25,10 @@ contract RegistryController is RegistryControllerI, Initializable {
     uint256 public stakePrice;
 
     /// @notice Emitted when the RegistryController is initialized.
-    event registryControllerInitialized(Registry registry, RegistryToken registryToken);
+    event registryControllerInitialized(address registryProxy, RegistryToken registryTokenProxy);
 
     /// @notice Emitted when a new Registry is created.
-    event createdRegistry(address registrtyAddress, Registry registryToken);
+    event createdRegistry(address registryAddress, RegistryToken registryToken);
 
     /// @notice Emitted when a Registry's stake price is updated.
     event stakePriceSet(uint256 newStakePrice);
@@ -41,21 +44,22 @@ contract RegistryController is RegistryControllerI, Initializable {
 
     /**
      * @notice Initializes a new RegistryController after construction.
-     * @param _registry The Registry address that the RegistryConroller will manage.
-     * @param _registryToken The RegistryToken address that the RegistryController will manage.
+     * @param _registryProxy The Registry address that the RegistryConroller will manage.
+     * @param _registryTokenProxy The RegistryToken address that the RegistryController will manage.
      */
 
-    function initialize(Registry _registry, RegistryToken _registryToken)
+    function initialize(address _registryProxy, RegistryToken _registryTokenProxy)
         external
         override
         initializer
     {
-        registryAddress = payable(address(_registry));
-        registry = _registry;
-        registryTokenAddress = payable(address(_registryToken));
-        registryToken = _registryToken;
+        registryProxyAddress = _registryProxy;
+        registryProxy = Registry(_registryProxy);
+        
+        registryTokenAddress = payable(address(_registryTokenProxy));
+        registryToken = _registryTokenProxy;
 
-        emit registryControllerInitialized(_registry, _registryToken);
+        emit registryControllerInitialized(_registryProxy, _registryTokenProxy);
     }
 
     /**
@@ -85,12 +89,12 @@ contract RegistryController is RegistryControllerI, Initializable {
         external
         override
     {
-        registry.createRegistryEntry(_subdomain, _ref);
-        (bool isRegistered, ) = registry.isRegistered(_subdomain);
+        registryProxy.createRegistryEntry(_subdomain, _ref);
+        (bool isRegistered, ) = registryProxy.isRegistered(_subdomain);
         assert(isRegistered==true);
 
         string memory currentRegistrySubdomain = _subdomain;
-        string memory currentRegistryRef = registry.getRegistryEntryRef(_subdomain);
+        string memory currentRegistryRef = registryProxy.getRegistryEntryRef(_subdomain);
         
         emit createdRegistryEntry(currentRegistrySubdomain, currentRegistryRef);
     }
@@ -105,8 +109,8 @@ contract RegistryController is RegistryControllerI, Initializable {
         external
         override
     {
-        registry.setRegistryRef(_newRef);        
-        string memory currentRegistryRef = registry.getRef();
+        registryProxy.setRegistryRef(_newRef);        
+        string memory currentRegistryRef = registryProxy.getRef();
 
         emit registryRefSet(currentRegistryRef);
     }
@@ -123,14 +127,14 @@ contract RegistryController is RegistryControllerI, Initializable {
         external
         override
     {
-        registry.setRegistryEntryRef(_subdomain, _newRef);
-        string memory currentRegistryEntryRef = registry.getRegistryEntryRef(_subdomain);
+        registryProxy.setRegistryEntryRef(_subdomain, _newRef);
+        string memory currentRegistryEntryRef = registryProxy.getRegistryEntryRef(_subdomain);
 
         emit registryEntryRefSet(_subdomain, currentRegistryEntryRef);
     }
     
     function getRef() override external returns (string memory) {
-        return registry.getRef();
+        return registryProxy.getRef();
     }
 
     function getStakePrice() override external returns (uint256) {
@@ -138,6 +142,6 @@ contract RegistryController is RegistryControllerI, Initializable {
     }
 
     function getRegistryEntryRef(string calldata _subdomain) override external returns (string memory) {
-        return registry.getRegistryEntryRef(_subdomain);
+        return registryProxy.getRegistryEntryRef(_subdomain);
     }
 }

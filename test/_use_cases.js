@@ -147,7 +147,7 @@ contract('Core Use Cases', (accounts) => {
         assert.lengthOf(registryControllerAddress, 42);
 
         // Second, we need to create a Registry Entry via the RegistryController.
-        // Note: Using deployed version of registryController from prior test
+        //   Note: Using deployed version of registryController from prior test
 
         txCreateRegistryEntry = await registryController.createRegistryEntry(
             subdomain,

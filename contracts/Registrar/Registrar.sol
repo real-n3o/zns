@@ -9,6 +9,8 @@ import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
 import '../RegistryController/RegistryController.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
+// import "../../node_modules/@openzeppelin-sdk/packages/lib/contracts/upgradeability/ProxyFactory.sol";
 
 contract Registrar { 
     using SafeMath for uint256;
@@ -19,8 +21,15 @@ contract Registrar {
         string registryType;
     }
 
-    Registry registry;
-    RegistryToken registryToken;
+    Registry registryLogic;
+    TransparentUpgradeableProxy registryProxy;
+    address registryProxyAddress;
+
+    RegistryToken registryTokenProxy;
+    address registryTokenProxyAddress;
+
+    RegistryController registryControllerLogic;
+    TransparentUpgradeableProxy registryControllerProxy;
 
     mapping (string => RegistrarEntry) registryMap;
     address[] public registrar;
@@ -34,7 +43,7 @@ contract Registrar {
      * @param _ref The primary reference that a Registry links to. This can be any type of content and is typically used to reference an index or url.
      * @param _registryType The Registry's Type. Registry Types are defined globally at the Registrar and used to categorize Registries.
      * @param _stakePrice The amount of Infinity Token required to register a new Entry in the Registry. 
-     * @param _registryToken The address of the Registry's Token. Registry Tokens are issued upon staking Infinity Token to transfer the ownership of a Registry Entry.
+     * @param _registryTokenProxyAddress The address of the Registry's Token. Registry Tokens are issued upon staking Infinity Token to transfer the ownership of a Registry Entry.
      */
 
     function createRegistry (
@@ -42,25 +51,38 @@ contract Registrar {
         string memory _ref,
         string memory _registryType,
         uint256 _stakePrice,
-        RegistryToken _registryToken)
+        address payable _registryTokenProxyAddress)
         public
     {
-        registry = new Registry();
+        registryTokenProxyAddress = _registryTokenProxyAddress;
+        registryTokenProxy = RegistryToken(_registryTokenProxyAddress);
+        registryTokenProxy.setStakePrice(_stakePrice);
 
-        registry.initialize(_domain, _ref, _registryType, _registryToken);
-        registryToken = RegistryToken(_registryToken);
-        registryToken.setStakePrice(_stakePrice);
+        registryLogic = new Registry();
+        bytes memory registryData = abi.encodeWithSignature("initialize(string,string,string,address)",_domain,_ref,_registryType,registryTokenProxyAddress);
+        registryProxy = new TransparentUpgradeableProxy(
+            address(registryLogic),
+            msg.sender,
+            registryData
+        );
+        registryProxyAddress = address(registryProxy);
 
-        RegistryController controller = new RegistryController();
-        controller.initialize(registry, _registryToken);
+        registryControllerLogic = new RegistryController();
+        bytes memory controllerData = abi.encodeWithSignature("initialize(address,address)",address(registryProxy), address(registryTokenProxy));
+        registryControllerProxy = new TransparentUpgradeableProxy(
+            address(registryControllerLogic),
+            msg.sender,
+            controllerData
+        );
+        // controller.initialize(address(registryProxy), registryTokenProxy);
         
-        registryMap[_domain].controller = address(controller);
+        registryMap[_domain].controller = address(registryControllerProxy);
         registryMap[_domain].domain = _domain;
         registryMap[_domain].registryType = _registryType;
 
         registrar.push(registryMap[_domain].controller);
 
-        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, address(registryToken), address(registry), registryMap[_domain].controller);
+        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, registryTokenProxyAddress, registryProxyAddress, registryMap[_domain].controller);
     }
 
     /**

@@ -15,7 +15,7 @@ contract Registry is Initializable {
     string domain;
     string ref;
     string registryType;
-    RegistryToken registryToken;
+    address registryToken;
     address payable public registryTokenAddress;
 
     struct RegistryEntry {
@@ -47,7 +47,7 @@ contract Registry is Initializable {
         string memory _domain,
         string memory _ref, 
         string memory _registryType, 
-        RegistryToken _registryToken)
+        address _registryToken)
         public 
         initializer
     returns (string memory, string memory) 
