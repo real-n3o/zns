@@ -3,13 +3,14 @@ pragma solidity 0.6.2;
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol";
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import './RegistryTokenI.sol';
 
 /**
-* @title Staking Token
+* @title Registry Token
 * @notice Implements an ERC20 staking token that is connected to a registry.
 */
 
-contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
+contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
     using SafeMath for uint256;
 
     uint256 public stakePrice;
@@ -50,12 +51,13 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
 
     function initialize(
         address _owner, 
-        string memory _tokenName, 
-        string memory _tokenSymbol, 
+        string calldata _tokenName, 
+        string calldata _tokenSymbol, 
         uint256 _tokenSupply,
         uint256 _stakePrice
     ) 
-        public 
+        external
+        override 
         initializer 
     {
         ERC20UpgradeSafe.__ERC20_init(_tokenName, _tokenSymbol);
@@ -71,6 +73,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
 
     function addStaker(address _staker)
         public 
+        override
     returns(bool)
     {
         (bool _isStaker, ) = isStaker(_staker);
@@ -89,6 +92,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
 
     function removeStaker(address _staker)
         public
+        override
     {
         (bool _isStaker, uint256 s) = isStaker(_staker);
         if(_isStaker){
@@ -106,6 +110,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
 
     function isStaker(address _address)
        public
+       override
        view
     returns(bool, uint256)
     {
@@ -121,7 +126,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
      * @return uint256 representing the new stake price, denominated in Infinity.
      */
 
-    function setStakePrice(uint256 _newStakePrice) public returns (uint256) {
+    function setStakePrice(uint256 _newStakePrice) external override returns (uint256) {
         stakePrice = _newStakePrice;
         emit StakePriceSet(stakePrice);
         return stakePrice;
@@ -134,6 +139,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
 
     function depositStake()
         public
+        override
         payable
     {
         require(msg.value == stakePrice);
@@ -154,7 +160,8 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
      */
 
     function withdrawStake()
-        public
+        external
+        override
         payable
     {
         require(msg.value == stakePrice);
@@ -176,7 +183,8 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
      */
 
     function getBalance() 
-        public 
+        external 
+        override
         view
     returns (uint256) 
     {
@@ -191,6 +199,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
 
     function getBalanceAddress(address _address)
         public
+        override
         view
     returns (uint256)
     {
@@ -202,7 +211,8 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
      */
 
     function getAddress()
-        public
+        external
+        override
         view
     returns(address payable)
     {
@@ -213,7 +223,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
      * @notice Method is executed if tokens are transfered to RegistryContract without a proper call.
      */
 
-    fallback() external payable {
+    fallback() external override payable {
         depositStake();
     }
 
@@ -221,7 +231,7 @@ contract RegistryToken is ERC20UpgradeSafe, OwnableUpgradeSafe {
      * @notice Method is executed when tokens are sent to RegistryContract.
      */
 
-    receive() external payable {
+    receive() external override payable {
         emit Received(msg.sender, msg.value);
     }
 }

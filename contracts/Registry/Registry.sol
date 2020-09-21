@@ -6,8 +6,7 @@ pragma solidity 0.6.2;
 */
 
 import '../RegistryToken/RegistryToken.sol';
-import '../Registry/Registry.sol';
-import '../Registry/RegistryI.sol';
+import './RegistryI.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
 contract Registry is RegistryI, Initializable {
