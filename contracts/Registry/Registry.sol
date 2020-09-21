@@ -7,9 +7,10 @@ pragma solidity 0.6.2;
 
 import '../RegistryToken/RegistryToken.sol';
 import '../Registry/Registry.sol';
+import '../Registry/RegistryI.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
-contract Registry is Initializable {
+contract Registry is RegistryI, Initializable {
     using SafeMath for uint256;
 
     string domain;
@@ -44,12 +45,13 @@ contract Registry is Initializable {
      */
 
     function initialize(
-        string memory _domain,
-        string memory _ref, 
-        string memory _registryType, 
+        string calldata _domain,
+        string calldata _ref, 
+        string calldata _registryType, 
         address _registryToken)
-        public 
+        external 
         initializer
+        override
     returns (string memory, string memory) 
     {
         domain = _domain;
@@ -67,9 +69,10 @@ contract Registry is Initializable {
      */
 
     function createRegistryEntry (
-        string memory _subdomain, 
-        string memory _ref)
-        public
+        string calldata _subdomain, 
+        string calldata _ref)
+        external
+        override
     {
         (bool _isRegistered, ) = isRegistered(_subdomain);
         if(!_isRegistered) {
@@ -86,7 +89,7 @@ contract Registry is Initializable {
      * @param _newRef The new reference used for the Registry.
      */
 
-    function setRegistryRef (string memory _newRef) public {
+    function setRegistryRef (string calldata _newRef) external override {
         ref = _newRef;
         emit RegistryRefSet(ref);
     }
@@ -97,7 +100,7 @@ contract Registry is Initializable {
      */
 
 
-    function setRegistryEntryRef (string memory _subdomain, string memory _newRef) public {
+    function setRegistryEntryRef (string calldata _subdomain, string calldata _newRef) external override {
         registryEntryMap[_subdomain].ref = _newRef;
         emit RegistryEntryRefSet(registryEntryMap[_subdomain].ref);
     }
@@ -107,9 +110,10 @@ contract Registry is Initializable {
      */
 
     function getRegistry() 
-        public
+        external
+        override
         view
-    returns(string memory, string memory, string memory, address)
+    returns (string memory, string memory, string memory, address)
     {
         return(domain, ref, registryType, registryTokenAddress);
     }
@@ -119,7 +123,8 @@ contract Registry is Initializable {
      */
 
     function getRef()
-        public
+        external
+        override
         view
     returns (string memory)
     {
@@ -131,8 +136,9 @@ contract Registry is Initializable {
      * @param _subdomain The subdomain to index the Registry entry.
      */
 
-    function getRegistryEntryRef (string memory _subdomain) 
-        public 
+    function getRegistryEntryRef (string calldata _subdomain) 
+        external 
+        override
         view 
     returns (string memory) {
         return registryEntryMap[_subdomain].ref;
@@ -145,6 +151,7 @@ contract Registry is Initializable {
 
     function isRegistered(string memory _subdomain)
        public
+       override
        view
     returns(bool, uint256)
     {

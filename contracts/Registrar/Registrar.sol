@@ -10,7 +10,6 @@ import '../RegistryToken/RegistryToken.sol';
 import '../RegistryController/RegistryController.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
-// import "../../node_modules/@openzeppelin-sdk/packages/lib/contracts/upgradeability/ProxyFactory.sol";
 
 contract Registrar { 
     using SafeMath for uint256;
@@ -74,7 +73,6 @@ contract Registrar {
             msg.sender,
             controllerData
         );
-        // controller.initialize(address(registryProxy), registryTokenProxy);
         
         registryMap[_domain].controller = address(registryControllerProxy);
         registryMap[_domain].domain = _domain;
