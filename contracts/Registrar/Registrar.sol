@@ -55,7 +55,6 @@ contract Registrar {
     {
         registryTokenProxyAddress = _registryTokenProxyAddress;
         registryTokenProxy = RegistryToken(_registryTokenProxyAddress);
-        registryTokenProxy.setStakePrice(_stakePrice);
 
         registryLogic = new Registry();
         bytes memory registryData = abi.encodeWithSignature("initialize(string,string,string,address)",_domain,_ref,_registryType,registryTokenProxyAddress);
@@ -73,6 +72,10 @@ contract Registrar {
             msg.sender,
             controllerData
         );
+        
+        // RegistryController registryControllerInstance;
+        // registryControllerInstance = RegistryController(address(registryControllerProxy));
+        // registryControllerInstance.setStakePrice(_stakePrice);
         
         registryMap[_domain].controller = address(registryControllerProxy);
         registryMap[_domain].domain = _domain;

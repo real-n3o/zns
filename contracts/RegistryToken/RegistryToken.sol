@@ -58,8 +58,9 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
     ) 
         external
         override 
-        initializer 
+        initializer
     {
+        __Ownable_init();
         ERC20UpgradeSafe.__ERC20_init(_tokenName, _tokenSymbol);
         stakePrice = _stakePrice;
         emit RegistryTokenCreated(_owner, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
@@ -74,6 +75,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
     function addStaker(address _staker)
         public 
         override
+        onlyOwner
     returns(bool)
     {
         (bool _isStaker, ) = isStaker(_staker);
@@ -93,6 +95,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
     function removeStaker(address _staker)
         public
         override
+        onlyOwner
     {
         (bool _isStaker, uint256 s) = isStaker(_staker);
         if(_isStaker){
@@ -126,7 +129,11 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
      * @return uint256 representing the new stake price, denominated in Infinity.
      */
 
-    function setStakePrice(uint256 _newStakePrice) external override returns (uint256) {
+    function setStakePrice(uint256 _newStakePrice) 
+        external 
+        override
+        onlyOwner
+    returns (uint256) {
         stakePrice = _newStakePrice;
         emit StakePriceSet(stakePrice);
         return stakePrice;

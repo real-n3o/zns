@@ -4,8 +4,8 @@ const Registry = artifacts.require('Registry.sol');
 contract('RegistryToken', (accounts) => { 
 
     let testAddress = '0x1770579e56dab8823cb7b4f16b664c71c34cee5e';
-    let tokenName = 'Medsdsow';
-    let tokenSymbol = "M232WM";
+    let tokenName = 'Meow';
+    let tokenSymbol = "INI";
     let tokenSupply = 1020;
     let stakePrice = 2150;
     let newStakePrice = 3313;

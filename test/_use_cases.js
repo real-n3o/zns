@@ -52,28 +52,30 @@ contract('Core Use Cases', (accounts) => {
             stakePrice,
         );
 
+        // registryToken.transferOwnership(owner);
+
         registryTokenAddress = registryToken.address;
 
         assert.isString(registryTokenAddress);
         assert.lengthOf(registryTokenAddress, 42);
 
-        assert.equal(txInitialize.logs.length, 1);
-        assert.equal(txInitialize.logs[0].event, 'RegistryTokenCreated');
+        assert.equal(txInitialize.logs.length, 2);
+        assert.equal(txInitialize.logs[1].event, 'RegistryTokenCreated');
         
-        assert.equal(txInitialize.logs[0].args[0], owner);
-        assert.lengthOf(txInitialize.logs[0].args[0], 42);
+        assert.equal(txInitialize.logs[1].args[0], owner);
+        assert.lengthOf(txInitialize.logs[1].args[0], 42);
 
-        assert.isString(txInitialize.logs[0].args[1]);
-        assert.equal(txInitialize.logs[0].args[1], tokenName);
+        assert.isString(txInitialize.logs[1].args[1]);
+        assert.equal(txInitialize.logs[1].args[1], tokenName);
 
-        assert.isString(txInitialize.logs[0].args[2]);
-        assert.equal(txInitialize.logs[0].args[2], tokenSymbol);
+        assert.isString(txInitialize.logs[1].args[2]);
+        assert.equal(txInitialize.logs[1].args[2], tokenSymbol);
 
-        assert.isNumber(txInitialize.logs[0].args[3].toNumber());
-        assert.equal(txInitialize.logs[0].args[3], tokenSupply);
+        assert.isNumber(txInitialize.logs[1].args[3].toNumber());
+        assert.equal(txInitialize.logs[1].args[3], tokenSupply);
 
-        assert.isNumber(txInitialize.logs[0].args[4].toNumber());
-        assert.equal(txInitialize.logs[0].args[4], stakePrice);
+        assert.isNumber(txInitialize.logs[1].args[4].toNumber());
+        assert.equal(txInitialize.logs[1].args[4], stakePrice);
 
         // Second, we need to create a new Registry from the Registrar and then initialize it.
 
@@ -183,6 +185,7 @@ contract('Core Use Cases', (accounts) => {
     // Use-case 4: Update the stake price for registering a new sub-domain within the Registry.
 
     it('Update the stake Price for registering a new sub-domain (Registry Entry)', async () => {
+        registryToken.transferOwnership(registryController.address);
         let txSetStakePrice = await registryController.setStakePrice(updatedStakePrice);
 
         assert.equal(txSetStakePrice.logs.length, 1);

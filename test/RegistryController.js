@@ -20,13 +20,17 @@ contract('RegistryController', (accounts) => {
     const newRef = "newRef";
 
     before(async () => {
-        registryToken = await RegistryToken.new(accounts[0], tokenName, tokenSymbol, tokenSupply, stakePrice);
+        registryToken = await RegistryToken.new();
+        registryToken.initialize(accounts[0], tokenName, tokenSymbol, tokenSupply, stakePrice);
         
         registry = await Registry.new();
         registry.initialize(domain, ref, registryType, registryToken.address);
 
         controller = await RegistryController.new();
         controller.initialize(registry.address, registryToken.address);
+
+        registryToken.transferOwnership(controller.address);
+
         return controller;
     });
 
