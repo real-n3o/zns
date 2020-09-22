@@ -32,7 +32,7 @@ contract('Core Use Cases', (accounts) => {
 
     // Use-case 0: Deploy the Registrar.
 
-    it('create Registrar', async () => {    
+    it('create registrar', async () => {    
         registrar = await Registrar.new();
         assert.isString(registrar.address);
         assert.lengthOf(registrar.address, 42);
@@ -40,7 +40,7 @@ contract('Core Use Cases', (accounts) => {
 
     // Use-case 1: Register a new ZNS domain.
 
-    it('Register a new ZNS domain (a Registry)', async () => {
+    it('register a new ZNS domain (a Registry)', async () => {
         // First, we need to create and initialize a new RegistryToken.
         
         registryToken = await RegistryToken.new();
@@ -140,7 +140,7 @@ contract('Core Use Cases', (accounts) => {
 
     // Use-case 2: Register a new ZNS sub-domain.
 
-    it('Register a new ZNS sub-domain (a Registry Entry)', async () => {
+    it('register a new ZNS sub-domain (a Registry Entry)', async () => {
         // First, we need to get the address of the RegistryController for the Registry we want to add the Registry Entry to.
 
         registryControllerAddress = await registrar.getRegistryController(domain);
@@ -168,7 +168,7 @@ contract('Core Use Cases', (accounts) => {
 
     // Use-case 3: Update the Ref for a domain.
 
-    it('Update the ref for a domain (Registry)', async () => {
+    it('update the ref for a domain (Registry)', async () => {
         let txSetRef = await registryController.setRef(updatedRef);
 
         assert.equal(txSetRef.logs.length, 1);
@@ -184,7 +184,7 @@ contract('Core Use Cases', (accounts) => {
 
     // Use-case 4: Update the stake price for registering a new sub-domain within the Registry.
 
-    it('Update the stake Price for registering a new sub-domain (Registry Entry)', async () => {
+    it('update the stake Price for registering a new sub-domain (Registry Entry)', async () => {
         registryToken.transferOwnership(registryController.address);
         let txSetStakePrice = await registryController.setStakePrice(updatedStakePrice);
 
@@ -201,7 +201,7 @@ contract('Core Use Cases', (accounts) => {
 
     // Use-case 5: Update the ref of a sub-domain within the Registry.
 
-    it('Update the ref of a sub-domain (Registry Entry)', async () => {
+    it('update the ref of a sub-domain (Registry Entry)', async () => {
         let txSetRegistryEntryRef = await registryController.setRegistryEntryRef(subdomain, updatedRegistryEntryRef);
 
         assert.equal(txSetRegistryEntryRef.logs.length, 1);
