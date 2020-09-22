@@ -157,6 +157,8 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
         _mint(msg.sender, msg.value);
         balance += msg.value;
         _balances[msg.sender] += msg.value;
+        
+        addStaker(msg.sender);
 
         emit StakeDeposited(msg.sender, msg.value, _balances[msg.sender]);
     }
@@ -180,6 +182,8 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
 
         (bool success, ) = msg.sender.call.value(msg.value)("");
         require(success, "Withdraw transfer failed.");
+
+       removeStaker(msg.sender);
 
         emit StakeReturned(msg.sender, msg.value, _balances[msg.sender]);
     }

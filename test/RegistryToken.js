@@ -83,6 +83,11 @@ contract('RegistryToken', (accounts) => {
     // Getters
 
     it('check if address is a staker', async () => {
+        await registryToken.depositStake.sendTransaction({
+            from: accounts[0],
+            value: newStakePrice,
+        });
+        await registryToken.addStaker(accounts[0]);
         const isStaker = await registryToken.isStaker(accounts[0]);
         assert.isTrue(isStaker[0]);
         assert.isNumber(isStaker[1].toNumber());
