@@ -90,7 +90,7 @@ contract Registry is RegistryI, Initializable, OwnableUpgradeSafe {
      * @param _newRef The new reference used for the Registry.
      */
 
-    function setRegistryRef (string calldata _newRef) external override {
+    function setRegistryRef (string calldata _newRef) external override onlyOwner {
         ref = _newRef;
         emit RegistryRefSet(ref);
     }
@@ -101,7 +101,7 @@ contract Registry is RegistryI, Initializable, OwnableUpgradeSafe {
      */
 
 
-    function setRegistryEntryRef (string calldata _subdomain, string calldata _newRef) external override {
+    function setRegistryEntryRef (string calldata _subdomain, string calldata _newRef) external override onlyOwner {
         registryEntryMap[_subdomain].ref = _newRef;
         emit RegistryEntryRefSet(registryEntryMap[_subdomain].ref);
     }
