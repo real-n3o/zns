@@ -8,8 +8,9 @@ pragma solidity 0.6.2;
 import '../RegistryToken/RegistryToken.sol';
 import './RegistryI.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
 
-contract Registry is RegistryI, Initializable {
+contract Registry is RegistryI, Initializable, OwnableUpgradeSafe {
     using SafeMath for uint256;
 
     string domain;
@@ -51,8 +52,8 @@ contract Registry is RegistryI, Initializable {
         external 
         initializer
         override
-    returns (string memory, string memory) 
     {
+        __Ownable_init_unchained();
         domain = _domain;
         ref = _ref;
         registryType = _registryType;
@@ -72,6 +73,7 @@ contract Registry is RegistryI, Initializable {
         string calldata _ref)
         external
         override
+        onlyOwner
     {
         (bool _isRegistered, ) = isRegistered(_subdomain);
         if(!_isRegistered) {

@@ -19,6 +19,8 @@ contract('RegistryController', (accounts) => {
     const subdomainRef = "meow_ref";
     const newRef = "newRef";
 
+    let owner = accounts[0];
+
     before(async () => {
         registryToken = await RegistryToken.new();
         registryToken.initialize(accounts[0], tokenName, tokenSymbol, tokenSupply, stakePrice);
@@ -30,6 +32,7 @@ contract('RegistryController', (accounts) => {
         controller.initialize(registry.address, registryToken.address);
 
         registryToken.transferOwnership(controller.address);
+        registry.transferOwnership(controller.address);
 
         return controller;
     });

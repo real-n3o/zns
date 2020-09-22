@@ -54,7 +54,7 @@ contract RegistryController is RegistryControllerI, Initializable {
         initializer
     {
         registryProxyAddress = _registryProxy;
-        registryProxy = Registry(_registryProxy);
+        registryProxy = Registry(registryProxyAddress);
         
         registryTokenAddress = payable(address(_registryTokenProxy));
         registryToken = _registryTokenProxy;

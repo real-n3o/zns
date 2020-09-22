@@ -73,8 +73,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
      */
 
     function addStaker(address _staker)
-        public 
-        override
+        internal 
         onlyOwner
     returns(bool)
     {
@@ -93,8 +92,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
      */
 
     function removeStaker(address _staker)
-        public
-        override
+        internal
         onlyOwner
     {
         (bool _isStaker, uint256 s) = isStaker(_staker);
@@ -215,19 +213,6 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
     returns (uint256)
     {
         return _balances[_address];
-    }
-
-     /**
-     * @notice Returns a `payable` address of the RegistryToken.
-     */
-
-    function getAddress()
-        external
-        override
-        view
-    returns(address payable)
-    {
-        return payable(address(this));
     }
 
     /**

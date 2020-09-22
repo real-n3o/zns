@@ -10,7 +10,7 @@ import '../Registry/Registry.sol';
 import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 
 interface RegistryI {
-    function initialize(string calldata _domain, string calldata _ref, string calldata _registryType, address _registryToken) external returns (string memory, string memory);
+    function initialize(string calldata _domain, string calldata _ref, string calldata _registryType, address _registryToken) external;
     function createRegistryEntry (string calldata _subdomain, string calldata _ref) external;
     function setRegistryRef (string calldata _newRef) external;
     function setRegistryEntryRef (string calldata _subdomain, string calldata _newRef) external;

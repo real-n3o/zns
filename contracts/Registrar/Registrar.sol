@@ -22,11 +22,10 @@ contract Registrar {
 
     Registry registryLogic;
     TransparentUpgradeableProxy registryProxy;
-    address registryProxyAddress;
+    Registry registryProxyInstance;
 
     RegistryToken registryTokenProxy;
-    address registryTokenProxyAddress;
-
+    
     RegistryController registryControllerLogic;
     TransparentUpgradeableProxy registryControllerProxy;
 
@@ -53,17 +52,15 @@ contract Registrar {
         address payable _registryTokenProxyAddress)
         public
     {
-        registryTokenProxyAddress = _registryTokenProxyAddress;
         registryTokenProxy = RegistryToken(_registryTokenProxyAddress);
 
         registryLogic = new Registry();
-        bytes memory registryData = abi.encodeWithSignature("initialize(string,string,string,address)",_domain,_ref,_registryType,registryTokenProxyAddress);
+        bytes memory registryData = abi.encodeWithSignature("initialize(string,string,string,address)",_domain,_ref,_registryType,address(registryTokenProxy));
         registryProxy = new TransparentUpgradeableProxy(
             address(registryLogic),
             msg.sender,
             registryData
         );
-        registryProxyAddress = address(registryProxy);
 
         registryControllerLogic = new RegistryController();
         bytes memory controllerData = abi.encodeWithSignature("initialize(address,address)",address(registryProxy), address(registryTokenProxy));
@@ -72,10 +69,10 @@ contract Registrar {
             msg.sender,
             controllerData
         );
-        
-        // RegistryController registryControllerInstance;
-        // registryControllerInstance = RegistryController(address(registryControllerProxy));
-        // registryControllerInstance.setStakePrice(_stakePrice);
+
+        registryProxyInstance = Registry(address(registryProxy));
+        registryProxyInstance.transferOwnership(address(registryControllerProxy));
+        // registryTokenProxy.transferOwnership(address(registryControllerProxy));
         
         registryMap[_domain].controller = address(registryControllerProxy);
         registryMap[_domain].domain = _domain;
@@ -83,7 +80,11 @@ contract Registrar {
 
         registrar.push(registryMap[_domain].controller);
 
-        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, registryTokenProxyAddress, registryProxyAddress, registryMap[_domain].controller);
+        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, address(registryTokenProxy), address(registryProxy), registryMap[_domain].controller);
+    }
+
+    function getRegistryOwner() external view returns(address) {
+        return registryProxyInstance.owner();
     }
 
     /**

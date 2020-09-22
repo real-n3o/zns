@@ -25,23 +25,10 @@ contract('RegistryToken', (accounts) => {
         assert.isString(registryToken.address);
     });
 
-    it('add staker', async () => {
-        const addStaker = await registryToken.addStaker(testAddress);
-        assert.isString(addStaker.tx);
-        let stakerBalance = await registryToken.getBalanceAddress.call(testAddress);
-        assert.equal(stakerBalance.toNumber(), 0);
-    });
-
     it('address is not a staker', async () => {
-        await registryToken.addStaker(accounts[0]);
         const isStaker = await registryToken.isStaker(testAddress);
         assert.isNotTrue(isStaker[0]);
         assert.equal(isStaker[1].toNumber(), 0);
-    });
-
-    it('remove staker', async () => {
-        const removeStaker = await registryToken.removeStaker(accounts[0]);
-        assert.isString(removeStaker.tx);
     });
 
     it('send stake to a registry tokens wallet', async () => {
@@ -55,8 +42,6 @@ contract('RegistryToken', (accounts) => {
     });
 
     it('add staker after stake has been sent', async () => {
-        const depositStake = await registryToken.addStaker(accounts[0]);
-        assert.isString(depositStake.tx);
         let stakerBalance = await registryToken.getBalanceAddress.call(accounts[0]);
         assert.isNumber(stakerBalance.toNumber());
     });
@@ -87,7 +72,6 @@ contract('RegistryToken', (accounts) => {
             from: accounts[0],
             value: newStakePrice,
         });
-        await registryToken.addStaker(accounts[0]);
         const isStaker = await registryToken.isStaker(accounts[0]);
         assert.isTrue(isStaker[0]);
         assert.isNumber(isStaker[1].toNumber());

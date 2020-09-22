@@ -118,42 +118,21 @@ contract('Core Use Cases', (accounts) => {
 
         // Third, we need to create and initialize a RegistryController to manage future Registry interactions. 
 
-        registry = await Registry(registryAddress);
-
-        registryController = await RegistryController.new(registryControllerAddress);
-        txRegistryControllerInit = await registryController.initialize(
-            registryAddress,
-            registryTokenAddress
-        );
-
-        assert.equal(txRegistryControllerInit.logs.length, 1);
-        assert.equal(txRegistryControllerInit.logs[0].event, 'registryControllerInitialized');
-
-        assert.isString(txRegistryControllerInit.logs[0].args[0]);
-        assert.lengthOf(txRegistryControllerInit.logs[0].args[0], 42);
-        assert.equal(txRegistryControllerInit.logs[0].args[0], registryAddress);
-
-        assert.isString(txRegistryControllerInit.logs[0].args[1]);
-        assert.lengthOf(txRegistryControllerInit.logs[0].args[1], 42);
-        assert.equal(txRegistryControllerInit.logs[0].args[1], registryTokenAddress);
+        registryController = await RegistryController.at(registryControllerAddress);
     });
 
     // Use-case 2: Register a new ZNS sub-domain.
 
     it('register a new ZNS sub-domain (a Registry Entry)', async () => {
-        // First, we need to get the address of the RegistryController for the Registry we want to add the Registry Entry to.
+        // First, we need to create a Registry Entry via the RegistryController.
+        // -- Note: Using deployed version of registryController from prior test.
+        // --       When calling a Proxy Contract, the call must be initiated from an account OTHER than the admin address controlling the proxy.
+        // --       See: https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies#transparent-proxies-and-function-clashes
 
-        registryControllerAddress = await registrar.getRegistryController(domain);
-
-        assert.isString(registryControllerAddress);
-        assert.lengthOf(registryControllerAddress, 42);
-
-        // Second, we need to create a Registry Entry via the RegistryController.
-        //   Note: Using deployed version of registryController from prior test
-
-        txCreateRegistryEntry = await registryController.createRegistryEntry(
+        txCreateRegistryEntry = await registryController.createRegistryEntry.sendTransaction(
             subdomain,
-            subdomainRef
+            subdomainRef,
+            { from: accounts[1] }
         );
 
         assert.equal(txCreateRegistryEntry.logs.length, 1);
@@ -169,7 +148,10 @@ contract('Core Use Cases', (accounts) => {
     // Use-case 3: Update the Ref for a domain.
 
     it('update the ref for a domain (Registry)', async () => {
-        let txSetRef = await registryController.setRef(updatedRef);
+        let txSetRef = await registryController.setRef.sendTransaction(
+            updatedRef,
+            { from: accounts[1] }
+        );
 
         assert.equal(txSetRef.logs.length, 1);
         assert.equal(txSetRef.logs[0].event, 'registryRefSet');
@@ -177,7 +159,7 @@ contract('Core Use Cases', (accounts) => {
         assert.isString(txSetRef.logs[0].args[0]);
         assert.equal(txSetRef.logs[0].args[0], updatedRef);
 
-        let getRef = await registryController.getRef.call();
+        let getRef = await registryController.getRef.call({ from: accounts[1] });
 
         assert.equal(getRef, updatedRef);
     });
@@ -185,8 +167,11 @@ contract('Core Use Cases', (accounts) => {
     // Use-case 4: Update the stake price for registering a new sub-domain within the Registry.
 
     it('update the stake Price for registering a new sub-domain (Registry Entry)', async () => {
-        registryToken.transferOwnership(registryController.address);
-        let txSetStakePrice = await registryController.setStakePrice(updatedStakePrice);
+        await registryToken.transferOwnership(registryController.address);
+        let txSetStakePrice = await registryController.setStakePrice.sendTransaction(
+            updatedStakePrice, 
+            { from: accounts[1] }
+        );
 
         assert.equal(txSetStakePrice.logs.length, 1);
         assert.equal(txSetStakePrice.logs[0].event, 'stakePriceSet');
@@ -194,7 +179,7 @@ contract('Core Use Cases', (accounts) => {
         assert.isNumber(txSetStakePrice.logs[0].args[0].toNumber());
         assert.equal(txSetStakePrice.logs[0].args[0], updatedStakePrice);
 
-        let getStakePrice = await registryController.getStakePrice.call();
+        let getStakePrice = await registryController.getStakePrice.call({ from: accounts[1] });
 
         assert.equal(getStakePrice, updatedStakePrice);
     });
@@ -202,7 +187,11 @@ contract('Core Use Cases', (accounts) => {
     // Use-case 5: Update the ref of a sub-domain within the Registry.
 
     it('update the ref of a sub-domain (Registry Entry)', async () => {
-        let txSetRegistryEntryRef = await registryController.setRegistryEntryRef(subdomain, updatedRegistryEntryRef);
+        let txSetRegistryEntryRef = await registryController.setRegistryEntryRef.sendTransaction(
+            subdomain, 
+            updatedRegistryEntryRef,
+            { from: accounts[1] }
+        );
 
         assert.equal(txSetRegistryEntryRef.logs.length, 1);
         assert.equal(txSetRegistryEntryRef.logs[0].event, 'registryEntryRefSet');
@@ -213,7 +202,10 @@ contract('Core Use Cases', (accounts) => {
         assert.isString(txSetRegistryEntryRef.logs[0].args[1]);
         assert.equal(txSetRegistryEntryRef.logs[0].args[1], updatedRegistryEntryRef);
 
-        let getRegistryEntryRef = await registryController.getRegistryEntryRef.call(subdomain);
+        let getRegistryEntryRef = await registryController.getRegistryEntryRef.call(
+            subdomain,
+            { from: accounts[1] }
+        );
 
         assert.equal(getRegistryEntryRef, updatedRegistryEntryRef);
     });
