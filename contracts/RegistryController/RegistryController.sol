@@ -92,6 +92,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         string calldata _ref)
         external
         override
+        onlyOwner
     {
         registryProxy.createRegistryEntry(_subdomain, _ref);
         (bool isRegistered, ) = registryProxy.isRegistered(_subdomain);
@@ -112,6 +113,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         string calldata _newRef)
         external
         override
+        onlyOwner
     {
         registryProxy.setRegistryRef(_newRef);        
         string memory currentRegistryRef = registryProxy.getRef();
@@ -130,6 +132,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         string calldata _newRef)
         external
         override
+        onlyOwner
     {
         registryProxy.setRegistryEntryRef(_subdomain, _newRef);
         string memory currentRegistryEntryRef = registryProxy.getRegistryEntryRef(_subdomain);
