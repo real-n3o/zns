@@ -1,16 +1,16 @@
 pragma solidity 0.6.2;
 
 /**
- * @title Registry
+ * @title Registry V2 Mock
  * @dev Manages a Registry and it's entries.
 */
 
-import '../RegistryToken/RegistryToken.sol';
-import './RegistryI.sol';
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import '../../RegistryToken/RegistryToken.sol';
+import '../../Registry/RegistryI.sol';
+import "../../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
 
-contract Registry is RegistryI, Initializable, OwnableUpgradeSafe {
+contract RegistryV2Mock is RegistryI, Initializable, OwnableUpgradeSafe {
     using SafeMath for uint256;
 
     string private domain;

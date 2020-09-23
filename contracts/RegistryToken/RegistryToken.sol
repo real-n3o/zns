@@ -17,7 +17,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
     address payable wallet = payable(address(this));
     uint256 public balance = wallet.balance;
     mapping (address => uint256) private _balances;
-    address[] internal stakers;    
+    address[] private stakers;    
 
     /// @notice Emitted when a new RegistryToken is created.
     event RegistryTokenCreated(address _owner, string _tokenName, string tokenSymbol, uint256 tokenSupply, uint256 stakePrice);

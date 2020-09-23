@@ -15,12 +15,12 @@ import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/ac
 contract RegistryController is RegistryControllerI, Initializable, OwnableUpgradeSafe {
     using SafeMath for uint256;
 
-    Registry registryFactory;
+    Registry private registryFactory;
 
-    Registry registryProxy;
+    Registry private registryProxy;
     address public registryProxyAddress;
 
-    RegistryToken registryToken;
+    RegistryToken private registryToken;
     address payable public registryTokenAddress;
 
     uint256 public stakePrice;

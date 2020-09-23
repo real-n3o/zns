@@ -20,16 +20,16 @@ contract Registrar {
         string registryType;
     }
 
-    Registry registryLogic;
-    TransparentUpgradeableProxy registryProxy;
-    Registry registryProxyInstance;
+    Registry private registryLogic;
+    TransparentUpgradeableProxy private registryProxy;
+    Registry private registryProxyInstance;
 
-    RegistryToken registryTokenProxy;
+    RegistryToken private registryTokenProxy;
     
-    RegistryController registryControllerLogic;
-    TransparentUpgradeableProxy registryControllerProxy;
+    RegistryController private registryControllerLogic;
+    TransparentUpgradeableProxy private registryControllerProxy;
 
-    mapping (string => RegistrarEntry) registryMap;
+    mapping (string => RegistrarEntry) private registryMap;
     address[] public registrar;
 
     /// @notice Emitted when a new Registry is added to the Registrar.
