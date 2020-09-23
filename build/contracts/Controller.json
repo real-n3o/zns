@@ -5112,10 +5112,100 @@
       "links": {},
       "address": "0x2FaF1FdbFf99F783ccb30e13a8CD57007994D23f",
       "transactionHash": "0x53a53fc41cb03cc12f0c0a34883dd97d8a269c7c54716f4c99861ce22231a9db"
+    },
+    "1600820625062": {
+      "events": {
+        "0x9f3d5c8f0416670c5a05d5aa0be67249a69f67ac1077f402c49b7d9558adecd9": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "registrtyAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "registryTokenAddress",
+              "type": "address"
+            }
+          ],
+          "name": "createdRegistry",
+          "type": "event"
+        },
+        "0x3fdde72950e6d9c53073a94114bea65c19a2076d1d4ff9390a70519dcbff22dd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "ref",
+              "type": "string"
+            }
+          ],
+          "name": "createdRegistryEntry",
+          "type": "event"
+        },
+        "0xa3560ee2efe796786b53781edf5691ed5900487a522725140e017119fc1ffe13": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "newRef",
+              "type": "string"
+            }
+          ],
+          "name": "registryEntryRefUpdated",
+          "type": "event"
+        },
+        "0x38f34884b67bf9d0741f654919f99f08b4b7f9809bef14be841cea0c25586dd5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "newRef",
+              "type": "string"
+            }
+          ],
+          "name": "registryRefUpdated",
+          "type": "event"
+        },
+        "0x5443a9b3a4f844af7ea1bbffa88c16f6f6c35f174ae032da718b6285c6be869c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newStakePrice",
+              "type": "uint256"
+            }
+          ],
+          "name": "stakePriceSet",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x43347a3Fe21fB5C9BC281ec18c36C98120C0Ad84",
+      "transactionHash": "0x660bce319df3f1fa1ba6a5cda0ffba260ee57f33e1419036cf860a51c7754f12"
     }
   },
-  "schemaVersion": "3.2.5",
-  "updatedAt": "2020-09-14T05:13:08.295Z",
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-09-23T00:24:40.808Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

@@ -60,7 +60,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
         override 
         initializer
     {
-        __Ownable_init();
+        __Ownable_init_unchained();
         ERC20UpgradeSafe.__ERC20_init(_tokenName, _tokenSymbol);
         stakePrice = _stakePrice;
         emit RegistryTokenCreated(_owner, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);

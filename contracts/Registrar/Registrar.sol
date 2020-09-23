@@ -72,7 +72,6 @@ contract Registrar {
 
         registryProxyInstance = Registry(address(registryProxy));
         registryProxyInstance.transferOwnership(address(registryControllerProxy));
-        // registryTokenProxy.transferOwnership(address(registryControllerProxy));
         
         registryMap[_domain].controller = address(registryControllerProxy);
         registryMap[_domain].domain = _domain;
