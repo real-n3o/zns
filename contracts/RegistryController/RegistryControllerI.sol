@@ -19,4 +19,6 @@ interface RegistryControllerI {
     function getStakePrice() external returns (uint256);
     function getRegistryEntryRef(string calldata _subdomain) external returns (string memory);
     function getTransparentProxyAdmin(address payable _transparentProxyAddress) external returns (address);
+    function getProxyImplementation(address payable _transparentProxyAddress) external returns (address);
+    function upgradeTransparentProxy(address payable _transparentProxyAddress, address payable _transparentProxyUpgradeAddress) external;
 }

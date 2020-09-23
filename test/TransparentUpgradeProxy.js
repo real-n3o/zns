@@ -1,5 +1,5 @@
 const Registrar = artifacts.require('Registrar');
-const RegistryV2Mock =artifacts.require('RegistryV2Mock.sol');
+const RegistryV2Mock = artifacts.require('RegistryV2Mock.sol');
 const RegistryToken = artifacts.require('RegistryToken.sol');
 const Registry = artifacts.require('Registry.sol');
 const RegistryController = artifacts.require('RegistryController.sol');
@@ -16,16 +16,16 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     let ref = "ref";
     let registryType = "type";
 
-    let registry;
-    let registryToken;
     let owner = accounts[0];
     let newOwner = accounts[1];
 
     let deployedRegistrar;
 
+    let registryToken;
     let registryTokenProxyAddress;
     let registryTokenProxy;
 
+    let registry;
     let registryProxyAddress;
     let registryProxy;
 
@@ -34,7 +34,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
 
     let transparentUpgradeableProxy;
     
-    let registryV2;
+    let registryV2Mock;
 
     it('deploy registrar', async () => {
         deployedRegistrar = await Registrar.new();
@@ -43,7 +43,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
 
     // Creators
 
-    it('create a new registry, relevant proxies, and update the proxy admin to the controller contract', async () => {
+    it('change the admin of a registry proxy via registry controller', async () => {
         // First, we need to create a new Registry from the Registrar.
 
         registryToken = await RegistryToken.new();
@@ -94,31 +94,37 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         // Fifth, we will use our Registry Controller proxy instance to call and verify the admin has been updated.
 
         let newRegistryProxyOwner = await registryControllerProxy.getTransparentProxyAdmin.call(registryProxyAddress, { from: newOwner } );
+        assert.lengthOf(newRegistryProxyOwner, 42);
         assert.equal(newRegistryProxyOwner, registryControllerProxyAddress);
     }); 
 
-    it('upgrade registry', async () => {
-        // TO DO
-        // console.log('deployedRegistrar: ' + deployedRegistrar.address);
-        // console.log('Current account: ' + owner);
-        // console.log('ControllerProxy: ' + registryControllerProxyAddress);
-        // console.log('RegistryProxyAdmin: ' + await registryProxy.owner.call( { from: accounts[1] } ));
-        // console.log('Registry V1 Owner: ' + await registryProxy.owner.call( { from: accounts[1] } ));
+    it('upgrade registry proxy to new implementation contract', async () => {
+        // First, we'll create a new instance and initialization of the RegistryV2Mock contract;
+        // -- [To Do]: This should utilize the Registrar to create the proxy contract properly.
 
-        // let getTransparentProxyAdmin = await registryControllerProxy.admin(
-        //     registryProxyAddress,
-        //     { from: accounts[0] } 
-        // );
+        registryV2Mock = await RegistryV2Mock.new();
+        registryV2Mock.initialize(
+            domain,
+            ref,
+            registryType,
+            registryToken.address
+        );
 
-        // console.log(getTransparentProxyAdmin);
+        let registryV2MockAddress = registryV2Mock.address;
 
-        // console.log(await transparentUpgradeableProxy.admin.call());
+        // Second, we'll upgrade the proxies implementation contract from RegistryController.
 
-        // console.log(await registryProxy.admin.call())
-        // create controller proxy instance (controller is owner)
-        // confirm controller proxy is admin
-        // create single controller function to upgrade RegistryContract
-        // test existing functions/methods work on controller
-        // test new functionality exists on controller
+        await registryControllerProxy.upgradeTransparentProxy.sendTransaction(registryProxyAddress, registryV2MockAddress, { from: newOwner } );
+
+        let newImplementationProxy = await registryControllerProxy.getProxyImplementation.call(registryProxyAddress, { from: newOwner } );
+        assert.lengthOf(newImplementationProxy, 42);
+        assert.equal(newImplementationProxy, registryV2MockAddress);
+    });
+
+    it('get existing registry ref from newly upgraded V2 contract', async () => {
+        let a = await registryProxy.getRef.call( { from: newOwner } );
+        // await registryControllerProxy.setRef.sendTransaction("meow", { from: newOwner });
+        // let existingRegistryRef = await registryControllerProxy.getRef.call( { from: owner } );
+        // console.log(existingRegistryRef);
     });
 });

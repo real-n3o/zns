@@ -113,7 +113,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         string calldata _newRef)
         external
         override
-        onlyOwner
+        // onlyOwner
     {
         registryProxy.setRegistryRef(_newRef);        
         string memory currentRegistryRef = registryProxy.getRef();
@@ -157,4 +157,17 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         transparentProxy = TransparentUpgradeableProxy(_transparentProxyAddress);
         return transparentProxy.admin();
     }
+
+    function getProxyImplementation(address payable _transparentProxyAddress) external override returns (address) {
+        TransparentUpgradeableProxy transparentProxy;
+        transparentProxy = TransparentUpgradeableProxy(_transparentProxyAddress);
+        return transparentProxy.implementation();
+    }
+
+    function upgradeTransparentProxy(address payable _transparentProxyAddress, address payable _transparentProxyUpgradeAddress) external override {
+        TransparentUpgradeableProxy transparentProxy;
+        transparentProxy = TransparentUpgradeableProxy(_transparentProxyAddress);
+        transparentProxy.upgradeTo(_transparentProxyUpgradeAddress);
+    }
+
 }
