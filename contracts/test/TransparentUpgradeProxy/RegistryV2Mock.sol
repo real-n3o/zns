@@ -18,6 +18,7 @@ contract RegistryV2Mock is RegistryI, Initializable, OwnableUpgradeSafe {
     string private registryType;
     address private registryToken;
     address payable public registryTokenAddress;
+    string public newUpgradeVar;
 
     struct RegistryEntry {
         string ref;
@@ -160,5 +161,9 @@ contract RegistryV2Mock is RegistryI, Initializable, OwnableUpgradeSafe {
             if (keccak256(bytes(_subdomain)) == keccak256(bytes(registryEntries[i]))) return (true, i);
         }
         return (false, 0);
+    }
+
+    function setNewUpgradeVar(string memory _newUpgradeVar) public {
+        newUpgradeVar = _newUpgradeVar;
     }
 }

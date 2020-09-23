@@ -151,4 +151,10 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
     function getRegistryEntryRef(string calldata _subdomain) override external returns (string memory) {
         return registryProxy.getRegistryEntryRef(_subdomain);
     }
+
+    function getTransparentProxyAdmin(address payable _transparentProxyAddress) external override returns (address) {
+        TransparentUpgradeableProxy transparentProxy;
+        transparentProxy = TransparentUpgradeableProxy(_transparentProxyAddress);
+        return transparentProxy.admin();
+    }
 }

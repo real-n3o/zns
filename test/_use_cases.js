@@ -134,7 +134,7 @@ contract('Core Use Cases', (accounts) => {
         txCreateRegistryEntry = await registryController.createRegistryEntry.sendTransaction(
             subdomain,
             subdomainRef,
-            { from: accounts[1] }
+            { from: newOwner }
         );
 
         assert.equal(txCreateRegistryEntry.logs.length, 1);
@@ -152,7 +152,7 @@ contract('Core Use Cases', (accounts) => {
     it('update the ref for a domain (Registry)', async () => {
         let txSetRef = await registryController.setRef.sendTransaction(
             updatedRef,
-            { from: accounts[1] }
+            { from: newOwner }
         );
 
         assert.equal(txSetRef.logs.length, 1);
@@ -161,7 +161,7 @@ contract('Core Use Cases', (accounts) => {
         assert.isString(txSetRef.logs[0].args[0]);
         assert.equal(txSetRef.logs[0].args[0], updatedRef);
 
-        let getRef = await registryController.getRef.call({ from: accounts[1] });
+        let getRef = await registryController.getRef.call({ from: newOwner });
 
         assert.equal(getRef, updatedRef);
     });
@@ -172,7 +172,7 @@ contract('Core Use Cases', (accounts) => {
         await registryToken.transferOwnership(registryController.address);
         let txSetStakePrice = await registryController.setStakePrice.sendTransaction(
             updatedStakePrice, 
-            { from: accounts[1] }
+            { from: newOwner }
         );
 
         assert.equal(txSetStakePrice.logs.length, 1);
@@ -181,7 +181,7 @@ contract('Core Use Cases', (accounts) => {
         assert.isNumber(txSetStakePrice.logs[0].args[0].toNumber());
         assert.equal(txSetStakePrice.logs[0].args[0], updatedStakePrice);
 
-        let getStakePrice = await registryController.getStakePrice.call({ from: accounts[1] });
+        let getStakePrice = await registryController.getStakePrice.call({ from: newOwner });
 
         assert.equal(getStakePrice, updatedStakePrice);
     });
@@ -192,7 +192,7 @@ contract('Core Use Cases', (accounts) => {
         let txSetRegistryEntryRef = await registryController.setRegistryEntryRef.sendTransaction(
             subdomain, 
             updatedRegistryEntryRef,
-            { from: accounts[1] }
+            { from: newOwner }
         );
 
         assert.equal(txSetRegistryEntryRef.logs.length, 1);
@@ -206,7 +206,7 @@ contract('Core Use Cases', (accounts) => {
 
         let getRegistryEntryRef = await registryController.getRegistryEntryRef.call(
             subdomain,
-            { from: accounts[1] }
+            { from: newOwner }
         );
 
         assert.equal(getRegistryEntryRef, updatedRegistryEntryRef);

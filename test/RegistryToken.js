@@ -13,10 +13,6 @@ contract('RegistryToken', (accounts) => {
     let registryToken;
     let owner = accounts[0];
 
-    before(async () => {
-        registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
-    });
-
     // Creators
 
     it('deploy a new registry token', async () => {

@@ -24,9 +24,9 @@ contract('Registrar', (accounts) => {
     // Creators
 
     it('create registry', async () => {
-        registryToken = await RegistryToken.new(owner, tokenName, tokenSymbol, tokenSupply, stakePrice);
+        registryToken = await RegistryToken.new();
 
-        registry = await deployedRegistrar.createRegistry.sendTransaction(
+        createRegistry = await deployedRegistrar.createRegistry.sendTransaction(
             domain,
             ref,
             registryType,
@@ -35,7 +35,16 @@ contract('Registrar', (accounts) => {
             registryToken.address
         );
 
-        assert.isString(registry.tx);
+        assert.isString(createRegistry.tx);
+        assert.equal(createRegistry.logs.length, 1);
+        assert.equal(createRegistry.logs[0].event, 'RegistryCreated');
+        assert.equal(createRegistry.logs[0].args[0], domain);
+        assert.equal(createRegistry.logs[0].args[1], ref);
+        assert.equal(createRegistry.logs[0].args[2], registryType);
+        assert.equal(createRegistry.logs[0].args[3], stakePrice);
+        assert.lengthOf(createRegistry.logs[0].args[4], 42);
+        assert.lengthOf(createRegistry.logs[0].args[5], 42);
+        assert.lengthOf(createRegistry.logs[0].args[6], 42);
     }); 
 
     // Getters

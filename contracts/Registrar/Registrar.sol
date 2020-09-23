@@ -80,7 +80,7 @@ contract Registrar {
 
         registrar.push(registryMap[_domain].controller);
 
-        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, address(registryTokenProxy), address(registryProxy), registryMap[_domain].controller);
+        emit RegistryCreated( _domain, _ref, _registryType, _stakePrice, address(registryTokenProxy), address(registryProxy), address(registryControllerProxy));
     }
 
     function getRegistryOwner() external view returns(address) {
@@ -111,5 +111,11 @@ contract Registrar {
 
     function getRegistryType(string memory _domain) public view returns (string memory) {
         return registryMap[_domain].registryType;
+    }
+
+    function getTransparentProxyAdmin(address payable _transparentProxyAddress) public returns (address) {
+        TransparentUpgradeableProxy transparentProxy;
+        transparentProxy = TransparentUpgradeableProxy(_transparentProxyAddress);
+        return transparentProxy.admin();
     }
 }
