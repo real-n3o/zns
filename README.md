@@ -40,6 +40,9 @@ In relation to traditional DNS addressing, the ```0:``` is comparable to ```http
 
 ## Contracts
 
+![ZNS Smart Contract Architecture](https://user-images.githubusercontent.com/69747643/93969645-3d27fb80-fd21-11ea-9840-bcce3d4135c8.png)
+*<p align="center">Figure 1: ZNS Smart Contract Architecture</p>*
+
 ZNS is made up of four primary contracts that should be deployed in the following order:
 
 ***Registrar***
