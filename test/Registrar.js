@@ -31,6 +31,7 @@ contract('Registrar', (accounts) => {
             ref,
             registryType,
             stakePrice,
+            owner,
             registryToken.address
         );
 

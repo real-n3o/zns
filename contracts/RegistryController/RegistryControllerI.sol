@@ -10,7 +10,7 @@ import '../RegistryToken/RegistryToken.sol';
 // import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
 
 interface RegistryControllerI {
-    function initialize(address _registryProxy, RegistryToken _registryTokenProxy) external;
+    function initialize(address _registryProxy, RegistryToken _registryTokenProxy, address _own) external;
     function setStakePrice(uint256 _newStakePrice) external;
     function createRegistryEntry(string calldata _subdomain, string calldata _ref) external;
     function setRef(string calldata _newRef) external;   

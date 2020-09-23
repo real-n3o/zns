@@ -13,6 +13,7 @@ contract('Core Use Cases', (accounts) => {
     let tokenSupply = 500;
     let stakePrice = 250;
     let owner = accounts[0];
+    let newOwner = accounts[1];
 
     let subdomain = 'TestSubDomain';
     let subdomainRef = 'subdomainRef';
@@ -52,7 +53,7 @@ contract('Core Use Cases', (accounts) => {
             stakePrice,
         );
 
-        // registryToken.transferOwnership(owner);
+        registryToken.transferOwnership(owner);
 
         registryTokenAddress = registryToken.address;
 
@@ -84,6 +85,7 @@ contract('Core Use Cases', (accounts) => {
             ref,
             registryType,
             stakePrice,
+            newOwner,
             registryTokenAddress
         );
 

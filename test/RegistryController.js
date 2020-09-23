@@ -29,7 +29,7 @@ contract('RegistryController', (accounts) => {
         registry.initialize(domain, ref, registryType, registryToken.address);
 
         controller = await RegistryController.new();
-        controller.initialize(registry.address, registryToken.address);
+        controller.initialize(registry.address, registryToken.address, owner);
 
         registryToken.transferOwnership(controller.address);
         registry.transferOwnership(controller.address);

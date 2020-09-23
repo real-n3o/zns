@@ -49,12 +49,13 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
      * @param _registryTokenProxy The RegistryToken address that the RegistryController will manage.
      */
 
-    function initialize(address _registryProxy, RegistryToken _registryTokenProxy)
+    function initialize(address _registryProxy, RegistryToken _registryTokenProxy, address _owner)
         external
         override
         initializer
     {
-        __Ownable_init_unchained();
+        __Ownable_init();
+        transferOwnership(_owner);
         registryProxyAddress = _registryProxy;
         registryProxy = Registry(registryProxyAddress);
         

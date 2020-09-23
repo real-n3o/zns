@@ -49,6 +49,7 @@ contract Registrar {
         string memory _ref,
         string memory _registryType,
         uint256 _stakePrice,
+        address _owner,
         address payable _registryTokenProxyAddress)
         public
     {
@@ -63,7 +64,7 @@ contract Registrar {
         );
 
         registryControllerLogic = new RegistryController();
-        bytes memory controllerData = abi.encodeWithSignature("initialize(address,address)",address(registryProxy), address(registryTokenProxy));
+        bytes memory controllerData = abi.encodeWithSignature("initialize(address,address,address)",address(registryProxy),address(registryTokenProxy),_owner);
         registryControllerProxy = new TransparentUpgradeableProxy(
             address(registryControllerLogic),
             msg.sender,
