@@ -14,7 +14,7 @@ contract ProxyAdmin is Initializable, OwnableUpgradeSafe {
 
     function initialize(address _owner) external initializer {
         __Ownable_init();
-        // if(_owner != msg.sender) transferOwnership(_owner);
+        if(_owner != msg.sender) transferOwnership(_owner);
         transferOwnership(_owner);
         emit Initialized(this.owner());
     }

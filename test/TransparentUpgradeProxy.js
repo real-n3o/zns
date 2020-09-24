@@ -18,7 +18,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     let registryType = "type";
 
     let owner = accounts[0];
-    let newOwner = accounts[1];
+    let notOwner = accounts[1];
 
     let deployedRegistrar;
 
@@ -127,13 +127,13 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     });
 
     it('get existing registry ref from newly upgraded V2 contract', async () => {
-        let getExistingRef = await registryProxy.getRef.call( { from: newOwner } );
+        let getExistingRef = await registryProxy.getRef.call( { from: notOwner } );
         assert.equal(getExistingRef, ref);
     });
 
     it('set new registry ref in V2 contract', async () => {
         let newRef = "newRef";
-        await registryControllerProxy.setRef.sendTransaction(newRef, { from: newOwner } );
+        await registryControllerProxy.setRef.sendTransaction(newRef, { from: notOwner } );
         let getNewRef = await registryProxy.getRef.call();
         assert.equal(getNewRef, newRef);
 

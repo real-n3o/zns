@@ -7,7 +7,6 @@ pragma solidity 0.6.2;
 
 import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
-// import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
 
 interface RegistryControllerI {
     function initialize(address _registryProxy, RegistryToken _registryTokenProxy, address _own) external;
