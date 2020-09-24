@@ -37,6 +37,9 @@ contract RegistryV2Mock is RegistryI, Initializable, OwnableUpgradeSafe {
     /// @notice Emitted when the Registry entry ref is set.
     event RegistryEntryRefSet(string ref);
 
+    /// @notice Emitted when newUpgradeVar is set.
+    event NewUpgradeVarSet(string _newUpgradeVar);
+
     /**
      * @notice Initializes a new Registry after construction.
      * @param _domain The primary name used to represent the Registry. 
@@ -165,5 +168,10 @@ contract RegistryV2Mock is RegistryI, Initializable, OwnableUpgradeSafe {
 
     function setNewUpgradeVar(string memory _newUpgradeVar) public {
         newUpgradeVar = _newUpgradeVar;
+        emit NewUpgradeVarSet(_newUpgradeVar);
+    }
+
+    function getNewUpgradeVar() public view returns (string memory) {
+        return newUpgradeVar;
     }
 }

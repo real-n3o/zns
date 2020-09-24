@@ -38,6 +38,8 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     let proxyAdmin;
     let registryV2Mock;
 
+    let newUpgradeVar = "newUpgradeVar";
+
     it('deploy registrar', async () => {
         deployedRegistrar = await Registrar.new();
         assert.isString(deployedRegistrar.address);
@@ -124,17 +126,34 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         let newImplementationProxy = await proxyAdmin.getProxyImplementation.call(registryProxy.address);
         assert.lengthOf(newImplementationProxy, 42);
         assert.equal(newImplementationProxy, registryV2Mock.address);
+
+        // Third, reinitialize local registryProxy var with registryV2Mock interface.
+
+        registryProxy = await RegistryV2Mock.at(registryProxy.address);
     });
 
-    it('get existing registry ref from newly upgraded V2 contract', async () => {
+    it('get ref in v2 registry contract (old method)', async () => {
         let getExistingRef = await registryProxy.getRef.call( { from: contractOwner } );
         assert.equal(getExistingRef, ref);
     });
 
-    it('set new registry ref in V2 contract', async () => {
+    it('set new ref in v2 registry contract (old method)', async () => {
         let newRef = "newRef";
         await registryControllerProxy.setRef.sendTransaction(newRef, { from: contractOwner } );
         let getNewRef = await registryProxy.getRef.call();
         assert.equal(getNewRef, newRef);
     });
+
+    it('set newUpgradeVar on v2 registry contract (new method)', async () => {
+        let txNewSetUpgradeVar = await registryProxy.setNewUpgradeVar.sendTransaction(newUpgradeVar, { from: contractOwner } );
+
+        assert.equal(txNewSetUpgradeVar.logs.length, 1);
+        assert.equal(txNewSetUpgradeVar.logs[0].event, 'NewUpgradeVarSet');    
+        assert.equal(txNewSetUpgradeVar.logs[0].args[0], newUpgradeVar);
+    });
+
+    it('get newUpgradeVar on v2 registry contract (new method)', async () => {
+        let getNewUpgradeVar = await registryProxy.getNewUpgradeVar.call({ from: contractOwner });
+        assert.equal(getNewUpgradeVar, newUpgradeVar);
+    })
 });
