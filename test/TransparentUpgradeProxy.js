@@ -18,7 +18,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     let registryType = "type";
 
     let owner = accounts[0];
-    let notOwner = accounts[1];
+    let contractOwner = accounts[1];
 
     let deployedRegistrar;
 
@@ -55,7 +55,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
             ref,
             registryType,
             stakePrice,
-            owner,
+            contractOwner,
             registryToken.address
         );
 
@@ -119,7 +119,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
 
         // Second, we'll upgrade the Proxy Implementation Contract via the Proxy Admin Contract.
 
-        await proxyAdmin.upgradeTransparentProxy.sendTransaction(registryProxy.address, registryV2Mock.address, );
+        await proxyAdmin.upgradeTransparentProxy.sendTransaction(registryProxy.address, registryV2Mock.address);
 
         let newImplementationProxy = await proxyAdmin.getProxyImplementation.call(registryProxy.address);
         assert.lengthOf(newImplementationProxy, 42);
@@ -127,16 +127,14 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     });
 
     it('get existing registry ref from newly upgraded V2 contract', async () => {
-        let getExistingRef = await registryProxy.getRef.call( { from: notOwner } );
+        let getExistingRef = await registryProxy.getRef.call( { from: contractOwner } );
         assert.equal(getExistingRef, ref);
     });
 
     it('set new registry ref in V2 contract', async () => {
         let newRef = "newRef";
-        await registryControllerProxy.setRef.sendTransaction(newRef, { from: notOwner } );
+        await registryControllerProxy.setRef.sendTransaction(newRef, { from: contractOwner } );
         let getNewRef = await registryProxy.getRef.call();
         assert.equal(getNewRef, newRef);
-
-        // -- Note: had to remove the onlyOwner modifier due to the ProxyAdmin fallback issue
     });
 });

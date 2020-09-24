@@ -113,7 +113,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         string calldata _newRef)
         external
         override
-        // onlyOwner
+        onlyOwner
     {
         registryProxy.setRegistryRef(_newRef);        
         string memory currentRegistryRef = registryProxy.getRef();
