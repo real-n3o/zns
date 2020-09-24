@@ -210,5 +210,4 @@ contract('Core Use Cases', (accounts) => {
 
         assert.equal(getRegistryEntryRef, updatedRegistryEntryRef);
     });
-
 });

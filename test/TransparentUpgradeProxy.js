@@ -1,5 +1,6 @@
 const Registrar = artifacts.require('Registrar');
 const RegistryV2Mock = artifacts.require('RegistryV2Mock.sol');
+const RegistryControllerV2Mock = artifacts.require('RegistryControllerV2Mock.sol');
 const RegistryToken = artifacts.require('RegistryToken.sol');
 const Registry = artifacts.require('Registry.sol');
 const RegistryController = artifacts.require('RegistryController.sol');
@@ -33,7 +34,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     let registryControllerProxyAddress;
     let registryControllerProxy;
 
-    let transparentUpgradeableProxy;
+    let transparentUpgradeableProxy;    
     
     let proxyAdmin;
     let registryV2Mock;
@@ -45,7 +46,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         assert.isString(deployedRegistrar.address);
     });
 
-    // Creators
+    // Upgrading the Registry Contract
 
     it('change the admin of a registry proxy via registry controller', async () => {
         // First, we need to create a new Registry from the Registrar.
@@ -160,4 +161,34 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         let getNewUpgradeVar = await registryProxy.getNewUpgradeVar.call({ from: contractOwner });
         assert.equal(getNewUpgradeVar, newUpgradeVar);
     })
+
+    // Upgrading the Controller Contract
+
+    // Update Admin to ProxyAdmin
+    
+    it('upgrade registry controller proxy to new implementation contract (ControllerV2Mock)', async () => {
+        // First, we'll create a new instance and initialization of the ControllerV2Mock contract.
+
+        controllerV2Mock = await RegistryControllerV2Mock.new();
+        controllerV2Mock.initialize(
+            registryProxy.address,
+            registryTokenProxy.address,
+            contractOwner
+        );
+
+        // Second, we'll upgrade the registry controller Proxy Implementation Contract via the Proxy Admin Contract.
+
+        console.log('cont addr: ' + registryControllerProxy.address);
+
+        // await proxyAdmin.upgradeTransparentProxy.sendTransaction(registryControllerProxy.address, controllerV2Mock.address);
+
+        // let newImplementationControllerProxy = await proxyAdmin.getProxyImplementation.call(registryControllerProxy.address);
+        // assert.lengthOf(newImplementationControllerProxy, 42);
+        // assert.equal(newImplementationControllerProxy, controllerV2Mock.address);
+
+        // // Third, reinitialize local registryProxy var with upgraded registryV2Mock interface.
+
+        // registryProxy = await RegistryV2Mock.at(registryProxy.address);
+    });
+
 });

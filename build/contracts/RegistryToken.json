@@ -12714,12 +12714,12 @@
         }
       },
       "links": {},
-      "address": "0xA310A211AA1D075fbe6C7B261840a07e2Ea280EC",
-      "transactionHash": "0x6917d5c0d2ba89201b351d985068f2964f9d8276eceec7708ffb7a9e9d128a7e"
+      "address": "0x349f0724E49534C760aeE5a2CE95A76308708C69",
+      "transactionHash": "0x01671a9dbcfe0a9da82576826e355a5120e511cde1d39a4da249fe9b3da13d72"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-09-24T18:11:07.976Z",
+  "updatedAt": "2020-09-24T18:37:56.097Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
