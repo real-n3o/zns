@@ -4,6 +4,7 @@ const RegistryToken = artifacts.require('RegistryToken.sol');
 const Registry = artifacts.require('Registry.sol');
 const RegistryController = artifacts.require('RegistryController.sol');
 const TransparentUpgradeableProxy = artifacts.require('TransparentUpgradeableProxy.sol');
+const ProxyAdmin = artifacts.require('ProxyAdmin.sol');
 
 contract('TransparentUpgradeProxyTests', (accounts) => { 
 
@@ -34,6 +35,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
 
     let transparentUpgradeableProxy;
     
+    let proxyAdmin;
     let registryV2Mock;
 
     it('deploy registrar', async () => {
@@ -65,7 +67,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         assert.equal(createRegistry.logs[0].args[2], registryType);
         assert.equal(createRegistry.logs[0].args[3], stakePrice);
 
-        // Second, we need to create Proxy instances of each main contract.
+        // Second, we need to create Proxy instances of each of the main Registry contracts.
 
         registryTokenProxyAddress = createRegistry.logs[0].args[4];
         assert.lengthOf(createRegistry.logs[0].args[4], 42);
@@ -84,23 +86,28 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
 
         transparentUpgradeableProxy = await TransparentUpgradeableProxy.at(registryProxyAddress);
 
-        // Fourth, we are going to transfer ownership of the Proxy to the RegistryController Contract.
+        // Fourth, we are going to transfer ownership of the Proxy to the ProxyAdmin Contract.
 
+        proxyAdmin = await ProxyAdmin.new();
+        proxyAdmin.initialize(owner);
+
+        // -- Note: Because the owner is msg.sender, we have to call the TransparentUpgradeProxy admin() method from that address.
         let currentRegistryProxyOwner = await transparentUpgradeableProxy.admin.call();
         assert.equal(currentRegistryProxyOwner, owner);
-
-        await transparentUpgradeableProxy.changeAdmin.sendTransaction(registryControllerProxyAddress, { from: owner } );  
+        
+        await transparentUpgradeableProxy.changeAdmin.sendTransaction(proxyAdmin.address);  
 
         // Fifth, we will use our Registry Controller proxy instance to call and verify the admin has been updated.
+        // -- Note: Now that the admin has been changed, the TransparentUpgradeProxy admin() method must be called from the new Admin (in this case the ProxyAdmin contract).
 
-        let newRegistryProxyOwner = await registryControllerProxy.getTransparentProxyAdmin.call(registryProxyAddress, { from: newOwner } );
+        let newRegistryProxyOwner = await proxyAdmin.getTransparentProxyAdmin.call(registryProxyAddress);
         assert.lengthOf(newRegistryProxyOwner, 42);
-        assert.equal(newRegistryProxyOwner, registryControllerProxyAddress);
+        assert.equal(newRegistryProxyOwner, proxyAdmin.address);
     }); 
 
     it('upgrade registry proxy to new implementation contract', async () => {
-        // First, we'll create a new instance and initialization of the RegistryV2Mock contract;
-        // -- [To Do]: This should utilize the Registrar to create the proxy contract properly.
+        // First, we'll create a new instance and initialization of the RegistryV2Mock contract.
+        // -- Note: We are creating an Implementation Contract (also known as a Logic Contract) that the Proxy will reference.
 
         registryV2Mock = await RegistryV2Mock.new();
         registryV2Mock.initialize(
@@ -110,21 +117,26 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
             registryToken.address
         );
 
-        let registryV2MockAddress = registryV2Mock.address;
+        // Second, we'll upgrade the Proxy Implementation Contract via the Proxy Admin Contract.
 
-        // Second, we'll upgrade the proxies implementation contract from RegistryController.
+        await proxyAdmin.upgradeTransparentProxy.sendTransaction(registryProxy.address, registryV2Mock.address, );
 
-        await registryControllerProxy.upgradeTransparentProxy.sendTransaction(registryProxyAddress, registryV2MockAddress, { from: newOwner } );
-
-        let newImplementationProxy = await registryControllerProxy.getProxyImplementation.call(registryProxyAddress, { from: newOwner } );
+        let newImplementationProxy = await proxyAdmin.getProxyImplementation.call(registryProxy.address);
         assert.lengthOf(newImplementationProxy, 42);
-        assert.equal(newImplementationProxy, registryV2MockAddress);
+        assert.equal(newImplementationProxy, registryV2Mock.address);
     });
 
     it('get existing registry ref from newly upgraded V2 contract', async () => {
-        let a = await registryProxy.getRef.call( { from: newOwner } );
-        // await registryControllerProxy.setRef.sendTransaction("meow", { from: newOwner });
-        // let existingRegistryRef = await registryControllerProxy.getRef.call( { from: owner } );
-        // console.log(existingRegistryRef);
+        let getExistingRef = await registryProxy.getRef.call( { from: newOwner } );
+        assert.equal(getExistingRef, ref);
+    });
+
+    it('set new registry ref in V2 contract', async () => {
+        let newRef = "newRef";
+        await registryControllerProxy.setRef.sendTransaction(newRef, { from: newOwner } );
+        let getNewRef = await registryProxy.getRef.call();
+        assert.equal(getNewRef, newRef);
+
+        // -- Note: had to remove the onlyOwner modifier due to the ProxyAdmin fallback issue
     });
 });
