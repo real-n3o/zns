@@ -28,13 +28,13 @@ contract Registry is RegistryI, Initializable, OwnableUpgradeSafe {
     string[] registryEntries;
 
     /// @notice Emitted when a new Registry is created.
-    event RegistryEntryCreated(string subdomain, string ref);
+    event RegistryEntryCreated(string _subdomain, string _ref);
 
     /// @notice Emitted when the Registry ref is set.
-    event RegistryRefSet(string ref);
+    event RegistryRefSet(string _ref);
 
     /// @notice Emitted when the Registry entry ref is set.
-    event RegistryEntryRefSet(string ref);
+    event RegistryEntryRefSet(string _ref);
 
     /**
      * @notice Initializes a new Registry after construction.

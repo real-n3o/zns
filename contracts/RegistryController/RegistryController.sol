@@ -26,22 +26,22 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
     uint256 public stakePrice;
 
     /// @notice Emitted when the RegistryController is initialized.
-    event registryControllerInitialized(address registryProxy, RegistryToken registryTokenProxy);
+    event RegistryControllerInitialized(address _registryProxy, RegistryToken _registryTokenProxy);
 
     /// @notice Emitted when a new Registry is created.
-    event createdRegistry(address registryAddress, RegistryToken registryToken);
+    event CreatedRegistry(address _registryAddress, RegistryToken _registryToken);
 
     /// @notice Emitted when a Registry's stake price is updated.
-    event stakePriceSet(uint256 newStakePrice);
+    event StakePriceSet(uint256 _newStakePrice);
 
     /// @notice Emitted when a new entry is created in a Registry.
-    event createdRegistryEntry(string subdomain, string ref);
+    event CreatedRegistryEntry(string _subdomain, string _ref);
 
     /// @notice Emitted when a new a Registry 'ref' is updated.
-    event registryRefSet(string newRef);
+    event RegistryRefSet(string _newRef);
 
     /// @notice Emitted when a new a Registry Entry 'ref' is updated.
-    event registryEntryRefSet(string subdomain, string newRef);
+    event RegistryEntryRefSet(string _subdomain, string _newRef);
 
     /**
      * @notice Initializes a new RegistryController after construction.
@@ -62,7 +62,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         registryTokenAddress = payable(address(_registryTokenProxy));
         registryToken = _registryTokenProxy;
 
-        emit registryControllerInitialized(_registryProxy, _registryTokenProxy);
+        emit RegistryControllerInitialized(_registryProxy, _registryTokenProxy);
     }
 
     /**
@@ -78,7 +78,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         registryToken.setStakePrice(_newStakePrice);
         stakePrice = registryToken.stakePrice();
 
-        emit stakePriceSet(_newStakePrice);
+        emit StakePriceSet(_newStakePrice);
     }
 
     /**
@@ -101,7 +101,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         string memory currentRegistrySubdomain = _subdomain;
         string memory currentRegistryRef = registryProxy.getRegistryEntryRef(_subdomain);
         
-        emit createdRegistryEntry(currentRegistrySubdomain, currentRegistryRef);
+        emit CreatedRegistryEntry(currentRegistrySubdomain, currentRegistryRef);
     }
 
     /**
@@ -118,7 +118,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         registryProxy.setRegistryRef(_newRef);        
         string memory currentRegistryRef = registryProxy.getRef();
 
-        emit registryRefSet(currentRegistryRef);
+        emit RegistryRefSet(currentRegistryRef);
     }
 
     /**
@@ -137,7 +137,7 @@ contract RegistryController is RegistryControllerI, Initializable, OwnableUpgrad
         registryProxy.setRegistryEntryRef(_subdomain, _newRef);
         string memory currentRegistryEntryRef = registryProxy.getRegistryEntryRef(_subdomain);
 
-        emit registryEntryRefSet(_subdomain, currentRegistryEntryRef);
+        emit RegistryEntryRefSet(_subdomain, currentRegistryEntryRef);
     }
     
     function getRef() override external returns (string memory) {

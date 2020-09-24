@@ -33,7 +33,7 @@ contract Registrar {
     address[] public registrar;
 
     /// @notice Emitted when a new Registry is added to the Registrar.
-    event RegistryCreated(string domain, string ref, string registryType, uint256 stakePrice, address registryToken, address registry, address registryController);
+    event RegistryCreated(string _domain, string _ref, string _registryType, uint256 _stakePrice, address _registryTokenProxy, address _registryProxy, address _registryControllerProxy);
 
     /**
      * @notice Creates a new Registry and associated Entry in the Registrar.

@@ -138,7 +138,7 @@ contract('Core Use Cases', (accounts) => {
         );
 
         assert.equal(txCreateRegistryEntry.logs.length, 1);
-        assert.equal(txCreateRegistryEntry.logs[0].event, 'createdRegistryEntry');
+        assert.equal(txCreateRegistryEntry.logs[0].event, 'CreatedRegistryEntry');
 
         assert.isString(txCreateRegistryEntry.logs[0].args[0]);
         assert.equal(txCreateRegistryEntry.logs[0].args[0], subdomain);
@@ -155,9 +155,8 @@ contract('Core Use Cases', (accounts) => {
             { from: contractOwner }
         );
 
-        assert.equal(txSetRef.logs.length, 1);
-        assert.equal(txSetRef.logs[0].event, 'registryRefSet');
-
+        assert.equal(txSetRef.logs.length, 2);
+        assert.equal(txSetRef.logs[0].event, 'RegistryRefSet');
         assert.isString(txSetRef.logs[0].args[0]);
         assert.equal(txSetRef.logs[0].args[0], updatedRef);
 
@@ -175,8 +174,8 @@ contract('Core Use Cases', (accounts) => {
             { from: contractOwner }
         );
 
-        assert.equal(txSetStakePrice.logs.length, 1);
-        assert.equal(txSetStakePrice.logs[0].event, 'stakePriceSet');
+        assert.equal(txSetStakePrice.logs.length, 2);
+        assert.equal(txSetStakePrice.logs[0].event, 'StakePriceSet');
 
         assert.isNumber(txSetStakePrice.logs[0].args[0].toNumber());
         assert.equal(txSetStakePrice.logs[0].args[0], updatedStakePrice);
@@ -196,7 +195,7 @@ contract('Core Use Cases', (accounts) => {
         );
 
         assert.equal(txSetRegistryEntryRef.logs.length, 1);
-        assert.equal(txSetRegistryEntryRef.logs[0].event, 'registryEntryRefSet');
+        assert.equal(txSetRegistryEntryRef.logs[0].event, 'RegistryEntryRefSet');
 
         assert.isString(txSetRegistryEntryRef.logs[0].args[0]);
         assert.equal(txSetRegistryEntryRef.logs[0].args[0], subdomain);

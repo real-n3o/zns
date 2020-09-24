@@ -107,7 +107,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         assert.equal(newRegistryProxyOwner, proxyAdmin.address);
     }); 
 
-    it('upgrade registry proxy to new implementation contract', async () => {
+    it('upgrade registry proxy to new implementation contract (RegistryV2Mock)', async () => {
         // First, we'll create a new instance and initialization of the RegistryV2Mock contract.
         // -- Note: We are creating an Implementation Contract (also known as a Logic Contract) that the Proxy will reference.
 
@@ -127,7 +127,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
         assert.lengthOf(newImplementationProxy, 42);
         assert.equal(newImplementationProxy, registryV2Mock.address);
 
-        // Third, reinitialize local registryProxy var with registryV2Mock interface.
+        // Third, reinitialize local registryProxy var with upgraded registryV2Mock interface.
 
         registryProxy = await RegistryV2Mock.at(registryProxy.address);
     });
@@ -139,9 +139,13 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
 
     it('set new ref in v2 registry contract (old method)', async () => {
         let newRef = "newRef";
-        await registryControllerProxy.setRef.sendTransaction(newRef, { from: contractOwner } );
+        let txGetNewRef = await registryControllerProxy.setRef.sendTransaction(newRef, { from: contractOwner } );
         let getNewRef = await registryProxy.getRef.call();
+        
         assert.equal(getNewRef, newRef);
+        assert.equal(txGetNewRef.logs.length, 2);
+        assert.equal(txGetNewRef.logs[0].event, 'RegistryRefSet');    
+        assert.equal(txGetNewRef.logs[0].args[0], newRef);
     });
 
     it('set newUpgradeVar on v2 registry contract (new method)', async () => {
