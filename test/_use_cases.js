@@ -24,7 +24,6 @@ contract('Core Use Cases', (accounts) => {
 
     let registrar;
     let registryToken;
-    let registry;
     let registryController;
 
     let registryAddress;

@@ -50,6 +50,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     // Upgrading the Registry Contract
 
     it('change the admin of a registry proxy via registry controller', async () => {
+        
         // First, we need to create a new Registry from the Registrar.
 
         registryToken = await RegistryToken.new();
@@ -110,6 +111,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     }); 
 
     it('upgrade registry proxy to new implementation contract (RegistryV2Mock)', async () => {
+        
         // First, we'll create a new instance and initialization of the RegistryV2Mock contract.
         // -- Note: We are creating an Implementation Contract (also known as a Logic Contract) that the Proxy will reference.
 
@@ -180,6 +182,7 @@ contract('TransparentUpgradeProxyTests', (accounts) => {
     });
     
     it('upgrade registry controller proxy to new implementation contract (ControllerV2Mock)', async () => {
+        
         // First, we'll create a new instance and initialization of the ControllerV2Mock contract.
 
         controllerV2Mock = await RegistryControllerV2Mock.new();
