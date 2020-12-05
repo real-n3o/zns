@@ -8,11 +8,11 @@ pragma solidity 0.6.2;
 import '../Registry/Registry.sol';
 import '../RegistryToken/RegistryToken.sol';
 import '../RegistryController/RegistryController.sol';
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
 
 contract Registrar { 
-    using SafeMath for uint256;
+    using SafeMathUpgradeable for uint256;
 
     struct RegistrarEntry {
         address controller;

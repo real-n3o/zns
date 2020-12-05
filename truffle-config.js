@@ -18,11 +18,18 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const fs = require('fs');
+
+const mnemonic = fs.readFileSync(".secret").toString().split("\n");
+const infuraKey = "30e92593182842a792eae4bab8d1ede6";
+
+const truffleInit = {
+  privateKeys: mnemonic,
+  providerOrUrl: 'https://ropsten.infura.io/v3/'+infuraKey
+}
 
 module.exports = {
   /**
@@ -46,11 +53,16 @@ module.exports = {
      port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
+    ropsten: {
+      provider: () => new HDWalletProvider(truffleInit),
+      network_id: 3,  
+      gas: 8000000
+    }
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
     // network_id: 1342,       // Custom network
-    // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
+    // gas: 8500000,           // Gas sent with each transaction (default: ~s6700000)
     // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
     // from: <address>,        // Account to send txs from (default: accounts[0])
     // websockets: true        // Enable EventEmitter interface for web3 (default: false)
@@ -75,7 +87,7 @@ module.exports = {
 
   plugins: ["solidity-coverage"],
   
-  // Set default mocha options here, use special reporters etc.
+  // Set default mocha options here , use special reporters etc.
   mocha: {
     // timeout: 100000
   },

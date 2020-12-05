@@ -5,10 +5,10 @@ pragma solidity 0.6.2;
  * @dev Manages the Upgrade Process for ZNS Contracts
 */
 
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
 
-contract ProxyAdmin is Initializable, OwnableUpgradeSafe {
+contract ProxyAdmin is Initializable, OwnableUpgradeable {
 
     event Initialized(address _owner);
 

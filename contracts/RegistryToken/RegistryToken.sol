@@ -1,8 +1,8 @@
 pragma solidity 0.6.2;
 
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol";
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import './RegistryTokenI.sol';
 
 /**
@@ -10,8 +10,8 @@ import './RegistryTokenI.sol';
 * @notice Implements an ERC20 staking token that is connected to a registry.
 */
 
-contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
-    using SafeMath for uint256;
+contract RegistryToken is RegistryTokenI, ERC20Upgradeable, OwnableUpgradeable {
+    using SafeMathUpgradeable for uint256;
 
     uint256 public stakePrice;
     address payable wallet = payable(address(this));
@@ -61,7 +61,7 @@ contract RegistryToken is RegistryTokenI, ERC20UpgradeSafe, OwnableUpgradeSafe {
         initializer
     {
         __Ownable_init_unchained();
-        ERC20UpgradeSafe.__ERC20_init(_tokenName, _tokenSymbol);
+        ERC20Upgradeable.__ERC20_init(_tokenName, _tokenSymbol);
         stakePrice = _stakePrice;
         emit RegistryTokenCreated(_owner, _tokenName, _tokenSymbol, _tokenSupply, _stakePrice);
     }

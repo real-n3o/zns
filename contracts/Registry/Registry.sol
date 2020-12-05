@@ -7,11 +7,11 @@ pragma solidity 0.6.2;
 
 import '../RegistryToken/RegistryToken.sol';
 import './RegistryI.sol';
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract Registry is RegistryI, Initializable, OwnableUpgradeSafe {
-    using SafeMath for uint256;
+contract Registry is RegistryI, Initializable, OwnableUpgradeable {
+    using SafeMathUpgradeable for uint256;
 
     string private domain;
     string private ref;

@@ -8,12 +8,12 @@ pragma solidity 0.6.2;
 import '../../Registry/Registry.sol';
 import '../../RegistryController/RegistryControllerI.sol';
 import '../../RegistryToken/RegistryToken.sol';
-import "../../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
-import "../../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import "../../../node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "../../../node_modules/@openzeppelin/contracts/proxy/TransparentUpgradeableProxy.sol";
 
-contract RegistryControllerV2Mock is RegistryControllerI, Initializable, OwnableUpgradeSafe {
-    using SafeMath for uint256;
+contract RegistryControllerV2Mock is RegistryControllerI, Initializable, OwnableUpgradeable {
+    using SafeMathUpgradeable for uint256;
 
     Registry private registryFactory;
 

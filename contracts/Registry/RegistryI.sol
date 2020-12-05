@@ -7,7 +7,7 @@ pragma solidity 0.6.2;
 
 import '../RegistryToken/RegistryToken.sol';
 import '../Registry/Registry.sol';
-import "../../node_modules/@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
+import "../../node_modules/@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
 
 interface RegistryI {
     function initialize(string calldata _domain, string calldata _ref, string calldata _registryType, address _registryToken) external;
