@@ -4,3 +4,4 @@
 .openzeppelin/.session
 node_modules/
 .secret
+build/
