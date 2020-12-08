@@ -12179,10 +12179,231 @@
       "links": {},
       "address": "0x211aa5db2a5f384c6f5f46045335f4E72495627f",
       "transactionHash": "0xa5713d308b9d5b66be07816e0854f547367c28f2cdbf1e8ab80ac99760fd3063"
+    },
+    "1607133320490": {
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_stake",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Received",
+          "type": "event"
+        },
+        "0x55941bc9181933cfa95780b91c2bd2114b4bf5286ebfe557a0652991857d59c6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_tokenName",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "tokenSymbol",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "tokenSupply",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "stakePrice",
+              "type": "uint256"
+            }
+          ],
+          "name": "RegistryTokenCreated",
+          "type": "event"
+        },
+        "0x05cce4a371bf9816b1a7594f1d76c98eba4ed025ff3e471234ae598f17899bd4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_senderBalance",
+              "type": "uint256"
+            }
+          ],
+          "name": "StakeDeposited",
+          "type": "event"
+        },
+        "0x59b026b47a87053c766311bcf7903ea569f503b02471704897eac772fa03eacd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_newStakePrice",
+              "type": "uint256"
+            }
+          ],
+          "name": "StakePriceSet",
+          "type": "event"
+        },
+        "0x7231d9b023ca3b1ac4645b261e0e008697318d4181c4630e9cb5e1709493fe52": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_senderBalance",
+              "type": "uint256"
+            }
+          ],
+          "name": "StakeReturned",
+          "type": "event"
+        },
+        "0xc0687b34adb081bf19c87a2a0a5bb56c4a9584ee8c67fce683c3fac163c27eb8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_staker",
+              "type": "address"
+            }
+          ],
+          "name": "StakerAdded",
+          "type": "event"
+        },
+        "0xb97b17a738bc54faf4f156f2072573525abf5a6f9fe4e3f78a2f159d7a851805": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_staker",
+              "type": "address"
+            }
+          ],
+          "name": "StakerRemoved",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xC543B352ee3f14AdC19F6395D81c7660C9263Fe7",
+      "transactionHash": "0xc67c625e8762897c9d59b477cadcf24423da9d3e7b4ec43566103ae1652381ca"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-05T00:07:10.064Z",
+  "updatedAt": "2020-12-05T01:57:24.269Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

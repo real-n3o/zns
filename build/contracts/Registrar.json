@@ -7803,10 +7803,66 @@
       "links": {},
       "address": "0x91Ba14051278560754bE92E9B63372899763A80e",
       "transactionHash": "0xfdd5f745face386817984a50b79bc1b906a3de4b95362656b549a39bfc7513cc"
+    },
+    "1607133320490": {
+      "events": {
+        "0x3f061e93054eec612830c0d96f30ae527e2f4793adb104a8003b904d2d4c1818": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_domain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_ref",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_registryType",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_stakePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_registryTokenProxy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_registryProxy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_registryControllerProxy",
+              "type": "address"
+            }
+          ],
+          "name": "RegistryCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2b339863F00b6bDF6Bc541291F75bD23e74c29b1",
+      "transactionHash": "0x058688b86bc01c7020fafdf4e161b6757ee042c76934bc722444800ce60074c7"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-05T00:07:10.048Z",
+  "updatedAt": "2020-12-05T01:57:24.238Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

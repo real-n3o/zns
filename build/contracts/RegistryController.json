@@ -7274,10 +7274,138 @@
       "links": {},
       "address": "0x99a3f50157719F6782e1729531Ef61bE13ECf21B",
       "transactionHash": "0x4b2dcc6c39ba78f5212fc99bd0c53fb89f87108459ac1104f46835b239cf2583"
+    },
+    "1607133320490": {
+      "events": {
+        "0x06034069ef7379acb769f9b57612c708bd80d63028d7b9a51679e3a2219df1d5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_registryAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "contract RegistryToken",
+              "name": "_registryToken",
+              "type": "address"
+            }
+          ],
+          "name": "CreatedRegistry",
+          "type": "event"
+        },
+        "0xc37bb6160ff34dd9db7b491c89af3a2b774a1896e2403831c879dac0710dfc72": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_ref",
+              "type": "string"
+            }
+          ],
+          "name": "CreatedRegistryEntry",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xdcdd2e9fad0d6d7ee3a5ecdc777668645858146ee4b8f33ee0edf553aef4983c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_registryProxy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "contract RegistryToken",
+              "name": "_registryTokenProxy",
+              "type": "address"
+            }
+          ],
+          "name": "RegistryControllerInitialized",
+          "type": "event"
+        },
+        "0xff4960b4a54429205a8c3dc005334a3daabb0f3ad515ef46123f74e079abfc1a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_newRef",
+              "type": "string"
+            }
+          ],
+          "name": "RegistryEntryRefSet",
+          "type": "event"
+        },
+        "0xe6a3d4ec4f69ac853579fb0336181042ec4d0a21b32de1a92b6dd6a2f904f5a0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_newRef",
+              "type": "string"
+            }
+          ],
+          "name": "RegistryRefSet",
+          "type": "event"
+        },
+        "0x59b026b47a87053c766311bcf7903ea569f503b02471704897eac772fa03eacd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_newStakePrice",
+              "type": "uint256"
+            }
+          ],
+          "name": "StakePriceSet",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8f745e0A4ECfAA0Ed1400578819AACCfD481B333",
+      "transactionHash": "0x8fc1ec954b886cc0ffd0b6f29cc8c577dfb5364b84331f094dd110e919fb3ffe"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-05T00:07:10.055Z",
+  "updatedAt": "2020-12-05T01:57:24.250Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
